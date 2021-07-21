@@ -1,6 +1,12 @@
 package com.team.beatify.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -31,4 +37,23 @@ public class Beat extends BaseModel{
     private String url;
 
     //relaciones etc..
+
+    //mensajes
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "messages", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> userMessages;
+
+    //compras
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "compras_beats", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "compra_id")
+    )
+    private List<Compra> compras;
+
 }

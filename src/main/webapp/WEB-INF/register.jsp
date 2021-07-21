@@ -15,7 +15,7 @@
     <div>
         <h1>Register</h1>
         <p class="error"><form:errors  path="user.*"/></p>
-        <form:form method="POST" action="/register" modelAttribute="user">
+        <form:form method="POST" action="/" modelAttribute="user">
             <p>
                 <form:label path="firstName">Last Name</form:label>
                 <form:input path="firstName"/>
