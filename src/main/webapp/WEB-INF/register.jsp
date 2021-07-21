@@ -15,7 +15,7 @@
     <div>
         <h1>Register</h1>
         <p class="error"><form:errors  path="user.*"/></p>
-        <form:form method="POST" action="/" modelAttribute="user">
+        <form:form method="POST" action="" modelAttribute="user">
             <p>
                 <form:label path="firstName">First Name</form:label>
                 <form:input path="firstName"/>
@@ -59,6 +59,9 @@
             </p>
             <input class="btn btn-primary moveButton" type="submit" value="Register!"/>
         </form:form>
+        <p>¿Ya tienes una cuenta? 
+            <a href="/login">Inicia sesión</a>
+        </p>
     </div>
 </body>
 </html>

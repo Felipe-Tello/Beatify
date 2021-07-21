@@ -10,7 +10,7 @@
     <div>
         <h1>Login</h1>
         <p class="error"><c:out value="${error}"/></p>
-        <form method="post" action="/login">
+        <form method="post" action="">
             <p>
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email"/>
@@ -21,6 +21,9 @@
             </p>
             <input class="btn btn-primary moveButton" type="submit" value="Login!"/>
         </form>
+        <p>¿Aún no tienes una cuenta? 
+            <a href="/register">Regístrate</a>
+        </p>
     </div>
 </body>
 </html>
