@@ -24,21 +24,21 @@
 	            <form:label path="region">Location</form:label>
 	            <form:input path="region"/>
 	            <form:select path="region"> 
-	                <form:option value="Arica y Parinacota">CA</form:option>
-	                <form:option value="Tarapacá">FL</form:option>
-	                <form:option value="Antofagasta">ME</form:option>
-	                <form:option value="Coquimbo">NV</form:option>
-	                <form:option value="Valparaíso">VA</form:option>
-	                <form:option value="O'Higgins">OH</form:option>
-                    <form:option value="Maule">OH</form:option>
-                    <form:option value="Ñuble">OH</form:option>
-                    <form:option value="BioBío">OH</form:option>
-                    <form:option value="La Araucanía">OH</form:option>
-                    <form:option value="Los Ríos">OH</form:option>
-                    <form:option value="Los Lagos">OH</form:option>
-                    <form:option value="Aysén">OH</form:option>
-                    <form:option value="Magallanes Y Antártica Chilena">OH</form:option>
-                    <form:option value="RM">OH</form:option>
+	                <form:option value="Arica y Parinacota">Arica y Parinacota</form:option>
+	                <form:option value="Tarapacá">Tarapacá</form:option>
+	                <form:option value="Antofagasta">Antofagasta</form:option>
+	                <form:option value="Coquimbo">Coquimbo</form:option>
+	                <form:option value="Valparaíso">Valparaíso</form:option>
+	                <form:option value="O'Higgins">O'Higgins</form:option>
+                    <form:option value="Maule">Maule</form:option>
+                    <form:option value="Ñuble">Ñuble</form:option>
+                    <form:option value="BioBío">BioBío</form:option>
+                    <form:option value="La Araucanía">La Araucanía</form:option>
+                    <form:option value="Los Ríos">Los Ríos</form:option>
+                    <form:option value="Los Lagos">Los Lagos</form:option>
+                    <form:option value="Aysén">Aysén</form:option>
+                    <form:option value="Magallanes Y Antártica Chilena">Magallanes Y Antártica Chilena</form:option>
+                    <form:option value="RM">RM</form:option>
 	            </form:select>
 	        </p>
             <p>
