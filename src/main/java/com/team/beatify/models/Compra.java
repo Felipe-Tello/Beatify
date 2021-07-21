@@ -1,6 +1,9 @@
 package com.team.beatify.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +20,11 @@ public class Compra extends BaseModel {
     //precio minimo pa pagar?
     @NotNull(message = "El campo no puede ser nulo")
     private int cost;
+    
+	//----------------------------------------------------------------------------------------//
 
-    
-    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="uComprador_id")
+    private User uComprador;
 }
+
