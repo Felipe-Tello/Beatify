@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -36,6 +37,22 @@ public class Beat extends BaseModel{
     @NotNull(message = "El campo no puede ser nulo")
     private String url;
 
+    //----------------------------------------------------------------------------------------//
+    //relacion n:1 users
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="uCreador_id")
+    private User uCreador;
+
+    //----------------------------------------------------------------------------------------//
+    //relacion n:m beats-users
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "respects", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )     
+    private List<User> users;
+
     //relaciones etc..
 
     //mensajes
@@ -55,5 +72,4 @@ public class Beat extends BaseModel{
         inverseJoinColumns = @JoinColumn(name = "compra_id")
     )
     private List<Compra> compras;
-
 }
