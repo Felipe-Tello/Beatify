@@ -14,6 +14,7 @@ import lombok.Setter;
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class User extends BaseModel{
+	
 	@NotBlank(message = "not blank")
 	@Size(min = 5,max = 200,message = "size")
 	private String firstName;
@@ -30,7 +31,5 @@ public class User extends BaseModel{
 	private String password;
 	@Transient
 	private String passwordConfirmation;
-	
-	public User() {
-	}
+
 }
