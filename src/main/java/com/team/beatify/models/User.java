@@ -16,7 +16,6 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseModel{
-
 	@NotBlank(message = "El campo no puede estar en blanco")
 	@Size(min = 5,max = 200,message = "size")
 	private String firstName;
@@ -38,11 +37,12 @@ public class User extends BaseModel{
 
 	@Transient
 	private String passwordConfirmation;
-
+  
 	//----------------------------------------------------------------------------------------//
 
 	@OneToMany(mappedBy="uComprador", fetch = FetchType.LAZY)
 	private List<Compra> listaDeCompras;
 
 	//----------------------------------------------------------------------------------------//
+
 }

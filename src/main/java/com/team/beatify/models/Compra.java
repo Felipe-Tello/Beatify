@@ -19,7 +19,8 @@ public class Compra extends BaseModel {
     
     //precio minimo pa pagar?
     @NotNull(message = "El campo no puede ser nulo")
-    private int cost;
+    private int total;
+
     
 	//----------------------------------------------------------------------------------------//
 
