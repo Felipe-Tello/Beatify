@@ -15,10 +15,14 @@
     <div>
         <h1>Register</h1>
         <p class="error"><form:errors  path="user.*"/></p>
-        <form:form method="POST" action="/register" modelAttribute="user">
+        <form:form method="POST" action="/" modelAttribute="user">
             <p>
-                <form:label path="firstName">Last Name</form:label>
+                <form:label path="firstName">First Name</form:label>
                 <form:input path="firstName"/>
+            </p>
+            <p>
+                <form:label path="lastName">Last Name</form:label>
+                <form:input path="lastName"/>
             </p>
             <p>
 	            <form:label path="region">Location</form:label>
@@ -41,10 +45,6 @@
                     <form:option value="RM">RM</form:option>
 	            </form:select>
 	        </p>
-            <p>
-                <form:label path="lastName">Last Name</form:label>
-                <form:input path="lastName"/>
-            </p>
             <p>
                 <form:label path="email">Email:</form:label>
                 <form:input type="email" path="email"/>

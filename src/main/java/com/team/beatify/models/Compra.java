@@ -1,5 +1,6 @@
 package com.team.beatify.models;
 
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,13 +24,12 @@ public class Compra extends BaseModel {
 
     
 	//----------------------------------------------------------------------------------------//
-
+    //relacion n:1 users
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="uComprador_id")
     private User uComprador;
 
     //----------------------------------------------------------------------------------------//
 
-    
 }
 
