@@ -22,5 +22,4 @@ public class Message extends BaseModel{
     @Size(min = 1, max = 255, message = "Debe tener entre 1 y 255 caracteres")
     private String comment;
 
-    //relaciones etc...
 }
