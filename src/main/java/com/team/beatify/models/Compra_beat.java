@@ -5,9 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,20 +14,17 @@ import lombok.Setter;
 
 @Entity
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
-@Table (name = "messages")
-public class Message extends BaseModel{
+@Table(name = "compras_beats")
+public class Compra_beat extends BaseModel{
     
-    //ver mensajes predeterminados
-    @NotNull(message = "El campo no puede ser nulo")
-    @NotBlank(message = "El campo no puede estar en blanco")
-    @Size(min = 1, max = 255, message = "Debe tener entre 1 y 255 caracteres")
-    private String comment;
+    //este sería el precio actual del beat
+    private int precio;
 
     //relaciones
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="compra_id")
+    private Compra compra;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="beat_id")
