@@ -26,5 +26,9 @@ public class Compra extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="uComprador_id")
     private User uComprador;
+
+    //----------------------------------------------------------------------------------------//
+
+    
 }
 
