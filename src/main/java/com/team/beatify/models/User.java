@@ -52,6 +52,15 @@ public class User extends BaseModel{
 	@OneToMany(mappedBy="uComprador", fetch = FetchType.LAZY)
 	private List<Compra> listaDeCompras;
 
+	//mensajes¿?
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "messages", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "beat_id")
+    )
+    private List<Beat> beatsMessages;
+
 	//----------------------------------------------------------------------------------------//
 	//relacion 1:n beats//
 	@OneToMany(mappedBy="uCreador", fetch = FetchType.LAZY)

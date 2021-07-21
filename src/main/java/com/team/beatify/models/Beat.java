@@ -52,4 +52,24 @@ public class Beat extends BaseModel{
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )     
     private List<User> users;
+
+    //relaciones etc..
+
+    //mensajes
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "messages", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> userMessages;
+
+    //compras
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "compras_beats", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "compra_id")
+    )
+    private List<Compra> compras;
 }
