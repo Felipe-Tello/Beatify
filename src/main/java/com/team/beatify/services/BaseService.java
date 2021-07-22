@@ -17,11 +17,9 @@ public abstract class BaseService<T> {
     public List<T> allThings() {
         return baseRepository.findAll();
     }
-
     public T createOrUpdateThing(T entity) {
         return baseRepository.save(entity);
     }
-
     public T findThingById(Long id) {
         Optional<T> tOptional = baseRepository.findById(id);
         if(tOptional.isPresent()) {

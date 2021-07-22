@@ -1,8 +1,12 @@
 package com.team.beatify.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.team.beatify.models.Beat;
+import com.team.beatify.models.User;
 import com.team.beatify.services.UserService;
 import com.team.beatify.validations.UserValidator;
 
@@ -13,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
@@ -28,6 +31,17 @@ public class UserController {
     }
 
     //el usuario debería tener un select de regiones, para agregarlo al model
+
+    @GetMapping("/profile/{userid}")
+    public String showProfile(@PathVariable("userid") Long userid, HttpSession session, Model model){
+        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        List<Beat> listaBeats = user.getBeatsDelCreador();
+        model.addAttribute("user", user);
+        model.addAttribute("listaBeats", listaBeats);
+        return "profile.jsp";
+    }
+
+
 
     //editar
     @GetMapping("/profile/{userid}/edit")

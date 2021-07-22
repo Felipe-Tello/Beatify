@@ -32,19 +32,19 @@ public class FileController {
     }
     //----------------------------------------------------------------------------------------//
 
-    @GetMapping("/uploadFile")
+    @GetMapping("/song/new")
     public String upload(@ModelAttribute("modelBeat")Beat beat){
         return "addSongs.jsp";
     }
-    @PostMapping("/uploadFile")
-    public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, HttpSession session, @RequestParam("file") MultipartFile file){
+    @PostMapping("/song/new")
+    public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, HttpSession session, @RequestParam("file") MultipartFile file){
         User user = userService.findThingById((Long) session.getAttribute("userId"));
             // String name = file.getOriginalFilename();
             // File directorio1 = new File("/beats/" + "1");  //1 es el id del usuario 
             if (!file.isEmpty()) {
                 String name = file.getOriginalFilename();
                 Path directorioImg = Paths.get("src//main//resources//static/images");
-                String ruta = directorioImg.toFile().getAbsolutePath() + " 2";
+                String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();
                 File directorio = new File(ruta);
                 if(directorio.exists() == false){ 
                     directorio.mkdir(); 
@@ -57,6 +57,7 @@ public class FileController {
                     stream.close();
                     Beat beatNew = beatService.createOrUpdateThing(beat);
                     beatNew.setuCreador(user); 
+                    beatNew.setUrl(directorio +"\\"+ name);
                     beatService.createOrUpdateThing(beatNew);
                     return "You successfully uploaded  !";
                 } catch (Exception e) {

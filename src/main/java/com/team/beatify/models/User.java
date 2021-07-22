@@ -68,14 +68,17 @@ public class User extends BaseModel{
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "beat_id")
     )     
-    private List<Beat> beats;
+    private List<Beat> beatsLike;
 
 	//----------------------------------------------------------------------------------------//
 
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Beat> beatsMessages, List<Beat> beatsDelCreador, List<Beat> beats) {
+	//----------------------------------------------------------------------------------------//
+
+	public User(
+			String firstName, String lastName, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Beat> beatsMessages,List<Beat> beatsDelCreador, List<Beat> beatsLike) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.region = region;
@@ -85,7 +88,7 @@ public class User extends BaseModel{
 		this.listaDeCompras = listaDeCompras;
 		this.beatsMessages = beatsMessages;
 		this.beatsDelCreador = beatsDelCreador;
-		this.beats = beats;
+		this.beatsLike = beatsLike;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -162,11 +165,12 @@ public class User extends BaseModel{
 		this.beatsDelCreador = beatsDelCreador;
 	}
 
-	public List<Beat> getBeats() {
-		return beats;
+	public List<Beat> getBeatsLike() {
+		return beatsLike;
 	}
 
-	public void setBeats(List<Beat> beats) {
-		this.beats = beats;
-	}
+	public void setBeatsLike(List<Beat> beatsLike) {
+		this.beatsLike = beatsLike;
+	}	
+
 }
