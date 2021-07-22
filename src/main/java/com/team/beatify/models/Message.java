@@ -9,13 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
 @Table (name = "messages")
 public class Message extends BaseModel{
     
@@ -25,6 +19,7 @@ public class Message extends BaseModel{
     @Size(min = 1, max = 255, message = "Debe tener entre 1 y 255 caracteres")
     private String comment;
 
+    //----------------------------------------------------------------------------------------//
     //relaciones
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,4 +30,38 @@ public class Message extends BaseModel{
     @JoinColumn(name="beat_id")
     private Beat beat;
 
+    public Message() {
+    }
+
+    public Message(String comment, User user, Beat beat) {
+        this.comment = comment;
+        this.user = user;
+        this.beat = beat;
+    }
+
+    //----------------------------------------------------------------------------------------//
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Beat getBeat() {
+        return beat;
+    }
+
+    public void setBeat(Beat beat) {
+        this.beat = beat;
+    }
 }

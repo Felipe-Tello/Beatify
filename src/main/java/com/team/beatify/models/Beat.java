@@ -13,13 +13,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
 @Table(name = "beats")
 public class Beat extends BaseModel{
 
@@ -34,7 +29,6 @@ public class Beat extends BaseModel{
     private int cost;
 
     //es un campo que se asigna desde el usuario? o en el servidor por interno? 
-    @NotNull(message = "El campo no puede ser nulo")
     private String url;
 
     //----------------------------------------------------------------------------------------//
@@ -53,8 +47,7 @@ public class Beat extends BaseModel{
     )     
     private List<User> users;
 
-    //relaciones etc..
-
+    //----------------------------------------------------------------------------------------//
     //mensajes
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -72,4 +65,77 @@ public class Beat extends BaseModel{
         inverseJoinColumns = @JoinColumn(name = "compra_id")
     )
     private List<Compra> compras;
-}
+
+    //----------------------------------------------------------------------------------------//
+
+    public Beat() {
+    }
+
+    public Beat(String title, int cost, String url, User uCreador, List<User> users, List<User> userMessages, List<Compra> compras) {
+        this.title = title;
+        this.cost = cost;
+        this.url = url;
+        this.uCreador = uCreador;
+        this.users = users;
+        this.userMessages = userMessages;
+        this.compras = compras;
+    }
+
+    //----------------------------------------------------------------------------------------//    
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public User getuCreador() {
+        return uCreador;
+    }
+
+    public void setuCreador(User uCreador) {
+        this.uCreador = uCreador;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<User> getUserMessages() {
+        return userMessages;
+    }
+
+    public void setUserMessages(List<User> userMessages) {
+        this.userMessages = userMessages;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }    
+}   

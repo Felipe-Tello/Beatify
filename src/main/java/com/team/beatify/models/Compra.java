@@ -11,13 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
 @Table(name = "compras")
 public class Compra extends BaseModel {
     
@@ -41,9 +35,41 @@ public class Compra extends BaseModel {
     )
     private List<Beat> beats;
 
+    //----------------------------------------------------------------------------------------//
 
+    public Compra() {
+    }
+
+    public Compra(@NotNull(message = "El campo no puede ser nulo") int total, User uComprador, List<Beat> beats) {
+        this.total = total;
+        this.uComprador = uComprador;
+        this.beats = beats;
+    }
 
     //----------------------------------------------------------------------------------------//
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public User getuComprador() {
+        return uComprador;
+    }
+
+    public void setuComprador(User uComprador) {
+        this.uComprador = uComprador;
+    }
+
+    public List<Beat> getBeats() {
+        return beats;
+    }
+
+    public void setBeats(List<Beat> beats) {
+        this.beats = beats;
+    }
 }
 

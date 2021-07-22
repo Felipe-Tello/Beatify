@@ -16,13 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseModel{
 	@NotBlank(message = "El campo no puede estar en blanco")
@@ -64,7 +58,7 @@ public class User extends BaseModel{
 	//----------------------------------------------------------------------------------------//
 	//relacion 1:n beats//
 	@OneToMany(mappedBy="uCreador", fetch = FetchType.LAZY)
-	private List<Beat> BeatsDelCreador;
+	private List<Beat> beatsDelCreador;
 
 	//----------------------------------------------------------------------------------------//
 	//relacion n:m users-beats
@@ -75,4 +69,104 @@ public class User extends BaseModel{
         inverseJoinColumns = @JoinColumn(name = "beat_id")
     )     
     private List<Beat> beats;
+
+	//----------------------------------------------------------------------------------------//
+
+	public User() {
+	}
+
+	public User(String firstName, String lastName, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Beat> beatsMessages, List<Beat> beatsDelCreador, List<Beat> beats) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.region = region;
+		this.email = email;
+		this.password = password;
+		this.passwordConfirmation = passwordConfirmation;
+		this.listaDeCompras = listaDeCompras;
+		this.beatsMessages = beatsMessages;
+		this.beatsDelCreador = beatsDelCreador;
+		this.beats = beats;
+	}
+
+	//----------------------------------------------------------------------------------------//
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
+
+	public List<Compra> getListaDeCompras() {
+		return listaDeCompras;
+	}
+
+	public void setListaDeCompras(List<Compra> listaDeCompras) {
+		this.listaDeCompras = listaDeCompras;
+	}
+
+	public List<Beat> getBeatsMessages() {
+		return beatsMessages;
+	}
+
+	public void setBeatsMessages(List<Beat> beatsMessages) {
+		this.beatsMessages = beatsMessages;
+	}
+
+	public List<Beat> getBeatsDelCreador() {
+		return beatsDelCreador;
+	}
+
+	public void setBeatsDelCreador(List<Beat> beatsDelCreador) {
+		this.beatsDelCreador = beatsDelCreador;
+	}
+
+	public List<Beat> getBeats() {
+		return beats;
+	}
+
+	public void setBeats(List<Beat> beats) {
+		this.beats = beats;
+	}
 }

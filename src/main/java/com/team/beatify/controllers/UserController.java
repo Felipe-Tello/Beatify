@@ -3,11 +3,11 @@ package com.team.beatify.controllers;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.team.beatify.models.User;
 import com.team.beatify.services.UserService;
 import com.team.beatify.validations.UserValidator;
 
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
