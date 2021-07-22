@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="/dashboard">Volver al perfil</a>
     <h1>Añadir Cancion</h1>
     <form action="" enctype="multipart/form-data" method="POST">
         <input type="file" name="file">
@@ -24,7 +25,7 @@
                 <form:label path="cost">Precio</form:label>
                 <form:input path="cost"/>
             </p>
-            <input class="btn btn-primary moveButton" type="submit" value="Register!"/>
+            <input type="submit" value="subir cancion"/>
         </form:form>
     </form>
 </body>
