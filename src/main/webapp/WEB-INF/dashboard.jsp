@@ -20,13 +20,15 @@
         <thead>
             <tr>
                 <th>Autor</th>
+                <th>Titulo</th>
                 <th>Price</th>
-                <th>Template</th>
+                <th>Reproductor</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${listaBeats}" var="lb">
             <tr>
+                <td><c:out value="${lb.uCreador.firstName}"/></td>
                 <td><c:out value="${lb.title}"/></td>
                 <td><c:out value="${lb.cost}"/></td>
                 <td>
