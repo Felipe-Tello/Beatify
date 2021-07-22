@@ -34,7 +34,6 @@ public class LoginController {
 			return "redirect:/dashboard";
 		}else {
 			//redirectAttributes.addFlashAttribute("error", "Usuario y/o Contraseña incorrectos. Por favor intente de nuevo");
-            //modificar al español pofavor
 			model.addAttribute("error", "Usuario y/o Contraseña incorrectos. Por favor intente de nuevo");
             return "login.jsp";
 		}
