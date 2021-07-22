@@ -13,9 +13,19 @@
 </head>
 <body>
     <h1>Añadir Cancion</h1>
-    <form action="/uploadFile" enctype="multipart/form-data" method="POST">
+    <form action="" enctype="multipart/form-data" method="POST">
         <input type="file" name="file">
-        <button>Subir</button>
+        <form:form method="POST" action="" modelAttribute="modelBeat">
+            <p>
+                <form:label path="title">Titulo de la cancion</form:label>
+                <form:input path="title"/>
+            </p>
+            <p>
+                <form:label path="cost">Precio</form:label>
+                <form:input path="cost"/>
+            </p>
+            <input class="btn btn-primary moveButton" type="submit" value="Register!"/>
+        </form:form>
     </form>
 </body>
 </html>
