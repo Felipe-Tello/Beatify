@@ -23,6 +23,7 @@
                 <th>Titulo</th>
                 <th>Price</th>
                 <th>Reproductor</th>
+                <th>respect</th>
             </tr>
         </thead>
         <tbody>
@@ -32,12 +33,11 @@
                 <td><c:out value="${lb.title}"/></td>
                 <td><c:out value="${lb.cost}"/></td>
                 <td>
-                    <audio controls>
-                        <source src="${lb.url}" type="audio/ogg">
-                        <source src="${lb.url}" type="audio/mpeg">
+                    <audio controls src="${lb.url}">
                         Your browser does not support the audio element.
                     </audio>
                 </td>
+                <td><a href="/like/${lb.id}">Like</a><a href="/dislike/${lb.id}">Dislike</a><c:out value="${lb.usersLike.size()}"/></td>
             </tr>
             </c:forEach>
         </tbody>

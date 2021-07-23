@@ -72,14 +72,14 @@ public class Beat extends BaseModel{
         joinColumns = @JoinColumn(name = "beat_id"), 
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> beatsGeneros;
+    private List<Category> categories;
 
     //----------------------------------------------------------------------------------------//
 
     public Beat() {
     }
 
-    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<User> userMessages, List<Compra> compras) {
+    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<User> userMessages, List<Compra> compras, List<Category> categories) {
         this.title = title;
         this.cost = cost;
         this.url = url;
@@ -87,6 +87,7 @@ public class Beat extends BaseModel{
         this.usersLike = usersLike;
         this.userMessages = userMessages;
         this.compras = compras;
+        this.categories = categories;
     }
 
     //----------------------------------------------------------------------------------------//    
@@ -145,5 +146,13 @@ public class Beat extends BaseModel{
 
     public void setCompras(List<Compra> compras) {
         this.compras = compras;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }    
 }   
