@@ -15,7 +15,7 @@
     <a href="/dashboard">Volver al perfil</a>
     <h1>Añadir Cancion</h1>
     <form action="" enctype="multipart/form-data" method="POST">
-        <input type="file" name="file">
+        <input type="file" name="file" accept=".AAC, .WMA, .WAV, .MP4, .MP3, .FLAC, .M4A">
         <form:form method="POST" action="" modelAttribute="modelBeat">
             <p>
                 <form:label path="title">Titulo de la cancion</form:label>
@@ -25,6 +25,13 @@
                 <form:label path="cost">Precio</form:label>
                 <form:input path="cost"/>
             </p>
+            <form:select path="categories"> 
+                <c:forEach items="${listaCategories}" var="lc">
+                    <form:option value="${lc.id}">
+                        <c:out value="${lc.genero}"></c:out>
+                    </form:option>
+                </c:forEach>
+            </form:select>
             <input type="submit" value="subir cancion"/>
         </form:form>
     </form>

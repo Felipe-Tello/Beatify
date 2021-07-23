@@ -8,7 +8,6 @@ import com.team.beatify.models.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BeatRepository extends BaseRepository<Beat> {
-    List<Beat> findAllByOrderByIdDesc();
-    List<Beat> findByCategoriesNotContaining(Category category);
+public interface CategoryRepository extends BaseRepository<Category>{
+    // List<Category> findByBeatsNotContaining(Beat beat);
 }
