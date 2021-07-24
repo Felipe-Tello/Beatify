@@ -12,13 +12,8 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/logout">Cerrar Sesion</a>
-    <br>
-    <a href="/profile/${Usuario.id}">ir al perfil</a>
-    <br>
-    <a href="/wishlist/${Usuario.id}">Wishlist</a>
-    <h1>Welcome <c:out value="${Usuario.firstName}"></c:out></h1>
-    <h3>Canciones de artistas cercanos a <c:out value="${Usuario.region}"></c:out></h3>
+    <a href="/dashboard">volver al menu principal</a>
+    <h1>Wish list</h1>
     <table>
         <thead>
             <tr>
@@ -26,12 +21,11 @@
                 <th>Titulo</th>
                 <th>Price</th>
                 <th>Reproductor</th>
-                <th>Respect</th>
                 <th>Wish List</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${listaBeats}" var="lb">
+            <c:forEach items="${wishlist}" var="lb">
             <tr>
                 <td><c:out value="${lb.uCreador.firstName}"/></td>
                 <td><c:out value="${lb.title}"/></td>
@@ -41,8 +35,7 @@
                         Your browser does not support the audio element.
                     </audio>
                 </td>
-                <td><a href="/like/${lb.id}?ruta=dashboard">Like</a><a href="/dislike/${lb.id}?ruta=dashboard">Dislike</a><c:out value="${lb.usersLike.size()}"/></td>
-                <td><a href="/addwishlist/${lb.id}?ruta=dashboard">Add lo wish list</a><a href="/removewishlist/${lb.id}?ruta=dashboard">Remove from wish list</a></td>
+                <td><a href="/removewishlist/${lb.id}?ruta=wishlist">Remove from wish list</a></td>
             </tr>
             </c:forEach>
         </tbody>

@@ -3,7 +3,6 @@ package com.team.beatify.services;
 import java.util.List;
 
 import com.team.beatify.models.Beat;
-import com.team.beatify.models.Category;
 import com.team.beatify.repositories.BaseRepository;
 import com.team.beatify.repositories.BeatRepository;
 
@@ -22,8 +21,5 @@ public class BeatService extends BaseService <Beat> {
 
     public List<Beat> listaDeBeatsAsc(){
 		return beatRepository.findAllByOrderByIdDesc();
-	}
-    public List<Beat> productsAvailables(Category category){
-		return beatRepository.findByCategoriesNotContaining(category);
 	}
 }
