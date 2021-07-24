@@ -12,10 +12,20 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/logout">Cerrar Sesion</a>
+    <!-- FORMULARIO PARA CERRAR SESIÓN -->
+    <form method="POST" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Cerrar sesión" />
+    </form>
+
     <br>
     <a href="/profile/${Usuario.id}">ir al perfil</a>
     <h1>Welcome <c:out value="${Usuario.firstName}"></c:out></h1>
+    <c:if test="${permiso == true}">
+        <p>
+            <a href="/admin">Página de administrador</a>
+        </p>
+    </c:if>
     <table>
         <thead>
             <tr>

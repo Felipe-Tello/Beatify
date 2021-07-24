@@ -1,5 +1,6 @@
 package com.team.beatify.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -37,11 +38,17 @@ public class HomeController {
         return "redirect:/login";
     }
     @GetMapping("/dashboard")
-    public String dashboard(Model model, HttpSession session){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String dashboard(Model model, Principal principal){
+        String email = principal.getName();
+        User user = userService.findByEmail(email);
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         model.addAttribute("Usuario", user);
         model.addAttribute("listaBeats", listaBeats);
+
+        //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
+        if(userService.hasAdmin(user)) {
+            model.addAttribute("permiso", true);
+        }
         return "dashboard.jsp";
     }
     @GetMapping(value = "/like/{id}")
@@ -77,7 +84,10 @@ public class HomeController {
 		return "redirect:/dashboard";
 	}
     @GetMapping("/admin")
-    public String addCategory(@ModelAttribute("categoryModel")Category category){
+    public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
+        String email = principal.getName();
+        User usuario = userService.findByEmail(email);
+        model.addAttribute("admin", usuario);
         return "admin.jsp";
     }
     @PostMapping("/admin")
