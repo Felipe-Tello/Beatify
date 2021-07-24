@@ -56,6 +56,15 @@ public class Beat extends BaseModel{
     )
     private List<User> userMessages;
 
+    //relacion n:m beats-users MENSAJES
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "wishlists", 
+        joinColumns = @JoinColumn(name = "beat_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> wishlistuser;
+
     //relacion n:m beats-users COMPRAS
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -79,7 +88,7 @@ public class Beat extends BaseModel{
     public Beat() {
     }
 
-    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<User> userMessages, List<Compra> compras, List<Category> categories) {
+    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<User> wishlistuser, List<User> userMessages, List<Compra> compras, List<Category> categories) {
         this.title = title;
         this.cost = cost;
         this.url = url;
@@ -88,6 +97,7 @@ public class Beat extends BaseModel{
         this.userMessages = userMessages;
         this.compras = compras;
         this.categories = categories;
+        this.wishlistuser = wishlistuser;
     }
 
     //----------------------------------------------------------------------------------------//    
@@ -132,6 +142,10 @@ public class Beat extends BaseModel{
         this.usersLike = usersLike;
     }
 
+    public void setUsersLike(User user) {
+        this.usersLike.add(user);
+    }
+
     public List<User> getUserMessages() {
         return userMessages;
     }
@@ -154,5 +168,16 @@ public class Beat extends BaseModel{
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }    
+    }
+    public List<User> getWishlistuser() {
+        return wishlistuser;
+    }
+
+    public void setWishlistuser(List<User> wishlistuser) {
+        this.wishlistuser = wishlistuser;
+    }
+    
+    public void setWishlistuser(User user) {
+        this.wishlistuser.add(user);
+    }
 }   

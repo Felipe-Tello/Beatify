@@ -48,11 +48,9 @@ public class FileController {
     @PostMapping("/song/new")
     public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, HttpSession session, @RequestParam("file") MultipartFile file){
         User user = userService.findThingById((Long) session.getAttribute("userId"));
-            // String name = file.getOriginalFilename();
-            // File directorio1 = new File("/beats/" + "1");  //1 es el id del usuario 
             if (!file.isEmpty()) {
                 String name = file.getOriginalFilename();
-                Path directorioImg = Paths.get("src/main/resources/static/images");
+                Path directorioImg = Paths.get("src/main/resources/static/user");
                 String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();
                 File directorio = new File(ruta);
                 if(directorio.exists() == false){ 
@@ -61,14 +59,11 @@ public class FileController {
                 try {
                     byte[] bytes = file.getBytes();
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(directorio.getAbsolutePath() +"/"+ name)));
-                    // BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
                     stream.write(bytes);
                     stream.close();
-                    //crea el Beat
                     Beat beatNew = beatService.createOrUpdateThing(beat);
-                    //Setea añade la categoria
                     beatNew.setuCreador(user); 
-                    beatNew.setUrl("/images"+user.getId()+"/"+ name);
+                    beatNew.setUrl("/user"+user.getId()+"/"+ name);
                     beatService.createOrUpdateThing(beatNew);
                     // Category category = categoryService.findThingById(idCategory);
                     // List<Category> categoriasBeat = beatNew.getCategories();

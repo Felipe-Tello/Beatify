@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <form:label path="region">Location</form:label>
-                    <form:input class="form-control" placeholder="Location" path="region"/>
+                    <form:input class="form-control" placeholder="Location" path="location"/>
                     <form:label for="exampleFormControlSelect1" path="region">Región</form:label>
                     <form:select class="form-control" id="exampleFormControlSelect1" path="region"> 
                         <form:option value="Arica y Parinacota">Arica y Parinacota</form:option>
