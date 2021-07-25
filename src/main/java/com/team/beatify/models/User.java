@@ -44,6 +44,15 @@ public class User extends BaseModel{
 
 	@Transient
 	private String passwordConfirmation;
+
+
+	///ROLES USUARIO--------------------------------------------------------------------------------//
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private List<Rol> roles;
   
 	//----------------------------------------------------------------------------------------//
 	//relacion 1:n compras//
@@ -186,6 +195,14 @@ public class User extends BaseModel{
 	public void setBeatsLike(List<Beat> beatsLike) {
 		this.beatsLike = beatsLike;
 	}
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}	
 
 	public String getLocation() {
 		return location;

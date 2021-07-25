@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Administrador</title>
 </head>
 <body>
     <form:form method="POST" action="" modelAttribute="categoryModel">
@@ -19,5 +19,10 @@
         </div>
         <input id="botonRegis"  class="btn btn-light" type="submit" value="Register!"/>
     </form:form>
+
+    <form method="POST" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Cerrar sesión" />
+    </form>
 </body>
 </html>

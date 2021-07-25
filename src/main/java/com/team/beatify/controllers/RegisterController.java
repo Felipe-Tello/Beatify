@@ -1,6 +1,5 @@
 package com.team.beatify.controllers;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.team.beatify.models.User;
@@ -30,21 +29,31 @@ public class RegisterController {
 	}
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+    public String registrarUsuario(@Valid @ModelAttribute("user") User user, BindingResult result) {
         userValidator.validate(user, result);
         if(result.hasErrors()) {
             return "register.jsp";
         }
+
+        //agregar un if de region
+
         if (userService.emailExist(user.getEmail())) {
             FieldError error = new FieldError("email", "email", "El email " + user.getEmail() + " ya se encuentra registrado");
             result.addError(error);
             return "register.jsp";
         }
+
         else {
-            User u = userService.registerUser(user);
-            session.setAttribute("userId", u.getId());
-            return "redirect:/dashboard";
+            //esto verifica si hay usuarios registrados. Si está vacío, el primero usuario será admin
+            if(userService.isEmpty()) {
+                userService.rolAdmin(user);
+            }
+            else {
+                userService.rolUsuario(user);
+            }
+            userService.createOrUpdateThing(user);
         }
-	}
+        return "redirect:/dashboard";
+    }
 
 }

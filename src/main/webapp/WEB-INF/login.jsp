@@ -9,16 +9,25 @@
 <body>
     <div>
         <h1>Login</h1>
-        <p class="error"><c:out value="${error}"/></p>
-        <form method="post" action="">
+        <c:if test="${error != null}">
             <p>
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email"/>
+                <c:out value = "${error}">
             </p>
+        </c:if>
+        <form method="post" action="/login">
+
             <p>
-                <label for="password">Password</label>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"/>
+            </p>
+
+            <p>
+                <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password"/>
             </p>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <input class="btn btn-primary moveButton" type="submit" value="Login!"/>
         </form>
         <p>¿Aún no tienes una cuenta? 
