@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BeatRepository extends BaseRepository<Beat> {
     List<Beat> findAllByOrderByIdDesc();
-    List<Beat> findByCategoriesNotContaining(Category category);
+    // List<Beat> findByCategoriesNotContaining(Category category);
 }

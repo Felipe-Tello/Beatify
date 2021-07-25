@@ -27,6 +27,10 @@ public class User extends BaseModel{
     @Size(min = 5,max = 200,message = "size")
     private String lastName;
 
+	@NotBlank(message = "El campo no puede estar en blanco")
+	@Size(min = 5,max = 200,message = "size")
+	private String location;
+
     @NotNull(message = "El campo no puede ser nulo")
     private String region;
 
@@ -80,14 +84,22 @@ public class User extends BaseModel{
     private List<Beat> beatsLike;
 
 	//----------------------------------------------------------------------------------------//
+	//relacion n:m users-beats
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "wishlists", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "beat_id")
+    )     
+    private List<Beat> wishlistbeats;
+
+	//----------------------------------------------------------------------------------------//
 
 	public User() {
 	}
 
-	//----------------------------------------------------------------------------------------//
-
 	public User(
-			String firstName, String lastName, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Beat> beatsMessages,List<Beat> beatsDelCreador, List<Beat> beatsLike) {
+			String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, List<Beat> wishlistbeats, List<Compra> listaDeCompras, List<Beat> beatsMessages,List<Beat> beatsDelCreador, List<Beat> beatsLike) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.region = region;
@@ -98,6 +110,8 @@ public class User extends BaseModel{
 		this.beatsMessages = beatsMessages;
 		this.beatsDelCreador = beatsDelCreador;
 		this.beatsLike = beatsLike;
+		this.location = location;
+		this.wishlistbeats = wishlistbeats;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -190,5 +204,19 @@ public class User extends BaseModel{
 		this.roles = roles;
 	}	
 
-	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public List<Beat> getWishlistbeats() {
+		return wishlistbeats;
+	}
+
+	public void setWishlistbeats(List<Beat> wishlistbeats) {
+		this.wishlistbeats = wishlistbeats;
+	}	
 }

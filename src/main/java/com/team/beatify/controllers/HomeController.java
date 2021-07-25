@@ -1,6 +1,10 @@
 package com.team.beatify.controllers;
 
+
 import java.security.Principal;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -42,6 +47,13 @@ public class HomeController {
         String email = principal.getName();
         User user = userService.findByEmail(email);
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
+        List<Beat> regionBeats = new ArrayList<>();
+        for (Beat beat : listaBeats) {
+            if(beat.getuCreador().getRegion().equals(user.getRegion())){
+                regionBeats.add(beat);
+            }
+        }
+        model.addAttribute("regionBeats", regionBeats);
         model.addAttribute("Usuario", user);
         model.addAttribute("listaBeats", listaBeats);
 
@@ -51,38 +63,62 @@ public class HomeController {
         }
         return "dashboard.jsp";
     }
-    @GetMapping(value = "/like/{id}")
-	public String like(@PathVariable("id") Long id, Model model,HttpSession session) {
+    
+    @GetMapping("/like/{id}")
+	public String like(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,HttpSession session) {
 		Beat beat = beatService.findThingById(id);
 		User user = userService.findThingById((Long) session.getAttribute("userId"));
-    	// List<User> users =ideas.getUsers();
-        List<User> listaLikes = beat.getUsersLike();
-        List<Beat> listaBeats = user.getBeatsLike();
-    	listaLikes.add(user);
-        listaBeats.add(beat);
-        // beat.setUsersLike(beat.getUsersLike());
-        // user.setBeatsLike(user.getBeatsLike());
+        beat.setUsersLike(user);
         beatService.createOrUpdateThing(beat);
-        userService.createOrUpdateThing(user);
-        model.addAttribute("likes", listaLikes.size());
-		return "redirect:/dashboard";
+        if (ruta.equals("dashboard")) {
+            return "redirect:/dashboard";
+        }
+        else{
+            return "redirect:/profile/"+ user.getId();
+        }
 	}
-    @GetMapping(value = "/dislike/{id}")
-	public String dislike(@PathVariable("id") Long id, Model model,HttpSession session) {
+    @GetMapping("/dislike/{id}")
+	public String dislike(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,HttpSession session) {
 		Beat beat = beatService.findThingById(id);
 		User user = userService.findThingById((Long) session.getAttribute("userId"));
-    	// List<User> users =ideas.getUsers();
-        List<User> listaLikes = beat.getUsersLike();
-        List<Beat> listaBeats = user.getBeatsLike();
-    	listaLikes.remove(user);
-        listaBeats.remove(beat);
-        // beat.setUsersLike(beat.getUsersLike());
-        // user.setBeatsLike(user.getBeatsLike());
+        beat.getUsersLike().remove(user);
         beatService.createOrUpdateThing(beat);
-        userService.createOrUpdateThing(user);
-        model.addAttribute("likes", listaLikes.size());
-		return "redirect:/dashboard";
+		if (ruta.equals("dashboard")) {
+            return "redirect:/dashboard";
+        }
+        else{
+            return "redirect:/profile/"+ user.getId();
+        }
 	}
+    @GetMapping("/addwishlist/{id}")
+    public String addwishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, HttpSession session){
+        Beat beat = beatService.findThingById(id);
+		User user = userService.findThingById((Long) session.getAttribute("userId"));
+        beat.setWishlistuser(user);
+        beatService.createOrUpdateThing(beat);
+        if (ruta.equals("dashboard")) {
+            return "redirect:/dashboard";
+        }
+        else{
+            return "redirect:/profile/"+ user.getId();
+        }
+    }
+    @GetMapping("/removewishlist/{id}")
+    public String removewishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, HttpSession session){
+        Beat beat = beatService.findThingById(id);
+		User user = userService.findThingById((Long) session.getAttribute("userId"));
+        beat.getWishlistuser().remove(user);
+        beatService.createOrUpdateThing(beat);
+        if (ruta.equals("dashboard")) {
+            return "redirect:/dashboard";
+        }
+        else if (ruta.equals("wishlist")) {
+            return "redirect:/wishlist/"+ user.getId();
+        }
+        else{
+            return "redirect:/profile/"+ user.getId();
+        }
+    }
     @GetMapping("/admin")
     public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
         String email = principal.getName();
@@ -92,9 +128,15 @@ public class HomeController {
     }
     @PostMapping("/admin")
     public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, HttpSession session){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
         Category newCategory = categoryService.createOrUpdateThing(category);
         categoryService.createOrUpdateThing(newCategory);
-        return "admin.jsp";
+        return "redirect:/admin";
     }
+    @GetMapping("/wishlist/{id}")
+    public String showWishlist(@PathVariable("id")Long id, HttpSession session, Model model){
+        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        List<Beat> listadeseados = user.getWishlistbeats();
+        model.addAttribute("wishlist", listadeseados);
+        return "wishlist.jsp";
+    }    
 }
