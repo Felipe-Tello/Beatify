@@ -1,5 +1,6 @@
 package com.team.beatify.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,16 +37,16 @@ public class UserController {
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
-    public String showProfile(@PathVariable("userid") Long userid, HttpSession session, Model model){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model){
+        User user = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = user.getBeatsDelCreador();
         model.addAttribute("user", user);
         model.addAttribute("listaBeats", listaBeats);
         return "profile.jsp";
     }
     @PostMapping("/profile/{userid}")
-    public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, HttpSession session, @RequestParam("beatId")Long id){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @RequestParam("beatId")Long id, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         
         return "redirect:/profile/"+ user.getId();
     }

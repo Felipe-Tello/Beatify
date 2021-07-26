@@ -7,10 +7,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.team.beatify.models.Beat;
 import com.team.beatify.models.Category;
 import com.team.beatify.models.Compra;
@@ -60,8 +58,7 @@ public class HomeController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal){
-        String email = principal.getName();
-        User user = userService.findByEmail(email);
+        User user = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         List<Beat> regionBeats = new ArrayList<>();
         for (Beat beat : listaBeats) {
@@ -81,9 +78,9 @@ public class HomeController {
     }
     
     @GetMapping("/like/{id}")
-	public String like(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,HttpSession session) {
-		Beat beat = beatService.findThingById(id);
-		User user = userService.findThingById((Long) session.getAttribute("userId"));
+	public String like(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
+		User user = userService.findByEmail(principal.getName());
+        Beat beat = beatService.findThingById(id);
         beat.setUsersLike(user);
         beatService.createOrUpdateThing(beat);
         if (ruta.equals("dashboard")) {
@@ -94,9 +91,9 @@ public class HomeController {
         }
 	}
     @GetMapping("/dislike/{id}")
-	public String dislike(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,HttpSession session) {
-		Beat beat = beatService.findThingById(id);
-		User user = userService.findThingById((Long) session.getAttribute("userId"));
+	public String dislike(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
+		User user = userService.findByEmail(principal.getName());
+        Beat beat = beatService.findThingById(id);
         beat.getUsersLike().remove(user);
         beatService.createOrUpdateThing(beat);
 		if (ruta.equals("dashboard")) {
@@ -107,9 +104,9 @@ public class HomeController {
         }
 	}
     @GetMapping("/addwishlist/{id}")
-    public String addwishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, HttpSession session){
+    public String addwishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
-		User user = userService.findThingById((Long) session.getAttribute("userId"));
         beat.setWishlistuser(user);
         beatService.createOrUpdateThing(beat);
         if (ruta.equals("dashboard")) {
@@ -120,9 +117,9 @@ public class HomeController {
         }
     }
     @GetMapping("/removewishlist/{id}")
-    public String removewishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, HttpSession session){
+    public String removewishlist(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
-		User user = userService.findThingById((Long) session.getAttribute("userId"));
         beat.getWishlistuser().remove(user);
         beatService.createOrUpdateThing(beat);
         if (ruta.equals("dashboard")) {
@@ -137,28 +134,27 @@ public class HomeController {
     }
     @GetMapping("/admin")
     public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
-        String email = principal.getName();
-        User usuario = userService.findByEmail(email);
-        model.addAttribute("admin", usuario);
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("admin", user);
         return "admin.jsp";
     }
     @PostMapping("/admin")
-    public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, HttpSession session){
+    public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, Principal principal){
         Category newCategory = categoryService.createOrUpdateThing(category);
         categoryService.createOrUpdateThing(newCategory);
         return "redirect:/admin";
     }
     @GetMapping("/wishlist/{id}")
-    public String showWishlist(@PathVariable("id")Long id, HttpSession session, Model model){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String showWishlist(@PathVariable("id")Long id, Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         List<Beat> listadeseados = user.getWishlistbeats();
         model.addAttribute("wishlist", listadeseados);
         return "wishlist.jsp";
     }
 
     @GetMapping("/realizarcompra")
-        public String showWishlist(HttpSession session, Model model){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        public String showWishlist(Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = user.getWishlistbeats();
         Compra compra = new Compra();
         compra.setuComprador(user);
@@ -180,8 +176,8 @@ public class HomeController {
         return "redirect:/details";
     }
     @GetMapping("/song/{id}")
-    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, HttpSession session, Model model){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
@@ -193,8 +189,8 @@ public class HomeController {
         return "showSong.jsp";
     }
     @PostMapping("/song/{idMessage}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, HttpSession session){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(idmessage);
         message.setBeat(beat);
         message.setUser(user);

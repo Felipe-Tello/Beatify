@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -46,8 +47,8 @@ public class FileController {
         return "addSongs.jsp";
     }
     @PostMapping("/song/new")
-    public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, HttpSession session, @RequestParam("file") MultipartFile file){
-        User user = userService.findThingById((Long) session.getAttribute("userId"));
+    public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal){
+        User user = userService.findByEmail(principal.getName());
             if (!file.isEmpty()) {
                 String name = file.getOriginalFilename();
                 Path directorioImg = Paths.get("src/main/resources/static/user");
