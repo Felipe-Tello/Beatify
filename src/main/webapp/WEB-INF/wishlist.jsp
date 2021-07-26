@@ -15,6 +15,10 @@
 </head>
 <body>
     <div id="contenedor">
+        <form method="POST" action="/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Cerrar sesión" />
+        </form>
         <a href="/dashboard" class="btn btn-outline-light volver">volver al menu principal</a>
         <h1>Wish list</h1>
         <div id="tabla">
