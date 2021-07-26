@@ -31,4 +31,7 @@ public abstract class BaseService<T> {
     public void deleteThing(Long id) {
         baseRepository.deleteById(id);
     }
+    public void saveAll(List<T> lista){
+        baseRepository.saveAll(lista);
+    }
 }

@@ -2,6 +2,7 @@ package com.team.beatify.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -22,14 +23,14 @@ public class Compra extends BaseModel {
     
 	//----------------------------------------------------------------------------------------//
     //relacion n:1 users
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name="uComprador_id")
     private User uComprador;
 
     //relacion compras_beats
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-        name = "compras_beats", 
+        name = "details", 
         joinColumns = @JoinColumn(name = "compra_id"), 
         inverseJoinColumns = @JoinColumn(name = "beat_id")
     )

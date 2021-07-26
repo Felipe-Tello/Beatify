@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -48,15 +49,17 @@ public class Beat extends BaseModel{
     private List<User> usersLike;
 
     //relacion n:m beats-users MENSAJES
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "messages", 
-        joinColumns = @JoinColumn(name = "beat_id"), 
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> userMessages;
+    @OneToMany(mappedBy="beat", fetch = FetchType.LAZY)
+	private List<Message> listaMessagesFromBeat;
+    // @ManyToMany(fetch = FetchType.LAZY)
+    // @JoinTable(
+    //     name = "messages", 
+    //     joinColumns = @JoinColumn(name = "beat_id"), 
+    //     inverseJoinColumns = @JoinColumn(name = "user_id")
+    // )
+    // private List<User> userMessages;
 
-    //relacion n:m beats-users MENSAJES
+    //relacion n:m beats-users WISHLIST
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "wishlists", 
@@ -68,7 +71,7 @@ public class Beat extends BaseModel{
     //relacion n:m beats-users COMPRAS
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "compras_beats", 
+        name = "details", 
         joinColumns = @JoinColumn(name = "beat_id"), 
         inverseJoinColumns = @JoinColumn(name = "compra_id")
     )
@@ -88,19 +91,19 @@ public class Beat extends BaseModel{
     public Beat() {
     }
 
-    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<User> wishlistuser, List<User> userMessages, List<Compra> compras, List<Category> categories) {
+    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<Message> listaMessagesFromBeat, List<User> wishlistuser, List<Compra> compras, List<Category> categories) {
         this.title = title;
         this.cost = cost;
         this.url = url;
         this.uCreador = uCreador;
         this.usersLike = usersLike;
-        this.userMessages = userMessages;
+        this.listaMessagesFromBeat = listaMessagesFromBeat;
+        this.wishlistuser = wishlistuser;
         this.compras = compras;
         this.categories = categories;
-        this.wishlistuser = wishlistuser;
     }
 
-    //----------------------------------------------------------------------------------------//    
+    //----------------------------------------------------------------------------------------// 
 
     public String getTitle() {
         return title;
@@ -146,12 +149,12 @@ public class Beat extends BaseModel{
         this.usersLike.add(user);
     }
 
-    public List<User> getUserMessages() {
-        return userMessages;
+    public List<Message> getListaMessagesFromBeat() {
+        return listaMessagesFromBeat;
     }
 
-    public void setUserMessages(List<User> userMessages) {
-        this.userMessages = userMessages;
+    public void setListaMessagesFromBeat(List<Message> listaMessagesFromBeat) {
+        this.listaMessagesFromBeat = listaMessagesFromBeat;
     }
 
     public List<Compra> getCompras() {

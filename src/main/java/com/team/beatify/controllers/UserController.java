@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;
+import com.team.beatify.models.Message;
 import com.team.beatify.models.User;
 import com.team.beatify.services.UserService;
 import com.team.beatify.validations.UserValidator;
@@ -16,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -41,6 +44,12 @@ public class UserController {
         model.addAttribute("listaBeats", listaBeats);
         return "profile.jsp";
 
+    }
+    @PostMapping("/profile/{userid}")
+    public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @RequestParam("beatId")Long id, Principal principal){
+        User user = userService.findByEmail(principal.getName());
+        
+        return "redirect:/profile/"+ user.getId();
     }
 
 

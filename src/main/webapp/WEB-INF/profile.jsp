@@ -12,7 +12,13 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="POST" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Cerrar sesión" />
+    </form>
     <a href="/dashboard">volver al menu principal</a>
+    <br>
+    <a href="/wishlist/${Usuario.id}">Wishlist</a>
     <br>
     <a href="/profile/${user.id}/edit">Editar perfil</a>
     <br>
@@ -30,6 +36,7 @@
                     <th>Reproductor</th>
                     <th>Respect</th>
                     <th>Wish List</th>
+                    <th>Messages</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +53,7 @@
                     </td>
                     <td><a href="/like/${lb.id}?ruta=profile">Like</a><a href="/dislike/${lb.id}?ruta=profile">Dislike</a><c:out value="${lb.usersLike.size()}"/></td>
                     <td><a href="/addwishlist/${lb.id}?ruta=profile">Add lo wish list</a><a href="/removewishlist/${lb.id}?ruta=profile">Remove from wish list</a></td>
+                    <td><a href="/song/${lb.id}">comentarios</a></td>
                 </tr>
                 </c:forEach>
             </tbody>

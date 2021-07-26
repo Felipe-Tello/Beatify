@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface RolRepository extends BaseRepository<Rol> {
     
     List<Rol> findByName(String name);
-    
+    boolean existsByName(String name);
 }
