@@ -6,11 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.team.beatify.models.Beat;
 import com.team.beatify.models.Category;
+import com.team.beatify.models.Compra;
+import com.team.beatify.models.Details;
+import com.team.beatify.models.Message;
 import com.team.beatify.models.User;
 import com.team.beatify.services.BeatService;
 import com.team.beatify.services.CategoryService;
+import com.team.beatify.services.CompraService;
+import com.team.beatify.services.DetailsService;
+import com.team.beatify.services.MessageService;
 import com.team.beatify.services.UserService;
 
 import org.springframework.stereotype.Controller;
@@ -28,16 +35,25 @@ public class HomeController {
     private final UserService userService;
     private final BeatService beatService;
     private final CategoryService categoryService;
+    private final CompraService compraService;
+    private final DetailsService detailsService;
+    private final MessageService messageService;
 
-    public HomeController(UserService userService, BeatService beatService, CategoryService categoryService) {
+    public HomeController(UserService userService, BeatService beatService, CategoryService categoryService,
+            CompraService compraService, DetailsService detailsService, MessageService messageService) {
         this.userService = userService;
         this.beatService = beatService;
         this.categoryService = categoryService;
+        this.compraService = compraService;
+        this.detailsService = detailsService;
+        this.messageService = messageService;
     }
+
     @GetMapping("/")
     public String home() {
         return "redirect:/login";
     }
+
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session){
         User user = userService.findThingById((Long) session.getAttribute("userId"));
@@ -125,5 +141,52 @@ public class HomeController {
         List<Beat> listadeseados = user.getWishlistbeats();
         model.addAttribute("wishlist", listadeseados);
         return "wishlist.jsp";
-    }    
+    }
+
+    @GetMapping("/realizarcompra")
+        public String showWishlist(HttpSession session, Model model){
+        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        List<Beat> listaBeats = user.getWishlistbeats();
+        Compra compra = new Compra();
+        compra.setuComprador(user);
+        compra.setBeats(listaBeats);
+        for (Beat beat: compra.getBeats()) {
+            Details details = new Details();
+            details.setCompra(compra);
+            details.setBeat(beat);
+            detailsService.createOrUpdateThing(details);
+        }
+        int total = 0;
+        for (Beat beat : compra.getBeats()) {
+            total += beat.getCost();
+        }
+        compra.setTotal(total);
+        compraService.createOrUpdateThing(compra);
+        
+        user.setWishlistbeats(new ArrayList<Beat>());
+        return "redirect:/details";
+    }
+    @GetMapping("/song/{id}")
+    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, HttpSession session, Model model){
+        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        Beat beat = beatService.findThingById(id);
+        List<Message> listaMessages = beat.getListaMessagesFromBeat();
+        String dataString = "";
+        for (Message message2 : listaMessages) {
+            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
+        }
+        model.addAttribute("data", dataString);
+        model.addAttribute("beat", beat);
+        return "showSong.jsp";
+    }
+    @PostMapping("/song/{idMessage}")
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, HttpSession session){
+        User user = userService.findThingById((Long) session.getAttribute("userId"));
+        Beat beat = beatService.findThingById(idmessage);
+        message.setBeat(beat);
+        message.setUser(user);
+        messageService.createOrUpdateThing(message);
+        return "redirect:/song/"+beat.getId();
+    }
+
 }
