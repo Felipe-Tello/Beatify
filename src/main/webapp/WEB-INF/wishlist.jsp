@@ -44,6 +44,7 @@
                     </c:forEach>
                 </tbody>
             </table>
+          <a href="/realizarcompra">realizar compra</a>
         <div>
     </div>
 </body>

@@ -7,8 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "compras_beats")
-public class Compra_beat extends BaseModel{
+@Table(name = "details")
+public class Details extends BaseModel{
     
     //este sería el precio actual del beat
     private int precio;
@@ -25,10 +25,10 @@ public class Compra_beat extends BaseModel{
 
     //----------------------------------------------------------------------------------------//
 
-    public Compra_beat() {
+    public Details() {
     }
 
-    public Compra_beat(int precio, Compra compra, Beat beat) {
+    public Details(int precio, Compra compra, Beat beat) {
         this.precio = precio;
         this.compra = compra;
         this.beat = beat;

@@ -60,13 +60,17 @@ public class User extends BaseModel{
 	private List<Compra> listaDeCompras;
 
 	//mensajes¿?
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "messages", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "beat_id")
-    )
-    private List<Beat> beatsMessages;
+
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Message> listaMessagesFromUsers;
+
+	// @ManyToMany(fetch = FetchType.LAZY)
+    // @JoinTable(
+    //     name = "messages", 
+    //     joinColumns = @JoinColumn(name = "user_id"), 
+    //     inverseJoinColumns = @JoinColumn(name = "beat_id")
+    // )
+    // private List<Beat> beatsMessages;
 
 	//----------------------------------------------------------------------------------------//
 	//relacion 1:n beats//
@@ -98,19 +102,18 @@ public class User extends BaseModel{
 	public User() {
 	}
 
-	public User(
-			String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, List<Beat> wishlistbeats, List<Compra> listaDeCompras, List<Beat> beatsMessages,List<Beat> beatsDelCreador, List<Beat> beatsLike) {
+	public User(String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Message> listaMessagesFromUsers, List<Beat> beatsDelCreador, List<Beat> beatsLike, List<Beat> wishlistbeats) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.location = location;
 		this.region = region;
 		this.email = email;
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
 		this.listaDeCompras = listaDeCompras;
-		this.beatsMessages = beatsMessages;
+		this.listaMessagesFromUsers = listaMessagesFromUsers;
 		this.beatsDelCreador = beatsDelCreador;
 		this.beatsLike = beatsLike;
-		this.location = location;
 		this.wishlistbeats = wishlistbeats;
 	}
 
@@ -172,12 +175,12 @@ public class User extends BaseModel{
 		this.listaDeCompras = listaDeCompras;
 	}
 
-	public List<Beat> getBeatsMessages() {
-		return beatsMessages;
+	public List<Message> getlistaMessagesFromUsers() {
+		return listaMessagesFromUsers;
 	}
 
-	public void setBeatsMessages(List<Beat> beatsMessages) {
-		this.beatsMessages = beatsMessages;
+	public void setlistaMessagesFromUsers(List<Message> listaMessagesFromUsers) {
+		this.listaMessagesFromUsers = listaMessagesFromUsers;
 	}
 
 	public List<Beat> getBeatsDelCreador() {
