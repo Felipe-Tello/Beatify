@@ -12,6 +12,15 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Titulo: <c:out value="${beat.title}"></c:out></h1>
+    <h1>Author: <c:out value="${beat.uCreador.firstName}"></c:out></h1>
+    <h1>cost: <c:out value="${beat.cost}"></c:out></h1>
+    <audio controls>
+        <source src="${beat.url}" type="audio/ogg">
+        <source src="${beat.url}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <h1>Message Wall</h1>
         <p>
         <textarea readonly rows="10" cols="40"><c:out value="${data}"/></textarea>
