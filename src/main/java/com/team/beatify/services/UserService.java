@@ -1,14 +1,25 @@
 package com.team.beatify.services;
 
-import org.mindrot.jbcrypt.BCrypt;
+import java.util.List;
+
+import com.team.beatify.models.Rol;
 import com.team.beatify.models.User;
 import com.team.beatify.repositories.BaseRepository;
+import com.team.beatify.repositories.RolRepository;
 import com.team.beatify.repositories.UserRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService extends BaseService<User>{
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private RolRepository rolRepository;
     
     private final UserRepository userRepository;
 
@@ -16,12 +27,7 @@ public class UserService extends BaseService<User>{
         super(baseRepository);
         this.userRepository = userRepository;
     }
-    // registrar el usuario y hacer Hash a su password
-    public User registerUser(User user) {
-        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        user.setPassword(hashed);
-        return userRepository.save(user);
-    }
+   
     // encontrar un usuario por su email
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -29,20 +35,34 @@ public class UserService extends BaseService<User>{
     public boolean emailExist(String email) {
         return userRepository.existsByEmail(email);
     }
-    // autenticar usuario
-    public boolean authenticateUser(String email, String password) {
-        // primero encontrar el usuario por su email
-        User user = userRepository.findByEmail(email);
-        // si no lo podemos encontrar por su email, retornamos false
-        if(user == null) {
-            return false;
-        } else {
-            // si el password coincide devolvemos true, sino, devolvemos false
-            if(BCrypt.checkpw(password, user.getPassword())) {
+
+    //metodos para guardar segun ROL
+    public void rolUsuario(User user) {
+        String contraseña = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(contraseña);
+        user.setRoles(rolRepository.findByName("ROLE_USER"));
+    }
+
+    public void rolAdmin(User user) {
+        String contraseña = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(contraseña);
+        user.setRoles(rolRepository.findByName("ROLE_ADMIN"));
+    }
+
+    public boolean isEmpty() {
+        Long count = userRepository.count();
+        return count == 0;
+    }
+    
+    public boolean hasAdmin(User user) {
+        List <Rol> userRol = user.getRoles();
+        
+        for (int i = 0; i < userRol.size(); i++) {
+            if(userRol.get(i).getName().equals("ROLE_ADMIN")) {
                 return true;
-            } else {
-                return false;
             }
         }
+
+        return false;
     }
 }
