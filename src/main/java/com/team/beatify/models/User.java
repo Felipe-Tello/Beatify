@@ -27,6 +27,7 @@ public class User extends BaseModel{
     @Size(min = 5,max = 200,message = "size")
     private String lastName;
 
+	//?
 	@NotBlank(message = "El campo no puede estar en blanco")
 	@Size(min = 5,max = 200,message = "size")
 	private String location;
@@ -44,6 +45,10 @@ public class User extends BaseModel{
 
 	@Transient
 	private String passwordConfirmation;
+
+	//opcional
+	//debería tener un tamaño máximo?
+	private String descripcion;
 
 
 	///ROLES USUARIO--------------------------------------------------------------------------------//
@@ -221,5 +226,14 @@ public class User extends BaseModel{
 
 	public void setWishlistbeats(List<Beat> wishlistbeats) {
 		this.wishlistbeats = wishlistbeats;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}	
+
 }
