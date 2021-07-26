@@ -40,7 +40,7 @@ public class HomeController {
     }
     @GetMapping("/")
     public String home() {
-        return "redirect:/login";
+        return "redirect:/dashboard";
     }
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal){
