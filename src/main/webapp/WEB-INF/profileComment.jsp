@@ -58,5 +58,18 @@
                 </c:forEach>
             </tbody>
         </table>
+    <h1>Message Wall</h1>
+    <p>
+        <textarea readonly rows="10" cols="40"><c:out value="${data}"/></textarea>
+    </p>
+    <h4>Add comment:</h4>
+    <form:form action="" method="post" modelAttribute="messageModel">
+        <p>
+            <form:label path="comment"></form:label>
+            <form:errors path="comment"/>
+            <form:textarea path="comment" name="content" cols="20" rows="1"></form:textarea>
+        </p>
+        <input type="submit" value="Submit"/>
+    </form:form>
 </body>
 </html>

@@ -12,6 +12,7 @@
     <title>Administrador</title>
 </head>
 <body>
+    <a href="/dashboard">volver al menu principal</a>
     <form:form method="POST" action="" modelAttribute="categoryModel">
         <div">
             <form:label path="genero">Genero Musical</form:label>
