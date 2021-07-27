@@ -16,7 +16,7 @@
         <h1>Login</h1>
         <c:if test="${error != null}">
             <p>
-                <c:out value = "${error}">
+                <c:out value = "${error}"/>
             </p>
         </c:if>
         <form method="post" action="/login">
