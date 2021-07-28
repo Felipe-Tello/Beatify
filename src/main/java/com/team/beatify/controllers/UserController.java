@@ -3,7 +3,6 @@ package com.team.beatify.controllers;
 import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;
@@ -14,7 +13,6 @@ import com.team.beatify.services.MessageService;
 import com.team.beatify.services.UserService;
 
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,17 +38,22 @@ public class UserController {
         this.messageService = messageService;
 }
 
+
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
     public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         User user = userService.findThingById(userid);
+        if(user == null) {
+            return "redirect:/dashboard";
+        }
         List<Beat> listaBeats = user.getBeatsDelCreador();
         model.addAttribute("user", user);
         model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
         return "profile.jsp";
+
     }
     @PostMapping("/profile/{userid}")
     public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @RequestParam("beatId")Long id, Principal principal){
@@ -97,29 +100,21 @@ public class UserController {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @GetMapping("/profile/{userid}/edit")
-    public String editProfilePage(@PathVariable("userid") Long userId, Model model) {
-
-        //verifica si la sesión es nula
-        if(validarUsuario(session)) {
-            return "redirect:/";
-        }
+    public String editProfilePage(@PathVariable("userid") Long userId, Model model, Principal principal) {
 
         //solo puede acceder a editar su perfil el usuario creador
-        Long sessionId = (Long) session.getAttribute("userId");
         User usuario = userService.findThingById(userId);
+        User usuarioLogeado = encontrarUsuario(principal);
 
-        if(usuario.getId() == null || usuario.getId() != sessionId) {
+        if(usuario == null || usuario.getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
         model.addAttribute("user", usuario);
-        //agregar lista de regiones
-        // model.addAttribute("regiones", regiones);
         return "editProfile.jsp";
     }
 
 
     //ver lo de descripcion de usuario, falta agregarlo
-    //Los campos editables serían todos? o solo algunos?
     //nombre, apellido, región, descripcion.
     @PutMapping("/profile/{userid}/edit")
     public String editProfile(@Valid @ModelAttribute("user") User user, BindingResult result, @PathVariable("userid") Long userId) {
@@ -136,16 +131,18 @@ public class UserController {
             usuario.setFirstName(user.getFirstName());
             usuario.setLastName(user.getLastName());
             usuario.setRegion(user.getRegion());
-            // setDescripcion
-            //no hace falta agregar los otros setters, pq no hace falta actualizarlos (se mantienen igual)
+            usuario.setLocation(user.getLocation());
+            usuario.setDescripcion(user.getDescripcion());
             userService.createOrUpdateThing(usuario);
             return "redirect:/profile/" + userId;
         }
+
     }
 
-    public boolean validarUsuario(HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        return userId == null;
+    public User encontrarUsuario(Principal principal) {
+        String email = principal.getName();
+        User user = userService.findByEmail(email);
+        return user;
     }
 
 }
