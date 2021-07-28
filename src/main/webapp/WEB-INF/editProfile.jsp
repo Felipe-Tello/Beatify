@@ -14,7 +14,10 @@
 </head>
 <body>
 
-    <div class="contenedor">
+    <div class="container">
+        <p class="text-right">
+            <a href="/dashboard">Menú</a>
+        </p>
         <h1>Editar perfil, <c:out value = "${user.firstName} ${user.lastName}" /></h1>
 
         <form:form method="POST" action="" modelAttribute="user">
@@ -69,6 +72,7 @@
             </div>
             <input id="botonRegis" class="btn btn-light" type="submit" value="Editar"/>
         </form:form>
+        <a href="/profile/${user.id}">Volver atrás</a>
     </div>
     <!-- input readonly buscar -->
 </body>

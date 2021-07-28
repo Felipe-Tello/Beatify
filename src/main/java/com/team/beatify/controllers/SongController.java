@@ -52,11 +52,13 @@ public class SongController {
 
     //campos editables: titulo, costo, añadir categorias?
     @PutMapping("/song/{songid}/edit")
-    public String editSong(@Valid @ModelAttribute("beat") Beat beat, BindingResult result, @PathVariable("songid") Long songId) {
+    public String editSong(@Valid @ModelAttribute("beat") Beat beat, BindingResult result, @PathVariable("songid") Long songId, Model model) {
 
         Beat beatUpdated = beatService.findThingById(songId);
 
         if(result.hasErrors()) {
+            List<Category> listaCategories = categoryService.allThings();
+            model.addAttribute("listaCategories", listaCategories);
             return "editSong.jsp";
         }
         else {
