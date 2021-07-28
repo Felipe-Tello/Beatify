@@ -9,26 +9,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="submit" value="Cerrar sesión" />
-    </form>
-    <a href="/dashboard">volver al menu principal</a>
-    <br>
-    <a href="/wishlist/${Usuario.id}">Wishlist</a>
-    <br>
-    <a href="/profile/${user.id}/edit">Editar perfil</a>
-    <br>
-    <a href="/song/new">Añadir cancion</a>
-    <h1>Nombre: <c:out value="${user.firstName}"></c:out></h1>
-    <h1>Apellido: <c:out value="${user.lastName}"></c:out></h1>
-    <h1>Region: <c:out value="${user.region}"></c:out></h1>
+    <div class="container">
+        <form method="POST" action="/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Cerrar sesión" />
+        </form>
+        <a href="/dashboard">volver al menu principal</a>
+        <br>
+            <a href="/wishlist/${userActual.id}">Wishlist</a>
+        <br>
+        <c:if test="${userActual.id == user.id}">
+            <a href="/profile/${user.id}/edit">Editar perfil</a>
+        </c:if>
+        <br>
+        <c:if test="${userActual.id == user.id}">
+            <a href="/song/new">Añadir cancion</a>
+        </c:if>
+        <h1>Nombre: <c:out value="${user.firstName}"></c:out></h1>
+        <h1>Apellido: <c:out value="${user.lastName}"></c:out></h1>
+        <h1>Region: <c:out value="${user.region}"></c:out></h1>
 
-    <h4>Tus Canciones</h4>
-        <table>
+        <h4>Tus Canciones</h4>
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -51,12 +57,33 @@
                             Your browser does not support the audio element.
                         </audio>
                     </td>
-                    <td><a href="/like/${lb.id}?ruta=profile">Like</a><a href="/dislike/${lb.id}?ruta=profile">Dislike</a><c:out value="${lb.usersLike.size()}"/></td>
-                    <td><a href="/addwishlist/${lb.id}?ruta=profile">Add lo wish list</a><a href="/removewishlist/${lb.id}?ruta=profile">Remove from wish list</a></td>
+                    <td>
+                        <c:out value="${lb.usersLike.size()}"/>
+                        <c:if test="${!lb.usersLike.contains(userActual)}"><a href="/like/${lb.id}?ruta=profile">Like</a></c:if>
+                        <c:if test="${lb.usersLike.contains(userActual)}"><a href="/dislike/${lb.id}?ruta=profile">Dislike</a></c:if>
+                    </td>
+                    <td>
+                        <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}"><a href="/addwishlist/${lb.id}?ruta=profile">Add lo wish list</a></c:if>
+                        <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}"><a href="/removewishlist/${lb.id}?ruta=profile">Remove from wish list</a></c:if>
+                    </td>
                     <td><a href="/profile/${user.id}/${lb.id}">comentarios</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
         </table>
+        <h1>Message Wall</h1>
+        <p>
+            <textarea readonly rows="10" cols="40"><c:out value="${data}"/></textarea>
+        </p>
+        <h4>Add comment:</h4>
+        <form action="" method="post" >
+            <p>
+                <label path="comment"></label>
+                <errors path="comment"/>
+                <textarea path="comment" name="content" cols="20" rows="1"></textarea>
+            </p>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
 </body>
 </html>

@@ -20,15 +20,15 @@ import javax.validation.constraints.Size;
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseModel{
 	@NotBlank(message = "El campo no puede estar en blanco")
-	@Size(min = 5,max = 200,message = "size")
+	@Size(min = 2,max = 200,message = "size")
 	private String firstName;
 
     @NotBlank(message = "El campo no puede estar en blanco")
-    @Size(min = 5,max = 200,message = "size")
+    @Size(min = 2,max = 200,message = "size")
     private String lastName;
 
 	@NotBlank(message = "El campo no puede estar en blanco")
-	@Size(min = 5,max = 200,message = "size")
+	@Size(min = 3,max = 200,message = "size")
 	private String location;
 
     @NotNull(message = "El campo no puede ser nulo")
