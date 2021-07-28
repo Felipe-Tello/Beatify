@@ -13,13 +13,16 @@
     <title>Editar Canción</title>
 </head>
 <body>
-    <div id="contenedor">
+  
+    <div class="container">
         <a href="/dashboard"  class="btn btn-outline-light volver">Volver al perfil</a>
         <img class="rounded float-end imagen" src="\css\16 sin título_20210723201644.png">
         <div id="agregar">
-            <h1>Editar Beat</h1>
+            <h1>Editar Beat, <c:out value = "${beat.title}"/></h1>
             
             <form:form method="POST" action="" modelAttribute="beat">
+
+                <input type="hidden" name="_method" value="put">
 
                 <div class="form-group">
                     <form:label path="title">Titulo de la cancion</form:label>

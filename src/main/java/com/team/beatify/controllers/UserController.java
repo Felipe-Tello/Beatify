@@ -52,8 +52,6 @@ public class UserController {
         return "redirect:/profile/"+ user.getId();
     }
 
-
-
     //editar
     @GetMapping("/profile/{userid}/edit")
     public String editProfilePage(@PathVariable("userid") Long userId, Model model, Principal principal) {
