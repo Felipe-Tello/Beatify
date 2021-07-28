@@ -64,20 +64,20 @@ public class HomeController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal){
-        User user = userService.findByEmail(principal.getName());
+        User userActual = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         List<Beat> regionBeats = new ArrayList<>();
         for (Beat beat : listaBeats) {
-            if(beat.getuCreador().getRegion().equals(user.getRegion())){
+            if(beat.getuCreador().getRegion().equals(userActual.getRegion())){
                 regionBeats.add(beat);
             }
         }
         model.addAttribute("regionBeats", regionBeats);
-        model.addAttribute("Usuario", user);
+        model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
 
         //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
-        if(userService.hasAdmin(user)) {
+        if(userService.hasAdmin(userActual)) {
             model.addAttribute("permiso", true);
         }
         return "dashboard.jsp";
@@ -96,8 +96,11 @@ public class HomeController {
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
+        else if (ruta.equals("profileComment")){
+            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        }
         else{
-            return "redirect:/profile/"+ user.getId();
+            return "redirect:/profile/"+ beat.getuCreador().getId();
         }
 	}
 
@@ -110,8 +113,11 @@ public class HomeController {
 		if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
+        else if (ruta.equals("profileComment")){
+            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        }
         else{
-            return "redirect:/profile/"+ userActual.getId();
+            return "redirect:/profile/"+ beat.getuCreador().getId();
         }
 	}
 
@@ -128,8 +134,11 @@ public class HomeController {
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
+        else if (ruta.equals("profileComment")){
+            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        }
         else{
-            return "redirect:/profile/"+ userActual.getId();
+            return "redirect:/profile/"+ beat.getuCreador().getId();
         }
     }
 
@@ -144,6 +153,9 @@ public class HomeController {
         }
         else if (ruta.equals("wishlist")) {
             return "redirect:/wishlist/"+ userActual.getId();
+        }
+        else if (ruta.equals("profileComment")){
+            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
         }
         else{
             return "redirect:/profile/"+ userActual.getId();
@@ -236,38 +248,6 @@ public class HomeController {
         message.setUser(userActual);
         messageService.createOrUpdateThing(message);
         return "redirect:/song/"+beat.getId();
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // VER COMENTARIOS EN EL PERFIL //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @GetMapping("/profile/{userid}/{beatid}")
-    public String showMessage(Principal principal, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, @ModelAttribute("messageModel") Message message, Model model){
-        // User userActual = userService.findByEmail(principal.getName());
-        User user = userService.findThingById(userid);
-        Beat beat = beatService.findThingById(beatid);
-        List<Beat> listaBeats = user.getBeatsDelCreador();
-        List<Message> listaMessages = beat.getListaMessagesFromBeat();
-        String dataString = "";
-        for (Message message2 : listaMessages) {
-            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
-        }
-        model.addAttribute("user", user);
-        model.addAttribute("listaBeats", listaBeats);
-        model.addAttribute("data", dataString);
-        model.addAttribute("beat", beat);
-        return "profileComment.jsp";
-    }
-
-    @PostMapping("/profile/{userid}/{beatid}")
-    public String showMessage(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, Principal principal){
-        User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(beatid);
-        message.setBeat(beat);
-        message.setUser(userActual);
-        messageService.createOrUpdateThing(message);
-        return "redirect:/profile/"+userid+"/"+beatid;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
