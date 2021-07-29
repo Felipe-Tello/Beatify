@@ -12,9 +12,21 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="POST" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Cerrar sesión" />
+    </form>
+    <p class="text-right">
+        <a href="/dashboard">Menú</a>
+    </p>
     <h1>Titulo: <c:out value="${beat.title}"></c:out></h1>
     <h1>Author: <c:out value="${beat.uCreador.firstName}"></c:out></h1>
     <h1>cost: <c:out value="${beat.cost}"></c:out></h1>
+    <c:if test="${usuario.id == beat.uCreador.id}">
+        <p>
+            <a href="/song/${beat.id}/edit">Editar</a>
+        </p>
+    </c:if>
     <audio controls>
         <source src="${beat.url}" type="audio/ogg">
         <source src="${beat.url}" type="audio/mpeg">
@@ -34,5 +46,6 @@
         </p>
         <input type="submit" value="Submit"/>
     </form:form>
+    <a href="/dashboard">Volver atrás</a>
 </body>
 </html>

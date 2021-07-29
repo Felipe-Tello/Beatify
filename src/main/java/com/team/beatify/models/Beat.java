@@ -78,6 +78,7 @@ public class Beat extends BaseModel{
     private List<Compra> compras;
 
     //relacion n:m beats-users CATEGORIAS
+    @NotNull(message = "El campo no puede ser nulo")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "beats_category", 

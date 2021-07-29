@@ -48,7 +48,8 @@ public class FileController {
     @PostMapping("/song/new")
     public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal){
         User user = userService.findByEmail(principal.getName());
-            if (!file.isEmpty()) {
+            //ver esto
+            if (!file.isEmpty() && beat.getCategories().size() > 0) {
                 String name = file.getOriginalFilename();
                 Path directorioImg = Paths.get("src/main/resources/static/user");
                 String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();

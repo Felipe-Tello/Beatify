@@ -10,22 +10,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/addsong.css">
     <title>Editar Canción</title>
 </head>
 <body>
   
-    <div class="container">
+    <div class="contenedor">
         <a href="/dashboard"  class="btn btn-outline-light volver">Volver al perfil</a>
         <img class="rounded float-end imagen" src="\css\16 sin título_20210723201644.png">
         <div id="agregar">
-            <h1>Editar Beat, <c:out value = "${beat.title}"/></h1>
-            
+            <h1>Editar beat</h1>
+
             <form:form method="POST" action="" modelAttribute="beat">
 
                 <input type="hidden" name="_method" value="put">
 
                 <div class="form-group">
-                    <form:label path="title">Titulo de la cancion</form:label>
+                    <form:label path="title">Título</form:label>
                     <form:input class="form-control" path="title" placeholder="Titulo de la cancion"/>
                 </div>
                 <div>
@@ -36,17 +37,27 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <form:label path="categories">Añadir Categorías</form:label>
-                    <form:select path="categories" class="form-select"> 
-                        <c:forEach items="${listaCategories}" var="lc">
-                            <form:option value="${lc.id}">
-                                <c:out value="${lc.genero}"></c:out>
-                            </form:option>
+                    <form:label path="categories" class="d-block">Añadir categorías. Si desea mantener las actuales, debe seleccionarlas.</form:label>
+                    <!-- cambiar color pofavo -->
+                    <small class="d-block">Actuales: 
+                        <c:forEach items="${beat.categories}" var="lc">
+                            <c:out value="${lc.genero} "/>
                         </c:forEach>
-                    </form:select>
+                    </small>
+
+                    <c:if test="${error != null}">
+                        <small class="d-block"><c:out value = "${error}"/></small>
+                    </c:if>
+
+                    <c:forEach items="${listaCategories}" var="lc">
+                        <form:checkbox path="categories" value="${lc.id}"/>
+                            <c:out value="${lc.genero}"/>
+                    </c:forEach>
+               
                 <div class="form-group">
                 <input type="submit"  class="btn btn-outline-light subir" value="Editar"/>
             </form:form>
+            <a href="/song/${beat.id}">Volver atrás</a>
         </div>
     </div>
 </body>

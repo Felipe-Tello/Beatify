@@ -42,7 +42,7 @@
             <tbody>
                 <c:forEach items="${listaBeats}" var="lb">
                 <tr>
-                    <td><c:out value="${lb.title}"/></td>
+                    <td><a href="/song/${lb.id}"><c:out value="${lb.title}"/></a></td>
                     <td><c:out value="${lb.cost}"/></td>
                     <td>
                         <audio controls>

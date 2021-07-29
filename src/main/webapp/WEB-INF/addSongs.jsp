@@ -35,13 +35,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <form:select path="categories" class="form-select"> 
-                            <c:forEach items="${listaCategories}" var="lc">
-                                <form:option value="${lc.id}">
-                                    <c:out value="${lc.genero}"></c:out>
-                                </form:option>
-                            </c:forEach>
-                        </form:select>
+                        <form:label path="categories">Añadir Categorías. </form:label>
+                        <c:forEach items="${listaCategories}" var="lc">
+                            <form:checkbox path="categories" value="${lc.id}"/>
+                                <c:out value="${lc.genero}"/>
+                        </c:forEach>
                     <div class="form-group">
                     <input type="submit"  class="btn btn-outline-light subir" value="subir cancion"/>
                 </form:form>
