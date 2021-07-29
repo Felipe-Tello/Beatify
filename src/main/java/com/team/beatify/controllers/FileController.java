@@ -46,7 +46,7 @@ public class FileController {
         return "addSongs.jsp";
     }
     @PostMapping("/song/new")
-    public @ResponseBody String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal){
+    public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal){
         User user = userService.findByEmail(principal.getName());
             //ver esto
             if (!file.isEmpty() && beat.getCategories().size() > 0) {
@@ -73,7 +73,7 @@ public class FileController {
                     // beatsCategorias.add(beatNew);
                     // beatService.createOrUpdateThing(beatNew);
                     // categoryService.createOrUpdateThing(category);
-                    return "You successfully uploaded  !";
+                    return "redirect:/profile/"+user.getId();
                 } catch (Exception e) {
                     return "You failed to upload  => " + e.getMessage();
                 }

@@ -8,8 +8,9 @@ import javax.validation.Valid;
 import com.team.beatify.models.Beat;
 import com.team.beatify.models.Message;
 import com.team.beatify.models.User;
+import com.team.beatify.services.BeatService;
+import com.team.beatify.services.MessageService;
 import com.team.beatify.services.UserService;
-import com.team.beatify.validations.UserValidator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,22 +26,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
+    private final HttpSession session;
+    private final BeatService beatService;
+    private final MessageService messageService;
 
-    public UserController(UserService userService, UserValidator userValidator) {
+    public UserController(UserService userService, HttpSession session, BeatService beatService,
+    MessageService messageService) {
         this.userService = userService;
-    }
+        this.session = session;
+        this.beatService = beatService;
+        this.messageService = messageService;
+}
+
 
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
-    public String showProfile(@PathVariable("userid") Long userid, Model model){
-        //aquí lo cambié un poco uwu
+    public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model){
+        User userActual = userService.findByEmail(principal.getName());
         User user = userService.findThingById(userid);
         if(user == null) {
             return "redirect:/dashboard";
         }
         List<Beat> listaBeats = user.getBeatsDelCreador();
         model.addAttribute("user", user);
+        model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
         return "profile.jsp";
 
@@ -52,7 +62,43 @@ public class UserController {
         return "redirect:/profile/"+ user.getId();
     }
 
-    //editar
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // VER COMENTARIOS EN EL PERFIL //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @GetMapping("/profile/{userid}/{beatid}")
+    public String showMessage(Principal principal, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, @ModelAttribute("messageModel") Message message, Model model){
+        User userActual = userService.findByEmail(principal.getName());
+        User user = userService.findThingById(userid);
+        Beat beat = beatService.findThingById(beatid);
+        List<Beat> listaBeats = user.getBeatsDelCreador();
+        List<Message> listaMessages = beat.getListaMessagesFromBeat();
+        String dataString = "";
+        for (Message message2 : listaMessages) {
+            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
+        }
+        model.addAttribute("userActual", userActual);
+        model.addAttribute("user", user);
+        model.addAttribute("listaBeats", listaBeats);
+        model.addAttribute("data", dataString);
+        model.addAttribute("beat", beat);
+        return "profileComment.jsp";
+    }
+
+    @PostMapping("/profile/{userid}/{beatid}")
+    public String showMessage(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, Principal principal){
+        User userActual = userService.findByEmail(principal.getName());
+        Beat beat = beatService.findThingById(beatid);
+        message.setBeat(beat);
+        message.setUser(userActual);
+        messageService.createOrUpdateThing(message);
+        return "redirect:/profile/"+userid+"/"+beatid;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // EDITAR PERFIL //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @GetMapping("/profile/{userid}/edit")
     public String editProfilePage(@PathVariable("userid") Long userId, Model model, Principal principal) {
 
