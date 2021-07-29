@@ -68,11 +68,13 @@ public class HomeController {
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         List<Beat> regionBeats = new ArrayList<>();
         Category category = categoryService.findThingById(2L); 
+        List<Category> listaCategories = categoryService.allThings();
         for (Beat beat : listaBeats) {
             if(beat.getuCreador().getRegion().equals(userActual.getRegion())){
                 regionBeats.add(beat);
             }
         }
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
         model.addAttribute("userActual", userActual);
@@ -85,8 +87,15 @@ public class HomeController {
         return "dashboard.jsp";
     }
 
+    @GetMapping("/categories/{id}")
+    public String showCategory(@PathVariable("id")Long id, Principal principal, Model model){
+        User userActual = userService.findByEmail(principal.getName());
+        Category category = categoryService.findThingById(id);
+        model.addAttribute("userActual", userActual);
+        model.addAttribute("category", category);
+        return "categories.jsp";
+    }
 
-    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DAR LIKES Y DISLIKES //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,6 +112,9 @@ public class HomeController {
         }
         else if (ruta.equals("profileComment")){
             return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        }
+        else if (ruta.equals("category")){
+            return "redirect:/category/"+ beat.getuCreador().getId() +"/"+ beat.getId();
         }
         else{
             return "redirect:/profile/"+ beat.getuCreador().getId();

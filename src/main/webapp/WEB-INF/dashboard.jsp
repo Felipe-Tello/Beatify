@@ -39,6 +39,9 @@
         <h1>Welcome <c:out value="${userActual.firstName}"></c:out></h1>
         <a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
         <h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
+        <c:forEach items="${listaCategories}" var="lc"> 
+            <a href="/categories/${lc.id}"><c:out value="${lc.genero}"/></a>
+        </c:forEach>
         <c:forEach items="${category.beats}" var="cb"> 
             <c:out value="${cb.title}"/>
         </c:forEach>
