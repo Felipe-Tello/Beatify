@@ -2,13 +2,6 @@
     margin: 0px;
     padding: 0px;
 }
-#contenedor{
-    background-color: #ca7fe9;
-    background: radial-gradient(circle, transparent 20%, #ca7fe9 20%, #ca7fe9 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ca7fe9 20%, #ca7fe9 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#8a2be2 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #8a2be2 2px, #ca7fe9 2px) -1px 0;
-    background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
-    padding-bottom: 200px;
-    /* background: radial-gradient(#8a2be2, black); */
-}
 h1{
     color: #ca7fe9;
 }
@@ -24,15 +17,12 @@ h1{
     border: solid black;
     border-radius: 10px;
     width: 500px;
-    height: 700px;
+    min-height: 700px;
     padding: 50px;
 }
 .form-group {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-#botonRegis{
-    margin-top: 10px;
 }
 h6{
     color: white;

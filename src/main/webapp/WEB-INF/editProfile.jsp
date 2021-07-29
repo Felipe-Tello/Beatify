@@ -61,15 +61,15 @@
                 <!-- agregar un width -->
                 <form:textarea class="form-control" placeholder="Añadir descripción (opcional)" path="descripcion"/>
             </div>
-            <div class="form-group mb-2">
-                <form:input class="form-control" type="hidden" path= "email" value = "${user.email}"/>
-            </div>
-            <div>
-                <form:input type = "hidden" class="form-control" path="password" value = "${user.password}"/>
-            </div>
-            <div>
-                <form:input type = "hidden" class="form-control" path="passwordConfirmation" value = "${user.passwordConfirmation}"/>
-            </div>
+                <div class="form-group mb-2">
+                    <form:input class="form-control" type="hidden" path= "email" value = "${user.email}"/>
+                </div>
+                <div>
+                    <form:input type = "hidden" class="form-control" path="password" value = "${user.password}"/>
+                </div>
+                <div>
+                    <form:input type = "hidden" class="form-control" path="passwordConfirmation" value = "${user.passwordConfirmation}"/>
+                </div>
             <input id="botonRegis" class="btn btn-light" type="submit" value="Editar"/>
         </form:form>
         <a href="/profile/${user.id}">Volver atrás</a>

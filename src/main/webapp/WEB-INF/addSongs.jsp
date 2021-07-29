@@ -22,7 +22,6 @@
             <form action="" enctype="multipart/form-data" method="POST">
                 <input  class="form-control" type="file" name="file" accept=".AAC, .WMA, .WAV, .MP4, .MP3, .FLAC, .M4A">
                 <form:form method="POST" action="" modelAttribute="modelBeat">
-
                     <div class="form-group">
                         <form:label path="title">Titulo de la cancion</form:label>
                         <form:input class="form-control" path="title" placeholder="Titulo de la cancion"/>

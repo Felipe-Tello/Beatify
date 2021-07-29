@@ -1,0 +1,14 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#login{
+    background-color: #17111e;
+    text-align: left;
+    border: solid black;
+    border-radius: 10px;
+    width: 500px;
+    min-height: 400px;
+    padding: 50px;
+    margin: 0 auto;
+}

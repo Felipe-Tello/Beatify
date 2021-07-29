@@ -1,4 +1,4 @@
-package com.team.beatify.models;
+    package com.team.beatify.models;
 
 import java.util.List;
 

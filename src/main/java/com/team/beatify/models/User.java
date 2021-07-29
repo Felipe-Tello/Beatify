@@ -19,28 +19,28 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseModel{
-	@NotBlank(message = "El campo no puede estar en blanco")
-	@Size(min = 2,max = 200,message = "size")
+	@NotBlank(message = "El nombre no puede estar en blanco")
+	@Size(min = 2,max = 200,message = "El nombre debe tener entre 2 y 200 caracteres")
 	private String firstName;
 
-    @NotBlank(message = "El campo no puede estar en blanco")
-    @Size(min = 2,max = 200,message = "size")
+    @NotBlank(message = "El apellido no puede estar en blanco")
+    @Size(min = 2,max = 200,message = "El apellido debe tener entre 2 y 200 caracteres")
     private String lastName;
 
 	//?
-	@NotBlank(message = "El campo no puede estar en blanco")
-	@Size(min = 3,max = 200,message = "size")
+	@NotBlank(message = "La ciudad no puede estar en blanco")
+	@Size(min = 3,max = 200,message = "La cuidad debe tener entre 3 y 200 caracteres")
 	private String location;
 
-    @NotNull(message = "El campo no puede ser nulo")
+    @NotNull(message = "Debe seleccionar una región")
     private String region;
 
-	@NotBlank(message = "El campo no puede estar en blanco")
+	@NotBlank(message = "El email no puede estar en blanco")
 	@Email(message = "Debe ingresar un Email valido")
 	private String email;
 
-	@NotBlank(message = "El campo no puede estar en blanco")
-	@Size( min = 8, max = 200, message = "size")
+	@NotBlank(message = "El campo contraseña no puede estar en blanco")
+	@Size( min = 8, max = 200, message = "La contraseña debe tener entre 8 y 200 caracteres")
 	private String password;
 
 	@Transient
@@ -50,6 +50,7 @@ public class User extends BaseModel{
 	//debería tener un tamaño máximo?
 	private String descripcion;
 
+	private String url;
 
 	///ROLES USUARIO--------------------------------------------------------------------------------//
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -107,7 +108,7 @@ public class User extends BaseModel{
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, List<Compra> listaDeCompras, List<Message> listaMessagesFromUsers, List<Beat> beatsDelCreador, List<Beat> beatsLike, List<Beat> wishlistbeats) {
+	public User(String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, String url, List<Compra> listaDeCompras, List<Message> listaMessagesFromUsers, List<Beat> beatsDelCreador, List<Beat> beatsLike, List<Beat> wishlistbeats) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.location = location;
@@ -120,6 +121,7 @@ public class User extends BaseModel{
 		this.beatsDelCreador = beatsDelCreador;
 		this.beatsLike = beatsLike;
 		this.wishlistbeats = wishlistbeats;
+		this.url = url;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -234,6 +236,22 @@ public class User extends BaseModel{
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}	
+	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public List<Message> getListaMessagesFromUsers() {
+		return listaMessagesFromUsers;
+	}
+
+	public void setListaMessagesFromUsers(List<Message> listaMessagesFromUsers) {
+		this.listaMessagesFromUsers = listaMessagesFromUsers;
+	}	
+	
 }
