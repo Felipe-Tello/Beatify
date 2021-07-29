@@ -31,7 +31,12 @@
         <c:if test="${userActual.id == user.id}">
             <a href="/song/new">Añadir cancion</a>
         </c:if>
-        <c:if test="${respectTotal > 0}"><img src="/ranges/1.png" alt=""></c:if>
+        <c:if test="${respectTotal >= 0 && respectTotal <=5}"><img src="/ranges/1.png" alt="" width="280" height="300"></c:if>
+        <c:if test="${respectTotal > 5 && respectTotal <=10}"><img src="/ranges/2.png" alt="" width="280" height="300"></c:if>
+        <c:if test="${respectTotal > 10 && respectTotal <=15}"><img src="/ranges/3.png" alt="" width="280" height="300"></c:if>
+        <c:if test="${respectTotal > 15 && respectTotal <= 20}"><img src="/ranges/4.png" alt="" width="280" height="300"></c:if>
+        <c:if test="${respectTotal > 20 && respectTotal <= 25}"><img src="/ranges/5.png" alt="" width="280" height="300"></c:if>
+        <c:if test="${respectTotal > 25}"><img src="/ranges/6.png" alt="" width="280" height="300"></c:if>
         <h1>Nombre: <c:out value="${user.firstName}"></c:out></h1>
         <h1>Apellido: <c:out value="${user.lastName}"></c:out></h1>
         <h1>Region: <c:out value="${user.region}"></c:out></h1>
