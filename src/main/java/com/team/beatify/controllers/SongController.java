@@ -63,15 +63,21 @@ public class SongController {
     public String editSong(@Valid @ModelAttribute("beat") Beat beat, BindingResult result, @PathVariable("songid") Long songId, Model model) {
 
         Beat beatUpdated = beatService.findThingById(songId);
+        List<Category> listaCategories = categoryService.allThings();
 
         if(result.hasErrors()) {
-            List<Category> listaCategories = categoryService.allThings();
+            model.addAttribute("listaCategories", listaCategories);
+            return "editSong.jsp";
+        }
+        else if(beat.getCategories().size() <= 0) {
+            model.addAttribute("error", "Debe agregar al menos una categoría");
             model.addAttribute("listaCategories", listaCategories);
             return "editSong.jsp";
         }
         else {
             beatUpdated.setTitle(beat.getTitle());
             beatUpdated.setCost(beat.getCost());
+            beatUpdated.setCategories(beat.getCategories());
             beatService.createOrUpdateThing(beatUpdated);
             return "redirect:/song/" + songId;
         }

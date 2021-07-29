@@ -3,6 +3,7 @@ package com.team.beatify.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;

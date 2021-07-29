@@ -231,7 +231,7 @@ public class HomeController {
 
     @GetMapping("/song/{id}")
     public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal){
-        // User user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
@@ -239,6 +239,7 @@ public class HomeController {
             dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
         }
         model.addAttribute("data", dataString);
+        model.addAttribute("usuario", user);
         model.addAttribute("beat", beat);
         return "showSong.jsp";
     }
