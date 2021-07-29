@@ -31,6 +31,7 @@
         <c:if test="${userActual.id == user.id}">
             <a href="/song/new">Añadir cancion</a>
         </c:if>
+        <br>
         <c:if test="${respectTotal >= 0 && respectTotal <=5}"><img src="/ranges/1.png" alt="" width="280" height="300"></c:if>
         <c:if test="${respectTotal > 5 && respectTotal <=10}"><img src="/ranges/2.png" alt="" width="280" height="300"></c:if>
         <c:if test="${respectTotal > 10 && respectTotal <=15}"><img src="/ranges/3.png" alt="" width="280" height="300"></c:if>

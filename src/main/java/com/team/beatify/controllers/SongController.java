@@ -113,7 +113,7 @@ public class SongController {
                     stream.close();
                     Beat beatNew = beatService.createOrUpdateThing(beat);
                     beatNew.setuCreador(user); 
-                    beatNew.setUrl("/user"+user.getId()+"/"+ name);
+                    beatNew.setUrl("/users/user"+user.getId()+"/"+ name);
                     beatService.createOrUpdateThing(beatNew);
                     // Category category = categoryService.findThingById(idCategory);
                     // List<Category> categoriasBeat = beatNew.getCategories();
