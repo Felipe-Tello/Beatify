@@ -67,11 +67,13 @@ public class HomeController {
         User userActual = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         List<Beat> regionBeats = new ArrayList<>();
+        Category category = categoryService.findThingById(2L); 
         for (Beat beat : listaBeats) {
             if(beat.getuCreador().getRegion().equals(userActual.getRegion())){
                 regionBeats.add(beat);
             }
         }
+        model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
         model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
@@ -82,6 +84,8 @@ public class HomeController {
         }
         return "dashboard.jsp";
     }
+
+
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DAR LIKES Y DISLIKES //
@@ -93,6 +97,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.setUsersLike(user);
         beatService.createOrUpdateThing(beat);
+        
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
@@ -110,6 +115,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.getUsersLike().remove(userActual);
         beatService.createOrUpdateThing(beat);
+
 		if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
@@ -131,6 +137,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.setWishlistuser(userActual);
         beatService.createOrUpdateThing(beat);
+
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
@@ -148,6 +155,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.getWishlistuser().remove(userActual);
         beatService.createOrUpdateThing(beat);
+
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
         }
@@ -160,24 +168,6 @@ public class HomeController {
         else{
             return "redirect:/profile/"+ userActual.getId();
         }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ACCEDER A LA PAGINA DE ADMIN //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @GetMapping("/admin")
-    public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
-        User userActual = userService.findByEmail(principal.getName());
-        model.addAttribute("admin", userActual);
-        return "admin.jsp";
-    }
-
-    @PostMapping("/admin")
-    public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, Principal principal){
-        Category newCategory = categoryService.createOrUpdateThing(category);
-        categoryService.createOrUpdateThing(newCategory);
-        return "redirect:/admin";
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +210,7 @@ public class HomeController {
         // }
         // compra.setTotal(total);
         userActual.setWishlistbeats(new ArrayList<Beat>());
-        return "redirect:/details";
+        return "redirect:/details/"+compra.getId();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,12 +244,13 @@ public class HomeController {
     // VER HISTORIAL DE COMPRA //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // @GetMapping("/details")
-    // public String showDetails(Principal principal, Model model){
-    //     User user = userService.findByEmail(principal.getName());
-    //     List<Compra> listaCompra = user.getListaDeCompras();
-    // }
-
-
+    @GetMapping("/details/{idCompra}")
+    public String showDetails(@PathVariable("idCompra") Long id, Principal principal, Model model){
+        User userActual = userService.findByEmail(principal.getName());
+        List<Compra> listaCompra = userActual.getListaDeCompras();
+        model.addAttribute("userActual", userActual);
+        model.addAttribute("listaCompra", listaCompra);
+        return "details.jsp";
+    }
 }
 

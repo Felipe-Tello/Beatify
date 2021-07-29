@@ -12,6 +12,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1></h1>
+    <h3><c:out value="${userActual.firstName}"/> <c:out value="${userActual.lastName}"/></h3>
+    <ul>
+        <c:forEach items="${listaCompra}" var="lc">
+            <li>
+                <td><c:out value="${lc.total}"/></td>
+            </li>
+        </c:forEach>
+    </ul>
 </body>
 </html>

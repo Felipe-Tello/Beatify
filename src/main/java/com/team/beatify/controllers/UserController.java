@@ -15,6 +15,7 @@ import com.team.beatify.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,19 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     private final UserService userService;
-    private final HttpSession session;
     private final BeatService beatService;
     private final MessageService messageService;
 
-    public UserController(UserService userService, HttpSession session, BeatService beatService,
+    public UserController(UserService userService, BeatService beatService,
     MessageService messageService) {
         this.userService = userService;
-        this.session = session;
         this.beatService = beatService;
         this.messageService = messageService;
-}
-
-
+    }
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
@@ -49,11 +46,15 @@ public class UserController {
             return "redirect:/dashboard";
         }
         List<Beat> listaBeats = user.getBeatsDelCreador();
+        int respectTotal = 0;
+        for (Beat beat : listaBeats) {
+            respectTotal += beat.getUsersLike().size();
+        }
+        model.addAttribute("respectTotal", respectTotal);
         model.addAttribute("user", user);
         model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
         return "profile.jsp";
-
     }
     @PostMapping("/profile/{userid}")
     public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @RequestParam("beatId")Long id, Principal principal){
@@ -122,6 +123,10 @@ public class UserController {
         User usuario = userService.findThingById(userId);
 
         if(result.hasErrors()) {
+            for (ObjectError e:result.getAllErrors()) {
+                System.out.println(e.getDefaultMessage());
+            }
+            System.out.println("ajsjkasj");
             return "editProfile.jsp";
         }
 

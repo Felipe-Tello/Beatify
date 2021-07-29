@@ -10,6 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/comentarios.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -29,9 +31,11 @@
         <c:if test="${userActual.id == user.id}">
             <a href="/song/new">Añadir cancion</a>
         </c:if>
+        <c:if test="${respectTotal > 0}"><img src="/ranges/1.png" alt=""></c:if>
         <h1>Nombre: <c:out value="${user.firstName}"></c:out></h1>
         <h1>Apellido: <c:out value="${user.lastName}"></c:out></h1>
         <h1>Region: <c:out value="${user.region}"></c:out></h1>
+        <h1>Respeto: <c:out value="${respectTotal}"></c:out></h1>
 
         <h4>Tus Canciones</h4>
         <table class="table table-striped table-hover">
