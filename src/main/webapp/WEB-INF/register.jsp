@@ -18,22 +18,24 @@
     <div class="container-fluid">
         <img id="iconoSup" src="/css/5 sin título_20210721162542.png">
         <div id="formulario">
-            <h1>Registrar</h1>
+            <h1 class="text-center">Regístrate</h1>
             <form:form method="POST" action="" modelAttribute="user">
                 <div class="form-group">
                     <form:label path="firstName">Nombre</form:label>
                     <form:input class="form-control" placeholder="Ingresa tu nombre" path="firstName"/>
-                    <p class="error"><form:errors  path="firstName"/></p>
+                    <small class="error"><form:errors  path="firstName"/></small>
                 </div>
                 <div class="form-group">
                     <form:label path="lastName">Apellido</form:label>
                     <form:input class="form-control" placeholder="Ingresa tu apellido" path="lastName"/>
-                    <p class="error"><form:errors  path="lastName"/></p>
+                    <small class="error"><form:errors  path="lastName"/></small>
                 </div>
                 <div class="form-group">
                     <form:label path="location">Ciudad</form:label>
-                    <form:input class="form-control" placeholder="Location" path="location"/>
-                    <p class="error"><form:errors  path="location"/></p>
+                    <form:input class="form-control" placeholder="Ciudad" path="location"/>
+                    <small class="error"><form:errors  path="location"/></small>
+                <div>
+                <div class="form-group">
                     <form:label for="exampleFormControlSelect1" path="region">Región</form:label>
                     <form:select class="form-select" path="region"> 
                         <option disabled selected>Selecciona tu región</option>
@@ -54,27 +56,27 @@
                         <form:option value="Arica y Parinacota">Arica y Parinacota (XV)</form:option>
                         <form:option value="Ñuble">Ñuble (XVI)</form:option>
                     </form:select>
-                    <p class="error"><form:errors  path="region"/></p>
+                    <small class="error"><form:errors  path="region"/></small>
                 </div>
                     <div class="form-group mb-2">
                         <form:label for="staticEmail2" class="sr-only" path="email">Email</form:label>
                         <form:input class="form-control" placeholder="Ingresa tu email" type="email" path="email"/>
-                        <p class="error"><form:errors  path="email"/></p>
+                        <small class="error"><form:errors  path="email"/></small>
                     </div>
-                    <div>
+                    <div class="form-group mb-2">
                         <form:label path="password">Contraseña</form:label>
                         <form:input placeholder="Ingresa tu contraseña" type = "password" class="form-control" path="password"/>
-                        <p class="error"><form:errors  path="password"/></p>
+                        <small class="error"><form:errors  path="password"/></small>
                     </div>
-                    <div>
-                        <form:label path="passwordConfirmation">Confirmacion contraseña</form:label>
+                    <div class="form-group mb-2">
+                        <form:label path="passwordConfirmation">Confirmar contraseña</form:label>
                         <form:input placeholder="Confirma tu contraseña" type = "password" class="form-control" path="passwordConfirmation"/>
-                        <p class="error"><form:errors  path="passwordConfirmation"/></p>
+                        <small class="error"><form:errors  path="passwordConfirmation"/></small>
                     </div>
                     <input class="btn btn-light w-100" type="submit" value="Registrar"/>
                 </form:form>
                 <div>
-                    <h6>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></h6>
+                    <h6 class="text-center">¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></h6>
                 </div>
         </div>
     </div>

@@ -13,13 +13,11 @@ import com.team.beatify.models.Beat;
 import com.team.beatify.models.Category;
 import com.team.beatify.models.Compra;
 import com.team.beatify.models.Details;
-import com.team.beatify.models.Message;
 import com.team.beatify.models.User;
 import com.team.beatify.services.BeatService;
 import com.team.beatify.services.CategoryService;
 import com.team.beatify.services.CompraService;
 import com.team.beatify.services.DetailsService;
-import com.team.beatify.services.MessageService;
 import com.team.beatify.services.UserService;
 
 import org.springframework.stereotype.Controller;
@@ -39,16 +37,14 @@ public class HomeController {
     private final CategoryService categoryService;
     private final CompraService compraService;
     private final DetailsService detailsService;
-    private final MessageService messageService;
 
     public HomeController(UserService userService, BeatService beatService, CategoryService categoryService,
-            CompraService compraService, DetailsService detailsService, MessageService messageService) {
+            CompraService compraService, DetailsService detailsService) {
         this.userService = userService;
         this.beatService = beatService;
         this.categoryService = categoryService;
         this.compraService = compraService;
         this.detailsService = detailsService;
-        this.messageService = messageService;
     }
 
     @GetMapping("/")
@@ -225,33 +221,6 @@ public class HomeController {
         return "redirect:/details/"+compra.getId();
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // VER CANCION//
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @GetMapping("/song/{id}")
-    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal){
-        User user = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(id);
-        List<Message> listaMessages = beat.getListaMessagesFromBeat();
-        String dataString = "";
-        for (Message message2 : listaMessages) {
-            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
-        }
-        model.addAttribute("data", dataString);
-        model.addAttribute("usuario", user);
-        model.addAttribute("beat", beat);
-        return "showSong.jsp";
-    }
-    @PostMapping("/song/{idMessage}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, Principal principal){
-        User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(idmessage);
-        message.setBeat(beat);
-        message.setUser(userActual);
-        messageService.createOrUpdateThing(message);
-        return "redirect:/song/"+beat.getId();
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // VER HISTORIAL DE COMPRA //

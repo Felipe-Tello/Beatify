@@ -18,7 +18,7 @@
         <p class="text-right">
             <a href="/dashboard">Menú</a>
         </p>
-        <h1>Editar perfil, <c:out value = "${user.firstName} ${user.lastName}" /></h1>
+        <h1>Editar perfil</h1>
 
         <form:form method="POST" action="" modelAttribute="user">
     
@@ -27,38 +27,46 @@
             <div class="form-group">
                 <form:label path="firstName">Nombre:</form:label>
                 <form:input class="form-control" placeholder="Nombre" path="firstName"/>
+                <small class="text-danger"><form:errors path="firstName"/></small>
             </div>
             <div class="form-group">
                 <form:label path="lastName">Apellido:</form:label>
                 <form:input class="form-control" placeholder="Apellido" path="lastName"/>
+                <small class="text-danger"><form:errors path="lastName"/></small>
             </div>
+
             <div class="form-group">
                 <form:label path="region">Ciudad/Comuna:</form:label>
                 <form:input class="form-control" placeholder="Ciudad/Comuna" path="location"/>
-    
+                <small class="text-danger"><form:errors path="location"/></small>
+            </div>
+
+            <div class="form-group">
                 <!-- cambiar a una lista dsps -->
                 <form:label for="exampleFormControlSelect1" path="region">Región</form:label>
-                <form:select class="form-control" id="exampleFormControlSelect1" path="region"> 
-                    <form:option value="Arica y Parinacota">Arica y Parinacota</form:option>
-                    <form:option value="Tarapacá">Tarapacá</form:option>
-                    <form:option value="Antofagasta">Antofagasta</form:option>
-                    <form:option value="Coquimbo">Coquimbo</form:option>
-                    <form:option value="Valparaíso">Valparaíso</form:option>
-                    <form:option value="O'Higgins">O'Higgins</form:option>
-                    <form:option value="Maule">Maule</form:option>
-                    <form:option value="Ñuble">Ñuble</form:option>
-                    <form:option value="BioBío">BioBío</form:option>
-                    <form:option value="La Araucanía">La Araucanía</form:option>
-                    <form:option value="Los Ríos">Los Ríos</form:option>
-                    <form:option value="Los Lagos">Los Lagos</form:option>
-                    <form:option value="Aysén">Aysén</form:option>
-                    <form:option value="Magallanes Y Antártica Chilena">Magallanes Y Antártica Chilena</form:option>
-                    <form:option value="RM">RM</form:option>
+                <form:select class="form-select" path="region"> 
+                    <form:option value="Tarapacá">Tarapacá (I)</form:option>
+                    <form:option value="Antofagasta">Antofagasta (II)</form:option>
+                    <form:option value="Atacama">Antacama (III)</form:option>
+                    <form:option value="Coquimbo">Coquimbo (IV)</form:option>
+                    <form:option value="Valparaíso">Valparaíso (V)</form:option>
+                    <form:option value="O'Higgins">O'Higgins (VI)</form:option>
+                    <form:option value="Maule">Maule (VII)</form:option>
+                    <form:option value="BioBío">BioBío (VIII)</form:option>
+                    <form:option value="La Araucanía">La Araucanía (IX)</form:option>
+                    <form:option value="Los Lagos">Los Lagos (X)</form:option>
+                    <form:option value="Aysén">Aysén (XI)</form:option>
+                    <form:option value="Magallanes Y Antártica Chilena">Magallanes Y Antártica Chilena (XII)</form:option>
+                    <form:option value="RM">Región Metropolitana de Santiago (XIII)</form:option>
+                    <form:option value="Los Ríos">Los Ríos (XIV)</form:option>
+                    <form:option value="Arica y Parinacota">Arica y Parinacota (XV)</form:option>
+                    <form:option value="Ñuble">Ñuble (XVI)</form:option>
                 </form:select>
+                <small class="text-danger"><form:errors path="region"/></small>
             </div>
+
             <div class="form-group mb-2">
                 <form:label for="staticEmail2" class="sr-only" path="descripcion">Descripción:</form:label>
-                <!-- agregar un width -->
                 <form:textarea class="form-control" placeholder="Añadir descripción (opcional)" path="descripcion"/>
             </div>
                 <div class="form-group mb-2">
@@ -72,8 +80,7 @@
                 </div>
             <input id="botonRegis" class="btn btn-light" type="submit" value="Editar"/>
         </form:form>
-        <a href="/profile/${user.id}">Volver atrás</a>
+        <a href="/profile/${userId}">Volver atrás</a>
     </div>
-    <!-- input readonly buscar -->
 </body>
 </html>
