@@ -18,15 +18,20 @@
     <div class="container-fluid">
         <img class="iconoSup" src="/css/BTlogo.png" alt="">
         <div id="login">
-            <h1>Ingresar</h1>
+            <h1 class="text-center">Ingresar</h1>
+            <c:if test="${error != null}">
+                <small class="error text-center">
+                    <c:out value = "${error}"/>
+                </small>
+            </c:if>
             <form method="post" action="/login">
 
-                <div class="form-group">
-                    <label for="email">Email</label>
+                <div class="form-group mb-2">
+                    <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label for="password">Contraseña:</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña"/>
                 </div>
@@ -35,12 +40,8 @@
 
                 <input class="btn btn-light moveButton w-100" type="submit" value="Ingresar!"/>
             </form>
-            <c:if test="${error != null}">
-                <p class="error">
-                    <c:out value = "${error}"/>
-                </p>
-            </c:if>
-            <h6>¿Aún no tienes una cuenta? <a href="/register">Regístrate</a></h6>
+
+            <h6 class="text-center">¿Aún no tienes una cuenta? <a href="/register">Regístrate</a></h6>
         </div>
     </div>
 </body>

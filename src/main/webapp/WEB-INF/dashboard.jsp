@@ -19,6 +19,15 @@
     <div id="contenedor">
     <!-- FORMULARIO PARA CERRAR SESIÓN -->
         <img id="icono" class="alinear" src="/css/5 sin título_20210721162541.png">
+
+        <c:if test="${errorSong != null}">
+            <p class="text-danger"><c:out value = "${errorSong}"/></p>
+        </c:if>
+
+        <c:if test="${errorUser != null}">
+            <p class="text-danger"><c:out value = "${errorUser}"/></p>
+        </c:if>
+
         <ul class="float-end padd">
             <li class="alinear sombra">
                 <c:if test="${permiso == true}">
@@ -61,7 +70,7 @@
                     <c:forEach items="${listaBeats}" var="lb">
                     <tr>
                         <td><a href="/profile/${lb.uCreador.id}"><c:out value="${lb.uCreador.firstName}"/></a></td>
-                        <td><c:out value="${lb.title}"/></td>
+                        <td><a href="/song/${lb.id}"><c:out value="${lb.title}"/></a></td>
                         <td><c:out value="${lb.cost}"/></td>
                         <td>
                             <audio controls src="${lb.url}" class="btn btn-dark">

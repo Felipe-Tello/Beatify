@@ -3,7 +3,6 @@ package com.team.beatify.controllers;
 import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;
@@ -16,13 +15,13 @@ import com.team.beatify.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -40,10 +39,11 @@ public class UserController {
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
-    public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model){
+    public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
         User user = userService.findThingById(userid);
         if(user == null) {
+            flash.addFlashAttribute("errorUser", "Usuario no encontrado");
             return "redirect:/dashboard";
         }
         List<Beat> listaBeats = user.getBeatsDelCreador();
@@ -111,6 +111,7 @@ public class UserController {
         if(usuario == null || usuario.getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
+        model.addAttribute("userId", usuario.getId());
         model.addAttribute("user", usuario);
         return "editProfile.jsp";
     }
@@ -119,15 +120,12 @@ public class UserController {
     //ver lo de descripcion de usuario, falta agregarlo
     //nombre, apellido, región, descripcion.
     @PutMapping("/profile/{userid}/edit")
-    public String editProfile(@Valid @ModelAttribute("user") User user, BindingResult result, @PathVariable("userid") Long userId) {
+    public String editProfile(@Valid @ModelAttribute("user") User user, BindingResult result, @PathVariable("userid") Long userId, Model model) {
 
         User usuario = userService.findThingById(userId);
 
         if(result.hasErrors()) {
-            for (ObjectError e:result.getAllErrors()) {
-                System.out.println(e.getDefaultMessage());
-            }
-            System.out.println("ajsjkasj");
+            model.addAttribute("userId", usuario.getId());
             return "editProfile.jsp";
         }
 

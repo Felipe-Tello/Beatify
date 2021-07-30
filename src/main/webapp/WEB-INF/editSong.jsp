@@ -16,10 +16,19 @@
 <body>
   
     <div class="contenedor">
-        <a href="/dashboard"  class="btn btn-outline-light volver">Volver al perfil</a>
+
+        <p class="text-end">
+            <a href="/profile/${usuario.id}"  class="btn btn-outline-light volver">Volver al perfil</a>
+            <a href="/dashboard"  class="btn btn-outline-light volver">Menú</a>
+        </p>
+
         <img class="rounded float-end imagen" src="\css\16 sin título_20210723201644.png">
         <div id="agregar">
-            <h1>Editar beat</h1>
+            <h1>Editar Beat</h1>
+
+            <c:if test="${error != null}">
+                <small class="d-block text-danger"><c:out value = "${error}"/></small>
+            </c:if>
 
             <form:form method="POST" action="" modelAttribute="beat">
 
@@ -27,13 +36,16 @@
 
                 <div class="form-group">
                     <form:label path="title">Título</form:label>
-                    <form:input class="form-control" path="title" placeholder="Titulo de la cancion"/>
+                    <form:input class="form-control" path="title" placeholder="Título del beat"/>
+                    <small class="text-danger"><form:errors path="title"/></small>
                 </div>
                 <div>
                     <form:label path="cost">Precio</form:label>
                     <div class="form-group input-group mb-3">
                         <span class="input-group-text">$</span>
-                        <form:input class="form-control" path="cost" placeholder="Precio"/>
+                        <form:input type="number" class="form-control" path="cost" step="100" min="0"/>
+                        <!-- lo mismo acá, modificar el error pa q se vea bonito con css -->
+                        <small class="text-danger"><form:errors path="cost"/></small>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,10 +57,6 @@
                         </c:forEach>
                     </small>
 
-                    <c:if test="${error != null}">
-                        <small class="d-block"><c:out value = "${error}"/></small>
-                    </c:if>
-
                     <c:forEach items="${listaCategories}" var="lc">
                         <form:checkbox path="categories" value="${lc.id}"/>
                             <c:out value="${lc.genero}"/>
@@ -57,7 +65,7 @@
                 <div class="form-group">
                 <input type="submit"  class="btn btn-outline-light subir" value="Editar"/>
             </form:form>
-            <a href="/song/${beat.id}">Volver atrás</a>
+            <a href="/song/${idBeat}">Volver atrás</a>
         </div>
     </div>
 </body>
