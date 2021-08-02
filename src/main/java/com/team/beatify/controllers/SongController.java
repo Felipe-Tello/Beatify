@@ -142,7 +142,7 @@ public class SongController {
             String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();
             File directorio = new File(ruta);
             if(directorio.exists() == false){ 
-                directorio.mkdir(); 
+                directorio.mkdirs(); 
             }
             try {
                 byte[] bytes = file.getBytes();
