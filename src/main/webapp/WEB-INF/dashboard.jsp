@@ -50,7 +50,6 @@
 	        <c:if test="${errorSong != null}">
 	            <p class="text-danger"><c:out value = "${errorSong}"/></p>
 	        </c:if>
-	
 	        <c:if test="${errorUser != null}">
 	            <p class="text-danger"><c:out value = "${errorUser}"/></p>
 	        </c:if>
