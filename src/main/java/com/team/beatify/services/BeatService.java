@@ -19,7 +19,9 @@ public class BeatService extends BaseService <Beat> {
         super(baseRepository);
         this.beatRepository = beatRepository;
     }
-
+    public List<Beat> busqueda(String busqueda) {
+        return beatRepository.findByTitleOrUCreatorContaining(busqueda);
+    }
     public List<Beat> listaDeBeatsAsc(){
 		return beatRepository.findAllByOrderByIdDesc();
 	}

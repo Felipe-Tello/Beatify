@@ -55,6 +55,10 @@
 	            <p class="text-danger"><c:out value = "${errorUser}"/></p>
 	        </c:if>
 	        <h1>Welcome <c:out value="${userActual.firstName}"></c:out></h1>
+			<form action="/search">
+				<input type="search" name="busqueda">
+				<input type="submit" value="Search">
+			</form>
 	        <a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
 	        <h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
 	        <c:forEach items="${listaCategories}" var="lc"> 

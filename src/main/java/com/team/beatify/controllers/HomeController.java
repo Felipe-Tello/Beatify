@@ -229,5 +229,12 @@ public class HomeController {
         model.addAttribute("listaCompra", listaCompra);
         return "details.jsp";
     }
+    @GetMapping("/search")
+	public String search(Model model, @RequestParam("busqueda")String busqueda) {
+		List<Beat> searchword = beatService.busqueda(busqueda); 
+		model.addAttribute("searchword", searchword);
+		model.addAttribute("artist", busqueda);
+		return "search.jsp";
+	}
 }
 
