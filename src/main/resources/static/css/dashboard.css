@@ -41,6 +41,10 @@ h3{
     box-shadow: #120033 -8px 8px 20px;
 }
 
+.abajo{
+    padding-top: 50px;
+}
+
 #tabla{
     margin-right: 150px;
     margin-left: 150px;

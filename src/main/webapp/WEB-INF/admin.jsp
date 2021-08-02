@@ -9,24 +9,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Administrador</title>
 </head>
 <body>
-    <div class="container">
-        <a href="/dashboard">volver al menu principal</a>
+    <div class="container-fluid">
+        <img id="icono" src="/css/5 sin título_20210721162542.png" alt="">
+        <div class="row">
+            <a class="col-6 text-end" href="/dashboard">volver al menu principal</a>
+            <form class="col-6 text-end" method="POST" action="/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="submit" value="Cerrar sesión" />
+            </form>
+        </div>
         <form:form method="POST" action="" modelAttribute="categoryModel">
-            <div">
-                <form:label path="genero">Genero Musical</form:label>
+            <div>
+                <form:label path="genero">Agregar genero musical</form:label>
                 <form:input class="form-control" placeholder="Genero Musical" path="genero"/>
             </div>
-            <input id="botonRegis"  class="btn btn-light" type="submit" value="Register!"/>
+            <input class="btn btn-light" type="submit" value="Añadir genero"/>
         </form:form>
-
-        <form method="POST" action="/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="submit" value="Cerrar sesión" />
-        </form>
     </div>  
 </body>
 </html>
