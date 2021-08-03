@@ -12,8 +12,11 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <!-- <script src="/js/comentarios.js"></script> -->
 </head>
 <body>
@@ -45,6 +48,40 @@
                 </ul>
             </div>
         </nav>
+	<!-- CAROUSEL -->
+	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+		<div class="carousel-inner">
+		  <div class="carousel-item active" data-bs-interval="10000">
+			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>First slide label</h5>
+			  <p>Some representative placeholder content for the first slide.</p>
+			</div>
+		  </div>
+		  <div class="carousel-item" data-bs-interval="2000">
+			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>Second slide label</h5>
+			  <p>Some representative placeholder content for the second slide.</p>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+			  <h5>Third slide label</h5>
+			  <p>Some representative placeholder content for the third slide.</p>
+			</div>
+		  </div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Next</span>
+		</button>
+	  </div>
     <!-- FORMULARIO PARA CERRAR SESIÓN -->
         <div class="abajo">
 	        <c:if test="${errorSong != null}">
@@ -62,9 +99,6 @@
 	        <h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
 	        <c:forEach items="${listaCategories}" var="lc"> 
 	            <a href="/categories/${lc.id}"><c:out value="${lc.genero}"/></a>
-	        </c:forEach>
-	        <c:forEach items="${category.beats}" var="cb"> 
-	            <c:out value="${cb.title}"/>
 	        </c:forEach>
 	        <div id="tabla">
 	            <table class="table table-dark table-sm table-responsive">
