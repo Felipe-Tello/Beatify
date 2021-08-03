@@ -20,6 +20,8 @@ public class Compra extends BaseModel {
     @NotNull(message = "El campo no puede ser nulo")
     private int total;
 
+    private String fecha;
+
     
 	//----------------------------------------------------------------------------------------//
     //relacion n:1 users
@@ -41,10 +43,11 @@ public class Compra extends BaseModel {
     public Compra() {
     }
 
-    public Compra(@NotNull(message = "El campo no puede ser nulo") int total, User uComprador, List<Beat> beats) {
+    public Compra(@NotNull(message = "El campo no puede ser nulo") int total, String fecha, User uComprador, List<Beat> beats) {
         this.total = total;
         this.uComprador = uComprador;
         this.beats = beats;
+        this.fecha = fecha;
     }
 
     //----------------------------------------------------------------------------------------//
@@ -71,6 +74,14 @@ public class Compra extends BaseModel {
 
     public void setBeats(List<Beat> beats) {
         this.beats = beats;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
 

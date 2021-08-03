@@ -2,9 +2,10 @@ package com.team.beatify.controllers;
 
 
 import java.security.Principal;
-
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 
 import com.team.beatify.models.Beat;
@@ -194,6 +195,8 @@ public class HomeController {
         public String showWishlist(Model model, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
         List<Beat> listaBeats = userActual.getWishlistbeats();
+        Format formatofecha = new SimpleDateFormat("MMMM/dd HH:mm a");
+	    String fecha = formatofecha.format(new Date());
         Compra compra = new Compra();
         compra.setuComprador(userActual);
         compraService.createOrUpdateThing(compra);
@@ -210,6 +213,7 @@ public class HomeController {
             total += beat.getCost();
         }
         detailsService.saveAll(listaDetails);
+        compra.setFecha(fecha);
         compra.setTotal(total);
         compraService.createOrUpdateThing(compra);
         // int total = 0;
