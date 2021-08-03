@@ -1,6 +1,7 @@
 package com.team.beatify.models;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,7 @@ public class Beat extends BaseModel{
         joinColumns = @JoinColumn(name = "beat_id"), 
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )     
-    private List<User> usersLike;
+    private Set<User> usersLike;
 
     //relacion n:m beats-users MENSAJES
     @OneToMany(mappedBy="beat", fetch = FetchType.LAZY)
@@ -92,7 +93,7 @@ public class Beat extends BaseModel{
     public Beat() {
     }
 
-    public Beat(String title, int cost, String url, User uCreador, List<User> usersLike, List<Message> listaMessagesFromBeat, List<User> wishlistuser, List<Compra> compras, List<Category> categories) {
+    public Beat(String title, int cost, String url, User uCreador, Set<User> usersLike, List<Message> listaMessagesFromBeat, List<User> wishlistuser, List<Compra> compras, List<Category> categories) {
         this.title = title;
         this.cost = cost;
         this.url = url;
@@ -138,11 +139,11 @@ public class Beat extends BaseModel{
         this.uCreador = uCreador;
     }
 
-    public List<User> getUsersLike() {
+    public Set<User> getUsersLike() {
         return usersLike;
     }
 
-    public void setUsersLike(List<User> usersLike) {
+    public void setUsersLike(Set<User> usersLike) {
         this.usersLike = usersLike;
     }
 

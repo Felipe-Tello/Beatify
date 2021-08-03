@@ -1,24 +1,17 @@
-*{
-    margin: 0px;
-    padding: 0px;
-}
-h1{
-    color: #ca7fe9;
-}
-#iconoSup{
+
+/* #iconoSup{
     display: inline-block;
     vertical-align: top;
     width: 200px;
-}
+} */
 #formulario{
     background-color: #17111e;
-    /* background-color: #ca7fe9; */
     margin: 0 auto;
     border: solid black;
     border-radius: 10px;
-    width: 500px;
-    min-height: 700px;
-    padding: 50px;
+    padding: 40px 50px 50px 50px;
+    display: inline-block;
+    vertical-align: top;
 }
 .form-group {
     margin-top: 10px;
@@ -26,4 +19,22 @@ h1{
 }
 h6{
     color: white;
+}
+
+@media screen and (max-width: 500px) {
+    #formulario {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    #formulario {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    #formulario {
+        width: 40%;
+    }
 }

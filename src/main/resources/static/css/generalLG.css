@@ -2,6 +2,11 @@
     margin: 0px;
     padding: 0px;
 }
+
+html, body {
+    height: 100%;
+}
+
 h1{
     color: #ca7fe9;
 }
@@ -9,11 +14,13 @@ label {
     color: white;
 }
 .container-fluid{   
-background-color: #6b118f;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23af0999' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23710373' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ae069c' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23760377' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23ad04a0' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%237a027b' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23ac02a3' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%237f0180' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23ab01a6' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23830184' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
-min-height: 1000px;
+    height: 100%;
+    background-color: #6b118f;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23af0999' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23710373' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ae069c' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23760377' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23ad04a0' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%237a027b' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23ac02a3' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%237f0180' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23ab01a6' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23830184' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 .container {
     background-color: aliceblue;
@@ -22,6 +29,7 @@ min-height: 1000px;
     display: inline-block;
     vertical-align: top;
     width: 250px;
+    /* position: absolute; */
 }
 h6{
     color: white;

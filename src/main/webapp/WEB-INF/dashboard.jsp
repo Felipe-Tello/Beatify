@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-    <!-- <script src="/js/comentarios.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/comentarios.js"></script>
 </head>
 <body>
     <div id="contenedor">
@@ -45,27 +45,35 @@
                 </ul>
             </div>
         </nav>
-    <!-- FORMULARIO PARA CERRAR SESIÓN -->
         <div class="abajo">
+
 	        <c:if test="${errorSong != null}">
 	            <p class="text-danger"><c:out value = "${errorSong}"/></p>
 	        </c:if>
+
 	        <c:if test="${errorUser != null}">
 	            <p class="text-danger"><c:out value = "${errorUser}"/></p>
 	        </c:if>
+
 	        <h1>Welcome <c:out value="${userActual.firstName}"></c:out></h1>
+
 			<form action="/search">
 				<input type="search" name="busqueda">
 				<input type="submit" value="Search">
 			</form>
+
 	        <a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
+
 	        <h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
+
 	        <c:forEach items="${listaCategories}" var="lc"> 
 	            <a href="/categories/${lc.id}"><c:out value="${lc.genero}"/></a>
 	        </c:forEach>
+
 	        <c:forEach items="${category.beats}" var="cb"> 
 	            <c:out value="${cb.title}"/>
 	        </c:forEach>
+
 	        <div id="tabla">
 	            <table class="table table-dark table-sm table-responsive">
 	                <thead>
@@ -80,23 +88,37 @@
 	                </thead>
 	                <tbody>
 	                    <c:forEach items="${listaBeats}" var="lb">
-	                    <tr>
-	                        <td><a href="/profile/${lb.uCreador.id}"><c:out value="${lb.uCreador.firstName}"/></a></td>
-	                        <td><a href="/song/${lb.id}"><c:out value="${lb.title}"/></a></td>
-	                        <td><c:out value="${lb.cost}"/></td>
+	                    <tr id="#row">
+	                        <td>
+								<a href="/profile/${lb.uCreador.id}"><c:out value="${lb.uCreador.firstName}"/></a>
+							</td>
+	                        <td>
+								<a href="/song/${lb.id}"><c:out value="${lb.title}"/></a>
+							</td>
+	                        <td>
+								<c:out value="${lb.cost}"/>
+							</td>
 	                        <td>
 	                            <audio controls src="${lb.url}" class="btn btn-dark">
 	                                Your browser does not support the audio element.
 	                            </audio>
 	                        </td>
-	                        <td>
-	                            <c:out value="${lb.usersLike.size()}"/>
-	                            <c:if test="${!lb.usersLike.contains(userActual)}"><a href="/like/${lb.id}?ruta=dashboard" class="btn btn-outline-info">Like</a></c:if>
-	                            <c:if test="${lb.usersLike.contains(userActual)}"><a href="/dislike/${lb.id}?ruta=dashboard" class="btn btn-outline-danger">Dislike</a></c:if>
+	                        <td id="${lb.id}">
+								<span><c:out value = "${lb.usersLike.size()}"/></span>
+	                            <c:if test="${!lb.usersLike.contains(userActual)}">
+									<a href="#row"class="btn btn-outline-info" onclick="like(${lb.id}, 'like')">Like</a>
+								</c:if>
+	                            <c:if test="${lb.usersLike.contains(userActual)}">
+									<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger" >Dislike</a>
+								</c:if>
 	                        </td>
 	                        <td>
-	                            <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}"><a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Add lo wish list</a></c:if>
-	                            <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}"><a href="/removewishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Remove from wish list</a></c:if>
+	                            <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
+									<a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Add lo wish list</a>
+								</c:if>
+	                            <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
+									<a href="/removewishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Remove from wish list</a>
+								</c:if>
 	                        </td>
 	                    </tr>
 	                    </c:forEach>

@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <img id="iconoSup" src="/css/5 sin título_20210721162542.png">
+        <img class="iconoSup" src="/css/5 sin título_20210721162542.png">
         <div id="formulario">
             <h1 class="text-center">Regístrate</h1>
             <form:form method="POST" action="" modelAttribute="user">
@@ -58,26 +58,26 @@
                     </form:select>
                     <small class="error"><form:errors  path="region"/></small>
                 </div>
-                    <div class="form-group mb-2">
-                        <form:label for="staticEmail2" class="sr-only" path="email">Email</form:label>
-                        <form:input class="form-control" placeholder="Ingresa tu email" type="email" path="email"/>
-                        <small class="error"><form:errors  path="email"/></small>
-                    </div>
-                    <div class="form-group mb-2">
-                        <form:label path="password">Contraseña</form:label>
-                        <form:input placeholder="Ingresa tu contraseña" type = "password" class="form-control" path="password"/>
-                        <small class="error"><form:errors  path="password"/></small>
-                    </div>
-                    <div class="form-group mb-2">
-                        <form:label path="passwordConfirmation">Confirmar contraseña</form:label>
-                        <form:input placeholder="Confirma tu contraseña" type = "password" class="form-control" path="passwordConfirmation"/>
-                        <small class="error"><form:errors  path="passwordConfirmation"/></small>
-                    </div>
-                    <input class="btn btn-light w-100" type="submit" value="Registrar"/>
-                </form:form>
-                <div>
-                    <h6 class="text-center">¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></h6>
+                <div class="form-group mb-2">
+                    <form:label for="staticEmail2" class="sr-only" path="email">Email</form:label>
+                    <form:input class="form-control" placeholder="Ingresa tu email" type="email" path="email"/>
+                    <small class="error"><form:errors  path="email"/></small>
                 </div>
+                <div class="form-group mb-2">
+                    <form:label path="password">Contraseña</form:label>
+                    <form:input placeholder="Ingresa tu contraseña" type = "password" class="form-control" path="password"/>
+                    <small class="error"><form:errors  path="password"/></small>
+                </div>
+                <div class="form-group mb-2">
+                    <form:label path="passwordConfirmation">Confirmar contraseña</form:label>
+                    <form:input placeholder="Confirma tu contraseña" type = "password" class="form-control" path="passwordConfirmation"/>
+                    <small class="error"><form:errors  path="passwordConfirmation"/></small>
+                </div>
+                <input class="btn btn-light w-100" type="submit" value="Registrar"/>
+            </form:form>
+            <div>
+                <h6 class="text-center">¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></h6>
+            </div>
         </div>
     </div>
 </body>

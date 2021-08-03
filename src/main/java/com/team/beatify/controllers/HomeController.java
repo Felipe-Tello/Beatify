@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -92,42 +93,46 @@ public class HomeController {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @GetMapping("/like/{id}")
-	public String like(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
+    @ResponseBody
+	public int like(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
 		User user = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
         beat.setUsersLike(user);
         beatService.createOrUpdateThing(beat);
+        return beat.getUsersLike().size();
         
-        if (ruta.equals("dashboard")) {
-            return "redirect:/dashboard";
-        }
-        else if (ruta.equals("profileComment")){
-            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        }
-        else if (ruta.equals("category")){
-            return "redirect:/category/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        }
-        else{
-            return "redirect:/profile/"+ beat.getuCreador().getId();
-        }
+        // if (ruta.equals("dashboard")) {
+        //     return "redirect:/dashboard";
+        // }
+        // else if (ruta.equals("profileComment")){
+        //     return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        // }
+        // else if (ruta.equals("category")){
+        //     return "redirect:/category/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        // }
+        // else{
+        //     return "redirect:/profile/"+ beat.getuCreador().getId();
+        // }
 	}
 
     @GetMapping("/dislike/{id}")
-	public String dislike(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
+    @ResponseBody
+	public int dislike(@PathVariable("id") Long id,@RequestParam("ruta") String ruta, Model model,Principal principal) {
 		User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
         beat.getUsersLike().remove(userActual);
         beatService.createOrUpdateThing(beat);
+        return beat.getUsersLike().size();
 
-		if (ruta.equals("dashboard")) {
-            return "redirect:/dashboard";
-        }
-        else if (ruta.equals("profileComment")){
-            return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        }
-        else{
-            return "redirect:/profile/"+ beat.getuCreador().getId();
-        }
+		// if (ruta.equals("dashboard")) {
+        //     return "redirect:/dashboard";
+        // }
+        // else if (ruta.equals("profileComment")){
+        //     return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        // }
+        // else{
+        //     return "redirect:/profile/"+ beat.getuCreador().getId();
+        // }
 	}
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

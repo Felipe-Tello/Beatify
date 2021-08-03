@@ -17,8 +17,8 @@
 <body>
     <div class="container-fluid">
         <img class="iconoSup" src="/css/BTlogo.png" alt="">
-        <div id="login">
-            <h1 class="text-center">Ingresar</h1>
+        <div class="login">
+            <h1 class="text-center mb-3">Ingresar</h1>
             <c:if test="${error != null}">
                 <small class="error text-center">
                     <c:out value = "${error}"/>
@@ -38,10 +38,10 @@
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                <input class="btn btn-light moveButton w-100" type="submit" value="Ingresar!"/>
+                <input class="btn btn-light moveButton w-100" type="submit" value="Ingresar"/>
             </form>
 
-            <h6 class="text-center">¿Aún no tienes una cuenta? <a href="/register">Regístrate</a></h6>
+            <h6 class="text-center mt-2">¿Aún no tienes una cuenta? <a href="/register">Regístrate</a></h6>
         </div>
     </div>
 </body>
