@@ -99,15 +99,23 @@
                                         Your browser does not support the audio element.
                                 </audio>
                             </td>
-                            <td>
-                                <c:out value="${lb.usersLike.size()}"/>
-                                <c:if test="${!lb.usersLike.contains(userActual)}"><a href="/like/${lb.id}?ruta=profile" class="btn btn-outline-info">Like</a></c:if>
-                                <c:if test="${lb.usersLike.contains(userActual)}"><a href="/dislike/${lb.id}?ruta=profile" class="btn btn-outline-danger">Dislike</a></c:if>
-                            </td>
-                            <td>
-                                <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}"><a href="/addwishlist/${lb.id}?ruta=profile" class="btn btn-outline-light" >Add lo wish list</a></c:if>
-                                <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}"><a href="/removewishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Remove from wish list</a></c:if>
-                            </td>
+                            <td id="${lb.id}">
+								<span><c:out value = "${lb.usersLike.size()}"/></span>
+	                            <c:if test="${!lb.usersLike.contains(userActual)}">
+									<a href="#row"class="btn btn-outline-info" onclick="like(${lb.id}, 'like')">Like</a>
+								</c:if>
+	                            <c:if test="${lb.usersLike.contains(userActual)}">
+									<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger" >Dislike</a>
+								</c:if>
+	                        </td>
+	                        <td>
+	                            <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
+									<a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Add lo wish list</a>
+								</c:if>
+	                            <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
+									<a href="/removewishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Remove from wish list</a>
+								</c:if>
+	                        </td>
                             <td><a href="/profile/${user.id}/${lb.id}" class="btn btn-outline-light" >comentarios</a></td>
                             </tr>
                         </c:forEach>

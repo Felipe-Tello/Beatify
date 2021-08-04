@@ -3,7 +3,7 @@ $(document).ready(function () {
 })
 
 function like(id, ruta) {
-    url = `/${ruta}/${id}?ruta=dashboard`
+    url = `/${ruta}/${id}?ruta=dashboard`;
     $.ajax({
         type:"get",
         url: url

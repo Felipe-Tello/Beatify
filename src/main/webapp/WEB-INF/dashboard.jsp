@@ -48,44 +48,6 @@
                 </ul>
             </div>
         </nav>
-<<<<<<< HEAD
-=======
-	<!-- CAROUSEL -->
-	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-		<div class="carousel-inner">
-		  <div class="carousel-item active" data-bs-interval="10000">
-			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-			  <h5>First slide label</h5>
-			  <p>Some representative placeholder content for the first slide.</p>
-			</div>
-		  </div>
-		  <div class="carousel-item" data-bs-interval="2000">
-			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-			  <h5>Second slide label</h5>
-			  <p>Some representative placeholder content for the second slide.</p>
-			</div>
-		  </div>
-		  <div class="carousel-item">
-			<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-			  <h5>Third slide label</h5>
-			  <p>Some representative placeholder content for the third slide.</p>
-			</div>
-		  </div>
-		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		  <span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		  <span class="visually-hidden">Next</span>
-		</button>
-	  </div>
-    <!-- FORMULARIO PARA CERRAR SESIÓN -->
->>>>>>> 8791faa4dd0a7a045927b5e8ea97e3f2391d6f88
         <div class="abajo">
 
 	        <c:if test="${errorSong != null}">
@@ -110,14 +72,11 @@
 	        <c:forEach items="${listaCategories}" var="lc"> 
 	            <a href="/categories/${lc.id}"><c:out value="${lc.genero}"/></a>
 	        </c:forEach>
-<<<<<<< HEAD
 
 	        <c:forEach items="${category.beats}" var="cb"> 
 	            <c:out value="${cb.title}"/>
 	        </c:forEach>
 
-=======
->>>>>>> 8791faa4dd0a7a045927b5e8ea97e3f2391d6f88
 	        <div id="tabla">
 	            <table class="table table-dark table-sm table-responsive">
 	                <thead>
