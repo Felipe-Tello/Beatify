@@ -3,24 +3,48 @@
     background-color: #17111e;
     border: solid black;
     border-radius: 10px;
-    padding: 40px 50px 50px 50px;
-    margin: 0 auto;
+    padding: 20px 50px 50px 50px;
+    margin: 0px auto;
 }
 
-@media screen and (max-width: 500px) {
+/* portrait phones */
+@media (max-width: 575px) {
     .login {
-        width: 90%;
+        width: 85%;
     }
 }
 
-@media screen and (min-width: 501px) {
+/* landscape phones */
+@media (min-width: 576px) { 
     .login {
         width: 70%;
     }
 }
 
-@media screen and (min-width: 850px) {
+/* tablets */
+@media (min-width: 768px) {
+    .login {
+        width: 60%;
+    }
+}
+
+/* desktop L */
+@media (min-width: 992px) {
+    .login {
+        width: 50%;
+    }
+}
+
+/* desktop XL */
+@media (min-width: 1200px) {
     .login {
         width: 40%;
+    }
+}
+
+/* desktop XXL */
+@media (min-width: 1400px) {
+    .login {
+        width: 30%;
     }
 }
