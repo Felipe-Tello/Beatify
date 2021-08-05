@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -21,7 +22,7 @@
 <body>
     <div id="contenedor">
         <nav class="navbar navbar-expand-md fixed-top barra bg-dark">
-            <img id="icono" src="/css/5 sin título_20210721162541.png">
+            <a href="/dashboard"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
             <div class="container-fluid">
                 <ul class="nav-menu">
                     <li class="alinear">
@@ -89,7 +90,7 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${listaBeats}" var="lb">
-                            <tr>
+                            <tr id="#row">
                             <td><c:out value="${lb.title}"/></td>
                             <td><c:out value="${lb.cost}"/></td>
                             <td>
@@ -99,11 +100,15 @@
                                         Your browser does not support the audio element.
                                 </audio>
                             </td>
-                            <td>
-                                <c:out value="${lb.usersLike.size()}"/>
-                                <c:if test="${!lb.usersLike.contains(userActual)}"><a href="/like/${lb.id}?ruta=profile" class="btn btn-outline-info">Like</a></c:if>
-                                <c:if test="${lb.usersLike.contains(userActual)}"><a href="/dislike/${lb.id}?ruta=profile" class="btn btn-outline-danger">Dislike</a></c:if>
-                            </td>
+                            <td id="${lb.id}">
+								<span><c:out value = "${lb.usersLike.size()}"/></span>
+	                            <c:if test="${!lb.usersLike.contains(userActual)}">
+									<a href="#row"class="btn btn-outline-info" onclick="like(${lb.id}, 'like')">Like</a>
+								</c:if>
+	                            <c:if test="${lb.usersLike.contains(userActual)}">
+									<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger" >Dislike</a>
+								</c:if>
+	                        </td>
                             <td>
                                 <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}"><a href="/addwishlist/${lb.id}?ruta=profile" class="btn btn-outline-light" >Add lo wish list</a></c:if>
                                 <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}"><a href="/removewishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Remove from wish list</a></c:if>
@@ -113,25 +118,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </div>
-            <div>
-                <div class="alinear addcomentario">
-                    <h4>Add comment:</h4>
-                    <form>
-                        <p>
-                            <label path="comment"></label>
-                            <errors path="comment"/>
-                            <textarea path="comment" name="content" cols="30" rows="1" class="bg-dark letra"></textarea>
-                        </p>
-                        <input type="submit" value="Submit" class="btn btn-outline-light"/>
-                    </form>
-                </div>
-                <div class="alinear float-end text-end">
-                    <h1>Message Wall</h1>
-                    <p>
-                        <textarea readonly rows="8" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
-                    </p>
-                </div>
             </div>
         </main>
     </div>

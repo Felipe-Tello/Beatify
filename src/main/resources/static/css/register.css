@@ -1,17 +1,11 @@
 
-/* #iconoSup{
-    display: inline-block;
-    vertical-align: top;
-    width: 200px;
-} */
 #formulario{
     background-color: #17111e;
     margin: 0 auto;
     border: solid black;
     border-radius: 10px;
-    padding: 40px 50px 50px 50px;
-    display: inline-block;
-    vertical-align: top;
+    padding: 20px 50px 50px 50px;
+
 }
 .form-group {
     margin-top: 10px;
@@ -21,20 +15,44 @@ h6{
     color: white;
 }
 
-@media screen and (max-width: 500px) {
+/* portrait phones */
+@media (max-width: 575px) {
     #formulario {
-        width: 90%;
+        width: 85%;
     }
 }
 
-@media screen and (min-width: 501px) {
+/* landscape phones */
+@media (min-width: 576px) { 
     #formulario {
         width: 70%;
     }
 }
 
-@media screen and (min-width: 850px) {
+/* tablets */
+@media (min-width: 768px) {
+    #formulario {
+        width: 60%;
+    }
+}
+
+/* desktop L */
+@media (min-width: 992px) {
+    #formulario {
+        width: 50%;
+    }
+}
+
+/* desktop XL */
+@media (min-width: 1200px) {
     #formulario {
         width: 40%;
+    }
+}
+
+/* desktop XXL */
+@media (min-width: 1400px) {
+    #formulario {
+        width: 30%;
     }
 }
