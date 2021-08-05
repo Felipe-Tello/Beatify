@@ -72,52 +72,14 @@
 						<li class="nav-item">
                     </ul>
                     
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
                     </form>
                 </div>
             </div>
         </div>
     </nav>
-
-
-
-
-<!-- CAROUSEL -->
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-	<div class="carousel-inner">
-		<div class="carousel-item active" data-bs-interval="10000">
-		<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-		<div class="carousel-caption d-none d-md-block">
-			<h5>First slide label</h5>
-			<p>Some representative placeholder content for the first slide.</p>
-		</div>
-		</div>
-		<div class="carousel-item" data-bs-interval="2000">
-		<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-		<div class="carousel-caption d-none d-md-block">
-			<h5>Second slide label</h5>
-			<p>Some representative placeholder content for the second slide.</p>
-		</div>
-		</div>
-		<div class="carousel-item">
-		<img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-		<div class="carousel-caption d-none d-md-block">
-			<h5>Third slide label</h5>
-			<p>Some representative placeholder content for the third slide.</p>
-		</div>
-		</div>
-	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
-	</div>
 
 	<div class="abajo">
 
@@ -131,6 +93,7 @@
 
 		<h1>Welcome <c:out value="${userActual.firstName}"></c:out></h1>
 
+		<a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
 
 		<form action="/search">
 			<input type="search" name="busqueda">
@@ -138,10 +101,7 @@
 		</form>
 
 		<h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
-
-		<c:forEach items="${listaCategories}" var="lc"> 
-			<a href="/categories/${lc.id}"><c:out value="${lc.genero}"/></a>
-		</c:forEach>
+		
 		<div id="tabla">
 			<table class="table table-dark table-sm table-responsive mb-5">
 				<thead>
