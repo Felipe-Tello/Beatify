@@ -1,5 +1,6 @@
 package com.team.beatify.controllers;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.List;
 
@@ -55,6 +56,12 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
+        String url = "src/main/resources/static/users/"+user.getId()+"/";
+        File folder = new File(url);
+        System.out.println(url);
+        if (folder.exists() == true){
+            model.addAttribute("archivos", folder.list());
+        }
         return "profile.jsp";
     }
     @PostMapping("/profile/{userid}")
@@ -79,6 +86,11 @@ public class UserController {
         for (Message message2 : listaMessages) {
             dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
         }
+        int respectTotal = 0;
+        for (Beat beat2 : listaBeats) {
+            respectTotal += beat2.getUsersLike().size();
+        }
+        model.addAttribute("respectTotal", respectTotal);
         model.addAttribute("userActual", userActual);
         model.addAttribute("user", user);
         model.addAttribute("listaBeats", listaBeats);

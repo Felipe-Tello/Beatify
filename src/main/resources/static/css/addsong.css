@@ -1,7 +1,7 @@
 *{
     margin: 0px;
     padding: 0px;
-    /* border: 1px solid black; */
+    /* border: 1px solid black;  */
 }
 
 #contenedor{
@@ -9,7 +9,7 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23dd09ba'/%3E%3Cstop offset='1' stop-color='%23120033'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23ff3ba0' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23ff3ba0' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
     background-attachment: fixed;
     background-size: cover;
-    padding-bottom: 200px;
+    padding-bottom: 100%;;
 }
 
 .form-group {
@@ -24,41 +24,53 @@ h1{
 }
 
 #agregar{
-    background-color: #352a52;
-    margin-left: 20px;
+    background-color: #272727;
+    /* margin-left: 20px; */
     border-radius: 5px;
-    width: 420px;
-    padding: 40px;
-    margin: 45px;
-    box-shadow: -15px 15px 25px #0f0c27;
+    width: 400px;
+    padding: 35px;
+    /* margin: 45px; */
 }
-
+/*
 a{
     margin: 10px;
+}*/
+
+.letra{
+    color: white;
 }
 
 label{
     color: #aa9beb;
 }
 
-.subir{
+/* .subir{
     margin-left: 220px;
-}
+} */
 
 .imagen{
-    margin-top: 150px;
+    width: 600px;
     margin-right: 50px;
+    margin-top: 50px;
 }
 
-.volver{
-    /* box-shadow: -10px 10px 15px #2c1c50; */
-    box-shadow: -8px 8px 20px #15003f;
+.alinear{
+    display: inline-block;
+    vertical-align: top;
 }
 
-body, html{
+.contenedordos{
+    padding-top: 100px;
+}
+
+.sombra{
+    box-shadow: #120033 -8px 8px 20px;
+}
+
+/* body, html{
     height:100%;
     background-repeat: no-repeat;
     background: url() no-repeat center center fixed;
     background-size:100% 100% ;
-}
+} */
 
