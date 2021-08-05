@@ -22,7 +22,7 @@
 </head>
 <body id="contenedor">
 	<!-- BARRA NAV -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
 
@@ -60,12 +60,16 @@
 								</c:forEach>
                             </ul>
                         </li>
+						<li class="nav-item">
+							<a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+						</li>
                         <li class="nav-item">
                             <form  method="POST" action="/logout">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
 							</form>
                         </li>
+						<li class="nav-item">
                     </ul>
                     
                     <form action="/search" class="d-flex">
@@ -91,6 +95,10 @@
 
 		<a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
 
+		<form action="/search">
+			<input type="search" name="busqueda">
+			<input type="submit" value="Search">
+		</form>
 
 		<h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
 		
