@@ -9,21 +9,11 @@
     vertical-align: top;
 }
 
-.nav-menu{
-    margin: 16px;
-    margin-left: auto;
-    width: max-content;
-}
-.barra{
-    height: 70px;
-    position: fixed;
-}
-
 #icono{
-    width: 170px;
+    width: 110px;
 }
 
-.nav-toggle{
+/* .nav-toggle{
     color: white;
     background: none;
     border: none;
@@ -32,9 +22,18 @@
     line-height: 60px;
 
     display: none;
+} */
+
+
+@media (max-width: 700px) {
+    #icono {
+        width: 100px;
+    }
 }
 
-@media (max-width: 858px){
+
+
+/* @media (max-width: 858px){
     .alinear{
         display: inline-block;
         vertical-align: top;
@@ -83,4 +82,4 @@
         width: 100%;
         padding: 5px;
     }
-}
+} */
