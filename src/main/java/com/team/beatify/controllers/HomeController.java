@@ -101,19 +101,6 @@ public class HomeController {
         beat.setUsersLike(user);
         beatService.createOrUpdateThing(beat);
         return beat.getUsersLike().size();
-        
-        // if (ruta.equals("dashboard")) {
-        //     return "redirect:/dashboard";
-        // }
-        // else if (ruta.equals("profileComment")){
-        //     return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        // }
-        // else if (ruta.equals("category")){
-        //     return "redirect:/category/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        // }
-        // else{
-        //     return "redirect:/profile/"+ beat.getuCreador().getId();
-        // }
 	}
 
     @GetMapping("/dislike/{id}")
@@ -124,16 +111,6 @@ public class HomeController {
         beat.getUsersLike().remove(userActual);
         beatService.createOrUpdateThing(beat);
         return beat.getUsersLike().size();
-
-		// if (ruta.equals("dashboard")) {
-        //     return "redirect:/dashboard";
-        // }
-        // else if (ruta.equals("profileComment")){
-        //     return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
-        // }
-        // else{
-        //     return "redirect:/profile/"+ beat.getuCreador().getId();
-        // }
 	}
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,8 +216,10 @@ public class HomeController {
         return "details.jsp";
     }
     @GetMapping("/search")
-	public String search(Model model, @RequestParam("busqueda")String busqueda) {
+	public String search(@RequestParam("busqueda")String busqueda, Principal principal,Model model) {
+        User userActual = userService.findByEmail(principal.getName());
 		List<Beat> searchword = beatService.busqueda(busqueda); 
+        model.addAttribute("userActual", userActual);
 		model.addAttribute("searchword", searchword);
 		model.addAttribute("artist", busqueda);
 		return "search.jsp";

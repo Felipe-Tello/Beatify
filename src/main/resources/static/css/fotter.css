@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    /* border: 1px solid rgb(21, 6, 226); */
+}
+
+footer{
+    padding-top: 5%;
+    background-color: rgb(52, 42, 65);
+}
+
+.logofooter{
+    width: 200px;
+}
+
+.alinear{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.letra{
+    color: rgb(135, 117, 150);
+}
+
+.espacio{
+    padding: 5px;
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.imagen{
+    width:25px;
+}
+
+.redes{
+    padding-top: 30px;
+}
+
+.logoredes{
+    margin: 20px;
+}

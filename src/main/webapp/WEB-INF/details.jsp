@@ -22,6 +22,7 @@
         <c:forEach items="${listaCompra}" var="lc">
             <li>
                 <td><c:out value="${lc.total}"/></td>
+                <td><c:out value="${lc.fecha}"/></td>
             </li>
         </c:forEach>
     </ul>

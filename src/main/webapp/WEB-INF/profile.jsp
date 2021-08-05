@@ -10,17 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/comentarios.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div id="contenedor">
+    <div class="container-fluid">
         <nav class="navbar navbar-expand-md fixed-top barra bg-dark">
             <a href="/dashboard"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
             <div class="container-fluid">
@@ -29,9 +30,9 @@
                         <a href="/dashboard" class="btn btn-outline-light">volver al menu principal</a>
                     </li>
                     <li class="alinear">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        <form action="/search" class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busqueda">
+                            <button class="btn btn-outline-light" value="Search" type="submit">Search</button>
                         </form>
                     </li>
                     <li class="alinear">
@@ -121,5 +122,43 @@
             </div>
         </main>
     </div>
+    <footer>
+        <main role="main" class="container">
+            <img class="logofooter espacio float-start" src="/css/logoblancoynegro.png" alt="">
+            <div class="espacio letra alinear">
+                <h6>SERVIVIO AL CLIENTE</h6>
+                <ul>
+                    <li>Acerca de</li>
+                    <li>Terminos y Condiciones</li>
+                    <li>Privacidad y Seguridad</li>
+                    <li>Representante Legal</li>
+                    <li>Orden de Servicio</li>
+                    <li>Bases y Promociones</li>
+                </ul>
+            </div>
+            <div class="espacio letra alinear">
+                <h6>COMUNIDAD</h6>
+                <ul>
+                    <li>Servicio para Artistas</li>
+                    <li>Publicidad</li>
+                    <li>Proveedores</li>
+                    <li>Inversionistas</li>
+                </ul>
+            </div>
+            <div class="espacio letra redes text-center float-end">
+                <h6>Siguenos en:</h6>
+                <img class="logoredes imagen" src="/css/facebook.png" alt="">
+                <img class="logoredes imagen" src="/css/twitter.png" alt="">
+                <img class="logoredes imagen" src="/css/youtube.png" alt="">
+                <img class="logoredes imagen" src="/css/discord.png" alt="">
+                <h6>CONTACTANOS</h6>
+                <h6>Beatify@gmail.com</h6>
+            </div>
+            <div class="text-center espacio letra">
+                <p>Chile 2021 Beatify</p>
+                <p>Legal / Centro de Privacidad / Politica de privacidad / Cookies</p>
+            </div>
+        </main>
+    </footer>
 </body>
 </html>
