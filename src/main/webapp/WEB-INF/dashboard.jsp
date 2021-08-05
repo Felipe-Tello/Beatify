@@ -78,6 +78,8 @@
     </nav>
 
 
+
+
 <!-- CAROUSEL -->
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 	<div class="carousel-inner">
@@ -125,12 +127,15 @@
 
 		<h1>Welcome <c:out value="${userActual.firstName}"></c:out></h1>
 
+
 		<form action="/search">
 			<input type="search" name="busqueda">
 			<input type="submit" value="Search">
 		</form>
 
+
 		<a href="/wishlist/${userActual.id}" class="btn btn-outline-light float-end padd sombra">Wishlist</a>
+
 
 		<h3>Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
 
