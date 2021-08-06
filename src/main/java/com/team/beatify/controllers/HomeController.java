@@ -66,6 +66,7 @@ public class HomeController {
                 regionBeats.add(beat);
             }
         }
+
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
