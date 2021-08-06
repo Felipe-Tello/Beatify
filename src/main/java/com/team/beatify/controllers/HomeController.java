@@ -35,8 +35,7 @@ public class HomeController {
     private final CompraService compraService;
     private final DetailsService detailsService;
 
-    public HomeController(UserService userService, BeatService beatService, CategoryService categoryService,
-            CompraService compraService, DetailsService detailsService) {
+    public HomeController(UserService userService, BeatService beatService, CategoryService categoryService, CompraService compraService, DetailsService detailsService) {
         this.userService = userService;
         this.beatService = beatService;
         this.categoryService = categoryService;
@@ -164,7 +163,15 @@ public class HomeController {
     public String showWishlist(@PathVariable("id")Long id, Model model, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
         List<Beat> listadeseados = userActual.getWishlistbeats();
+        List<Category> listaCategories = categoryService.allThings();
+        int total = 0;
+        for (Beat beat : listadeseados) {
+            total += beat.getCost();
+        }
+        model.addAttribute("listaCategories", listaCategories);
+        model.addAttribute("userActual", userActual);
         model.addAttribute("wishlist", listadeseados);
+        model.addAttribute("total", total);
         return "wishlist.jsp";
     }
 
@@ -215,6 +222,8 @@ public class HomeController {
         model.addAttribute("listaCompra", listaCompra);
         return "details.jsp";
     }
+
+    
     @GetMapping("/search")
 	public String search(@RequestParam("busqueda")String busqueda, Principal principal,Model model) {
         User userActual = userService.findByEmail(principal.getName());
