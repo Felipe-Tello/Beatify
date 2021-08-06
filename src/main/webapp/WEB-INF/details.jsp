@@ -23,6 +23,11 @@
             <li>
                 <td><c:out value="${lc.total}"/></td>
                 <td><c:out value="${lc.fecha}"/></td>
+                <ul>
+                    <c:forEach items="${lc.beats}" var="bc">
+                        <li><c:out value="${bc.cost}"/> <c:out value="${bc.title}"/></li>
+                    </c:forEach>
+                </ul>
             </li>
         </c:forEach>
     </ul>

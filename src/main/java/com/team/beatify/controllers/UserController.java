@@ -7,9 +7,11 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;
+import com.team.beatify.models.Category;
 import com.team.beatify.models.Message;
 import com.team.beatify.models.User;
 import com.team.beatify.services.BeatService;
+import com.team.beatify.services.CategoryService;
 import com.team.beatify.services.MessageService;
 import com.team.beatify.services.UserService;
 
@@ -30,18 +32,20 @@ public class UserController {
     private final UserService userService;
     private final BeatService beatService;
     private final MessageService messageService;
+    private final CategoryService categoryService;
 
-    public UserController(UserService userService, BeatService beatService,
-    MessageService messageService) {
+    public UserController(UserService userService, BeatService beatService, MessageService messageService, CategoryService categoryService) {
         this.userService = userService;
         this.beatService = beatService;
         this.messageService = messageService;
-    }
+        this.categoryService = categoryService;
+}
     //el usuario debería tener un select de regiones, para agregarlo al model
 
     @GetMapping("/profile/{userid}")
     public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
+        List<Category> listaCategories = categoryService.allThings();
         User user = userService.findThingById(userid);
         if(user == null) {
             flash.addFlashAttribute("errorUser", "Usuario no encontrado");
@@ -52,6 +56,7 @@ public class UserController {
         for (Beat beat : listaBeats) {
             respectTotal += beat.getUsersLike().size();
         }
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("respectTotal", respectTotal);
         model.addAttribute("user", user);
         model.addAttribute("userActual", userActual);
