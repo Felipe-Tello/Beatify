@@ -128,7 +128,7 @@
                 <div class="alinear float-end text-center">
                     <h1>Message Wall</h1>
                     <p>
-                        <textarea readonly rows="8" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
+                        <textarea readonly rows="6" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
                     </p>
                 </div>
                 <div class="alinear addcomentario">
