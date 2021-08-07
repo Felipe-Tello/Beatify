@@ -179,21 +179,20 @@ public class SongController {
             return "addSongs.jsp";
 
         }
-
-        else {  
-                String url = "src/main/resources/static/users/"+user.getId()+"/";
-                System.out.println(url);
-                beatService.uploadBeat(user, file, url);
-                Beat beatNew = beatService.createOrUpdateThing(beat);
-                beatNew.setuCreador(user); 
-                beatNew.setUrl(url+file.getOriginalFilename());
-                beatService.createOrUpdateThing(beatNew);
-                return "redirect:/profile/"+user.getId();
-                // model.addAttribute("listaCategories", listaCategories);
-                // model.addAttribute("error", e.getMessage());
-                // return "addSongs.jsp";
-        } 
-    }
+      
+    else {  
+            String url = "src/main/resources/static/users/"+user.getId()+"/";
+            beatService.uploadBeat(user, file, url);
+            Beat beatNew = beatService.createOrUpdateThing(beat);
+            beatNew.setuCreador(user); 
+            beatNew.setUrl(url+file.getOriginalFilename());
+            beatService.createOrUpdateThing(beatNew);
+            return "redirect:/profile/"+user.getId();
+            // model.addAttribute("listaCategories", listaCategories);
+            // model.addAttribute("error", e.getMessage());
+            // return "addSongs.jsp";
+    } 
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public User encontrarUsuario(Principal principal) {

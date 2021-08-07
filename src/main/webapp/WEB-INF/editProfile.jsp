@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -73,6 +74,7 @@
             <div class="form-group mb-2">
                 <form:label for="staticEmail2" class="sr-only" path="descripcion">Descripción:</form:label>
                 <form:textarea class="form-control" placeholder="Añadir descripción (opcional)" path="descripcion"/>
+                <small class="text-danger"><form:errors path="descripcion"/></small>
             </div>
                 <div class="form-group mb-2">
                     <form:input class="form-control" type="hidden" path= "email" value = "${user.email}"/>
