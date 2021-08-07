@@ -225,10 +225,10 @@
 				</div>
 				<div class="espacio letra redes text-center col-lg-4">
 					<h6>Síguenos en:</h6>
-					<img class="logoredes imagen" src="/css/facebook.png" alt="">
-					<img class="logoredes imagen" src="/css/twitter.png" alt="">
-					<img class="logoredes imagen" src="/css/youtube.png" alt="">
-					<img class="logoredes imagen" src="/css/discord.png" alt="">
+					<img class="logoredes imagen" src="/css/facebook.png" alt="logoFacebook">
+					<img class="logoredes imagen" src="/css/twitter.png" alt="logoTwitter">
+					<img class="logoredes imagen" src="/css/youtube.png" alt="logoYoutube">
+					<img class="logoredes imagen" src="/css/discord.png" alt="logoDiscord">
 					<h6>CONTÁCTANOS</h6>
 					<h6>Beatify@gmail.com</h6>
 				</div>
