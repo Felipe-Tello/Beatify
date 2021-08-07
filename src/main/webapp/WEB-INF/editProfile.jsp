@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/scrollbar.css">
-    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -91,7 +91,7 @@
     </div>
     <footer>
         <main role="main" class="container">
-            <img class="logofooter espacio float-start" src="/css/logoblancoynegro.png" alt="">
+            <img class="logofooter espacio float-start" src="/css/images/logoblancoynegro.png" alt="">
             <div class="espacio letra alinear">
                 <h6>SERVIVIO AL CLIENTE</h6>
                 <ul>
@@ -114,10 +114,10 @@
             </div>
             <div class="espacio letra redes text-center float-end">
                 <h6>Siguenos en:</h6>
-                <img class="logoredes imagen" src="/css/facebook.png" alt="">
-                <img class="logoredes imagen" src="/css/twitter.png" alt="">
-                <img class="logoredes imagen" src="/css/youtube.png" alt="">
-                <img class="logoredes imagen" src="/css/discord.png" alt="">
+                <img class="logoredes imagen" src="/css/images/facebook.png" alt="">
+                <img class="logoredes imagen" src="/css/images/twitter.png" alt="">
+                <img class="logoredes imagen" src="/css/images/youtube.png" alt="">
+                <img class="logoredes imagen" src="/css/images/discord.png" alt="">
                 <h6>CONTACTANOS</h6>
                 <h6>Beatify@gmail.com</h6>
             </div>
