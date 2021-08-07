@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beatify</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="/css/fotter.css">
@@ -20,6 +19,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/comentarios.js"></script>
+	<title>Beatify</title>
 </head>
 <body id="contenedor">
 	<!-- BARRA NAV -->
@@ -72,15 +72,14 @@
                         </li>
                     </ul>
                     
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
                     </form>
                 </div>
             </div>
         </div>
     </nav>
-
 
 	<!-- CAROUSEL 2DA VERSION -->
 	<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -132,7 +131,6 @@
 	<!-- <img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
 		<div class="carousel-caption d-none d-md-block"> -->
 
-
 	<div class="abajo">
 
 		<c:if test="${errorSong != null}">
@@ -150,6 +148,7 @@
 			<h3 class="text-white">Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
 
 			<table id="tabla" class="table table-dark table-hover">
+
 				<thead>
 					<tr>
 						<th scope="col">Título</th>

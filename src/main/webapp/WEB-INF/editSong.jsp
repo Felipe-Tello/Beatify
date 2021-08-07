@@ -22,7 +22,7 @@
 <body>
     <div id="contenedor">
         <nav class="navbar navbar-expand-md fixed-top barra bg-dark">
-            <img id="icono" src="5 sin título_20210721162541.png">
+            <img id="icono" src="/css/5 sin título_20210721162541.png">
             <div class="container-fluid">
                 <ul class="nav-menu">
                     <li class="alinear">
@@ -49,7 +49,7 @@
                 <a href="/dashboard"  class="btn btn-outline-light volver sombra">Menú</a>
                 <a href="/song/${idBeat}" class="btn btn-outline-light subir sombra">Volver atrás</a>
             </p>
-            <img class="float-end imagen alinear" src="16 sin título_20210723201644.png">
+            <img class="float-end imagen alinear" src="/css/16 sin título_20210723201644.png">
             <div id="agregar" class="alinear sombra">
                 <h1 class="text-center">Editar Beat</h1>
 
