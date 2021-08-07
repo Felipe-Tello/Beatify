@@ -54,28 +54,28 @@ public class SongController {
 
     @GetMapping("/song/{id}")
     public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal, RedirectAttributes flash){
-        User user = userService.findByEmail(principal.getName());
+        User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
-
+        List<Category> listaCategories = categoryService.allThings();
         if(beat == null) {
             flash.addFlashAttribute("errorSong", "Beat no encontrado");
             return "redirect:/dashboard";
         }
-
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
         for (Message message2 : listaMessages) {
             dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
         }
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("data", dataString);
-        model.addAttribute("usuario", user);
+        model.addAttribute("userActua", userActual);
         model.addAttribute("beat", beat);
         return "showSong.jsp";
     }
-    @PostMapping("/song/{idMessage}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, Principal principal){
+    @PostMapping("/song/{id}")
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("id") Long id, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(idmessage);
+        Beat beat = beatService.findThingById(id);
         message.setBeat(beat);
         message.setUser(userActual);
         messageService.createOrUpdateThing(message);
@@ -92,7 +92,7 @@ public class SongController {
         if(beat == null || beat.getuCreador().getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
-
+        model.addAttribute("userActual", usuarioLogeado);
         model.addAttribute("beat", beat);
         model.addAttribute("idBeat", beat.getId());
         setUserYCategorias(model, usuarioLogeado);
@@ -125,9 +125,13 @@ public class SongController {
     @GetMapping("/song/new")
     public String upload(@ModelAttribute("modelBeat")Beat beat, Model model, Principal principal){
         User usuario = encontrarUsuario(principal);
+        User userActual = userService.findByEmail(principal.getName());
         setUserYCategorias(model, usuario);
+        model.addAttribute("userActual", userActual);
         return "addSongs.jsp";
     }
+
+    
     // @PostMapping("/song/new")
     // public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
     //     User user = userService.findByEmail(principal.getName());
@@ -165,17 +169,17 @@ public class SongController {
     //     } 
     // }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-@PostMapping("/song/new")
-public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
-    User user = userService.findByEmail(principal.getName());
+    @PostMapping("/song/new")
+    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
+        User user = userService.findByEmail(principal.getName());
 
-    if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
-        model.addAttribute("error", "Por favor, verifique los campos");
-        setUserYCategorias(model, user);
-        return "addSongs.jsp";
+        if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
+            model.addAttribute("error", "Por favor, verifique los campos");
+            setUserYCategorias(model, user);
+            return "addSongs.jsp";
 
-    }
-
+        }
+      
     else {  
             String url = "src/main/resources/static/users/"+user.getId()+"/";
             beatService.uploadBeat(user, file, url);

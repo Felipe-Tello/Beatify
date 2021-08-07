@@ -51,6 +51,9 @@ public class UserController {
             flash.addFlashAttribute("errorUser", "Usuario no encontrado");
             return "redirect:/dashboard";
         }
+        if(userService.hasAdmin(userActual)) {
+            model.addAttribute("permiso", true);
+        }
         List<Beat> listaBeats = user.getBeatsDelCreador();
         int respectTotal = 0;
         for (Beat beat : listaBeats) {

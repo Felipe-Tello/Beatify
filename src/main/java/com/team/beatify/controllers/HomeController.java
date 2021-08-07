@@ -66,17 +66,15 @@ public class HomeController {
                 regionBeats.add(beat);
             }
         }
-
+        //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
+        if(userService.hasAdmin(userActual)) {
+            model.addAttribute("permiso", true);
+        }
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
         model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
-
-        //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
-        if(userService.hasAdmin(userActual)) {
-            model.addAttribute("permiso", true);
-        }
         return "dashboard.jsp";
     }
 
@@ -169,6 +167,9 @@ public class HomeController {
         for (Beat beat : listadeseados) {
             total += beat.getCost();
         }
+        if(userService.hasAdmin(userActual)) {
+            model.addAttribute("permiso", true);
+        }
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("userActual", userActual);
         model.addAttribute("wishlist", listadeseados);
@@ -228,7 +229,9 @@ public class HomeController {
     @GetMapping("/search")
 	public String search(@RequestParam("busqueda")String busqueda, Principal principal,Model model) {
         User userActual = userService.findByEmail(principal.getName());
-		List<Beat> searchword = beatService.busqueda(busqueda); 
+		List<Beat> searchword = beatService.busqueda(busqueda);
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("userActual", userActual);
 		model.addAttribute("searchword", searchword);
 		model.addAttribute("artist", busqueda);

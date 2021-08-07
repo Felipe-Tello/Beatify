@@ -76,6 +76,7 @@
                         <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
+
                 </div>
             </div>
         </div>
