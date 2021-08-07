@@ -47,7 +47,7 @@ public class User extends BaseModel{
 	private String passwordConfirmation;
 
 	//opcional
-	//debería tener un tamaño máximo?
+	@Size(max = 255, message = "Debe tener máximo 255 caracteres")
 	private String descripcion;
 
 	private String url;

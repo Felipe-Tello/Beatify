@@ -13,10 +13,6 @@
     background-attachment: fixed;
 }
 
-#icono{
-    width: 260px;
-}
-
 .alinear{
     display: inline-block;
     vertical-align: top;
@@ -42,43 +38,10 @@
     margin: 0 auto;
 }
 
-/* @media (max-width: 575px) {
-    #tabla {
+
+@media (max-width: 768px) {
+    
+    .tamañoTabla {
         width: 90%;
     }
 }
-
-/* landscape phones */
-/* @media (min-width: 576px) { 
-    #tabla {
-        width: 85%;
-    }
-} */
-
-/* tablets */
-/* @media (min-width: 768px) {
-    #tabla {
-        width: 80%;
-    }
-} */
-
-/* desktop L */
-/* @media (min-width: 992px) {
-    #tabla {
-        width: 75%;
-    }
-} */
-
-/* desktop XL */
-/* @media (min-width: 1200px) {
-    #tabla {
-        width: 70%;
-    }
-} */
-
-/* desktop XXL */
-/* @media (min-width: 1400px) {
-    #tabla {
-        width: 65%;
-    }
-}  */

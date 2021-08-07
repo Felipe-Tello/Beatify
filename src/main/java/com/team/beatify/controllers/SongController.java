@@ -178,7 +178,6 @@ public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingRe
 
     else {  
             String url = "src/main/resources/static/users/"+user.getId()+"/";
-            System.out.println(url);
             beatService.uploadBeat(user, file, url);
             Beat beatNew = beatService.createOrUpdateThing(beat);
             beatNew.setuCreador(user); 

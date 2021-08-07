@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
+	<link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -22,7 +23,7 @@
 </head>
 <body id="contenedor">
 	<!-- BARRA NAV -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
 
@@ -69,7 +70,6 @@
 								<input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
 							</form>
                         </li>
-						<li class="nav-item">
                     </ul>
                     
                     <form class="d-flex">
@@ -83,7 +83,7 @@
 
 
 	<!-- CAROUSEL 2DA VERSION -->
-	<div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+	<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 		<ol class="carousel-indicators">
 			<c:forEach items="${listaCategories}" var="lc">
 				<c:if test="${lc.id == 1}">
