@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/addsong.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
-    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link rel="stylesheet" type="text/css" href="/css/scrollbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -24,7 +24,7 @@
     <div id="contenedor">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
-                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
+                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
     
                 <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -86,7 +86,7 @@
                 <a href="/dashboard"  class="btn btn-outline-light volver sombra">Menú</a>
                 <a href="/song/${idBeat}" class="btn btn-outline-light subir sombra">Volver atrás</a>
             </p>
-            <img class="float-end imagen alinear" src="/css/16 sin título_20210723201644.png">
+            <img class="float-end imagen alinear" src="/css/images/16 sin título_20210723201644.png">
             <div id="agregar" class="alinear sombra">
                 <h1 class="text-center">Editar Beat</h1>
 

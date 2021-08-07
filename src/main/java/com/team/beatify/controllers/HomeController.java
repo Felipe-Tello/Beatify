@@ -82,6 +82,8 @@ public class HomeController {
     public String showCategory(@PathVariable("id")Long id, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         Category category = categoryService.findThingById(id);
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("userActual", userActual);
         model.addAttribute("category", category);
         return "categories.jsp";

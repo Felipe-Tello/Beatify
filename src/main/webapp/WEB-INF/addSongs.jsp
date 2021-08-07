@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/addsong.css">
-    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link rel="stylesheet" type="text/css" href="/css/scrollbar.css">
@@ -24,7 +24,7 @@
     <div id="contenedor">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
-                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
+                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
     
                 <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -85,7 +85,7 @@
             <a href="/dashboard"  class="btn btn-outline-light volver">Menú</a>
         </p>
 
-        <img class="rounded float-end imagenn" src="/css/16 sin título_20210723201644.png">
+        <img class="rounded float-end imagenn" src="/css/images/16 sin título_20210723201644.png">
         <div id="agregar">
             <h1>Añadir Beat</h1>
 
