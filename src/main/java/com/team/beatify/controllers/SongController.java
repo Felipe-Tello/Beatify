@@ -181,7 +181,7 @@ public class SongController {
         }
       
     else {  
-            String url = "src/main/resources/static/users/"+user.getId()+"/";
+            String url = "beats/"+user.getId()+"/";
             beatService.uploadBeat(user, file, url);
             Beat beatNew = beatService.createOrUpdateThing(beat);
             beatNew.setuCreador(user); 
