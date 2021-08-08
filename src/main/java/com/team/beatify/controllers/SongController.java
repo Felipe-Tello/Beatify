@@ -1,12 +1,5 @@
 package com.team.beatify.controllers;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 
@@ -169,6 +162,7 @@ public class SongController {
     //     } 
     // }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     @PostMapping("/song/new")
     public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
         User user = userService.findByEmail(principal.getName());
@@ -180,8 +174,8 @@ public class SongController {
 
         }
       
-    else {  
-            String url = "src/main/resources/static/users/"+user.getId()+"/";
+        else {  
+            String url = "beats/"+user.getId()+"/";
             beatService.uploadBeat(user, file, url);
             Beat beatNew = beatService.createOrUpdateThing(beat);
             beatNew.setuCreador(user); 

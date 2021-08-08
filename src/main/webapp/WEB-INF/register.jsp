@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/generalLG.css">
     <link rel="stylesheet" type="text/css" href="/css/register.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
-    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
 </head>
 <body id="imagenFondo">
     <div id="formulario" class="mt-5 mb-5">
-        <img class="iconoSup" src="/css/BTLogo.png" alt="">
+        <img class="iconoSup" src="/css/images/BTLogo.png" alt="">
         <h1 class="text-center">Regístrate</h1>
         <form:form method="POST" action="" modelAttribute="user">
             <div class="form-group">

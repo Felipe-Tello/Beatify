@@ -1,0 +1,27 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    /* border: 1px solid rgb(21, 6, 226); */
+}
+
+.abajo{
+    padding: 25%;
+}
+
+.sombra{
+    box-shadow: 0px 0px 30px rgb(122, 0, 57);
+}
+
+.tipoletra{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 70px;
+}
+
+.fondo{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.tipoletrados{
+    font-family:sans-serif;
+}

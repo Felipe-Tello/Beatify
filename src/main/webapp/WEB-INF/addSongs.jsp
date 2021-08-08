@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/addsong.css">
-    <link rel="shortcut icon" href="/css/BTLogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
     <link rel="stylesheet" type="text/css" href="/css/scrollbar.css">
@@ -20,11 +20,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>Añadir Beat</title>
 </head>
+
 <body id="contenedor" class="monitos">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
+            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -81,9 +82,10 @@
     </nav>
 
 
+
     <div class="container-fluid">
         <div class="contenedorMonitos end-0">
-            <img src="/css/16 sin título_20210723201644.png" id="imgMonitos" alt="monitosFondo">
+            <img src="/css/images/16 sin título_20210723201644.png" id="imgMonitos" alt="monitosFondo">
         </div>
         <div id="agregar" class="tamañoXSSM col-md-7 col-lg-5 col-xl-4 sombra">
             <h2 class="text-center text-white mb-3">Añadir Beat</h2>
