@@ -114,13 +114,11 @@
                     </div>
                     <div class="form-group">
                         <form:label path="categories" class="d-block">Añadir Categorías</form:label>
-
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               Selecciona categorías
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="dropdownMenuButton1">
-
+                            <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="dropdownMenuButton1" id="letrasGenero">
                                 <c:forEach items="${listaCategories}" var="lc">
                                     <li class="dropdown-item">
                                         <form:checkbox path="categories" value="${lc.id}"/>
@@ -130,17 +128,13 @@
                             </ul>
                         </div>
                     </div>
-
                     <div class="botonesNav mt-3">
                         <a href="/profile/${usuario.id}" class="btn btn-outline-info opacity-75 boton">Volver atrás</a>
-                        <input type="submit" class="btn btn-outline-light w-50" value="Subir"/>
+                        <input type="submit" class="btn btn-outline-light w-50 subir" value="Subir"/>
                     </div>
-                    
                 </form:form>
-
             </form>
         </div>
-
     </div>
 
     <footer>
