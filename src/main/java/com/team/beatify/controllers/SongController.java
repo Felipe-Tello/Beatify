@@ -61,7 +61,7 @@ public class SongController {
         }
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("data", dataString);
-        model.addAttribute("userActua", userActual);
+        model.addAttribute("userActual", userActual);
         model.addAttribute("beat", beat);
         return "showSong.jsp";
     }
@@ -161,10 +161,11 @@ public class SongController {
     //         }
     //     } 
     // }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     @PostMapping("/song/new")
-    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
+    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("fileImage") MultipartFile fileImage, Principal principal, Model model){
         User user = userService.findByEmail(principal.getName());
 
         if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
@@ -174,12 +175,18 @@ public class SongController {
 
         }
       
-        else {  
+        else {
+            // subir cancion
             String url = "beats/"+user.getId()+"/";
             beatService.uploadBeat(user, file, url);
             Beat beatNew = beatService.createOrUpdateThing(beat);
             beatNew.setuCreador(user); 
             beatNew.setUrl(url+file.getOriginalFilename());
+            // subir imagen
+            String urlImage = "beatsImage/"+user.getId()+"/";
+            beatService.uploadBeatImage(fileImage, urlImage);
+            beatNew.setImageUrl(urlImage+fileImage.getOriginalFilename());
+            // guardar beat
             beatService.createOrUpdateThing(beatNew);
             return "redirect:/profile/"+user.getId();
             // model.addAttribute("listaCategories", listaCategories);

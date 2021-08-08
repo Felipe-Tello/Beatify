@@ -33,6 +33,8 @@ public class Beat extends BaseModel{
     //es un campo que se asigna desde el usuario? o en el servidor por interno? 
     private String url;
 
+    private String imageUrl;
+
     //----------------------------------------------------------------------------------------//
 
     //relacion n:1 users 
@@ -93,7 +95,7 @@ public class Beat extends BaseModel{
     public Beat() {
     }
 
-    public Beat(String title, int cost, String url, User uCreador, Set<User> usersLike, List<Message> listaMessagesFromBeat, List<User> wishlistuser, List<Compra> compras, List<Category> categories) {
+    public Beat(String title, int cost, String url,String imageUrl, User uCreador, Set<User> usersLike, List<Message> listaMessagesFromBeat, List<User> wishlistuser, List<Compra> compras, List<Category> categories) {
         this.title = title;
         this.cost = cost;
         this.url = url;
@@ -103,6 +105,7 @@ public class Beat extends BaseModel{
         this.wishlistuser = wishlistuser;
         this.compras = compras;
         this.categories = categories;
+        this.imageUrl = imageUrl;
     }
 
     //----------------------------------------------------------------------------------------// 
@@ -185,4 +188,13 @@ public class Beat extends BaseModel{
     public void setWishlistuser(User user) {
         this.wishlistuser.add(user);
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
 }   

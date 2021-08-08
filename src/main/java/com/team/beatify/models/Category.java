@@ -17,6 +17,8 @@ public class Category extends BaseModel{
     @NotNull
     private String genero;
 
+    private String url;
+
     //----------------------------------------------------------------------------------------//
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -32,9 +34,10 @@ public class Category extends BaseModel{
     public Category() {
     }
 
-    public Category(@NotNull String genero, List<Beat> beats) {
+    public Category(@NotNull String genero, String url, List<Beat> beats) {
         this.genero = genero;
         this.beats = beats;
+        this.url = url;
     }
 
     //----------------------------------------------------------------------------------------//
@@ -54,4 +57,13 @@ public class Category extends BaseModel{
     public void setBeats(List<Beat> beats) {
         this.beats = beats;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
 }

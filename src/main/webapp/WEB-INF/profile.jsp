@@ -160,10 +160,8 @@
                                 <a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
                             </td>
                             <td>
-                                <audio controls>
-                                    <source src="${lb.url}" type="audio/ogg">
-                                    <source src="${lb.url}" type="audio/mpeg">
-                                        Your browser does not support the audio element.
+                                <audio controls="" src="${lb.url}" class="btn btn-dark">
+                                    Your browser does not support the audio element.
                                 </audio>
                             </td>
                             <td id="${lb.id}">
@@ -191,6 +189,18 @@
                             </c:if>
                         </tr>
                     </c:forEach>
+                </tbody>
+            </table>
+            <table class="table table-dark table-hover sombraclara">
+                <thead>
+                    <tr>
+                        <th scope="col">Mis Beats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>No tienes ningun Beat subido</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

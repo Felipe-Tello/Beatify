@@ -99,7 +99,7 @@
 				<c:if test="${lc.id == 1}">
 					<div class="carousel-item active" data-bs-interval="5000">
 						<div class="container">
-							<img src="" alt="">
+							<img src="${lc.url}" alt="">
 							<h1 class="text-center p-5"><c:out value = "${lc.genero}"/></h1>
 						</div>
 					</div>
@@ -108,7 +108,7 @@
 				<c:if test="${lc.id != 1}">
 					<div class="carousel-item" data-bs-interval="4000">
 						<div class="container">
-							<img src="" alt="">
+							<img src="${lc.url}" alt="" width="1300" height="400">
 							<h1 class="text-center p-5"><c:out value = "${lc.genero}"/></h1>
 						</div>
 					</div>
@@ -166,17 +166,17 @@
 							<a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
 						</td>
 						<td>
-							<audio controls src="${lb.url}" class="btn btn-dark">
+							<audio controls="" src="${lb.url}" class="btn btn-dark">
 								Your browser does not support the audio element.
 							</audio>
 						</td>
 						<td id="${lb.id}">
 							<span><c:out value = "${lb.usersLike.size()}"/></span>
 							<c:if test="${!lb.usersLike.contains(userActual)}">
-								<a href="#row"class="btn btn-outline-info" onclick="like(${lb.id}, 'like')">Like</a>
+								<a href="#row" onclick="like(${lb.id}, 'like')" class="btn btn-outline-info">Like</a>
 							</c:if>
 							<c:if test="${lb.usersLike.contains(userActual)}">
-								<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger" >Dislike</a>
+								<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
 							</c:if>
 						</td>
 						<td>
@@ -186,7 +186,7 @@
 							<c:out value="${lb.cost}"/>
 						</td>
 						
-						<td>
+						<td id="${lb.id}">
 							<c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
 								<a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Añadir al carro</a>
 							</c:if>

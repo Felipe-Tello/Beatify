@@ -11,8 +11,8 @@ public class Configuracion implements WebMvcConfigurer{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // TODO Auto-generated method stub
         registry
-            .addResourceHandler("/beats/**")
-            .addResourceLocations("file:beats/")
+            .addResourceHandler("/beats/**","/beatsImage/**","/categoryImage/**")
+            .addResourceLocations("file:beats/", "file:beatsImage/", "file:categoryImage/")
             .setCachePeriod(3600)
             .resourceChain(true)
             .addResolver(new PathResourceResolver());
