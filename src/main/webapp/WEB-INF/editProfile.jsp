@@ -89,42 +89,51 @@
         </form:form>
         <a href="/profile/${userId}">Volver atrás</a>
     </div>
+    
+
     <footer>
         <main role="main" class="container">
-            <img class="logofooter espacio float-start" src="/css/logoblancoynegro.png" alt="">
-            <div class="espacio letra alinear">
-                <h6>SERVIVIO AL CLIENTE</h6>
-                <ul>
-                    <li>Acerca de</li>
-                    <li>Terminos y Condiciones</li>
-                    <li>Privacidad y Seguridad</li>
-                    <li>Representante Legal</li>
-                    <li>Orden de Servicio</li>
-                    <li>Bases y Promociones</li>
-                </ul>
-            </div>
-            <div class="espacio letra alinear">
-                <h6>COMUNIDAD</h6>
-                <ul>
-                    <li>Servicio para Artistas</li>
-                    <li>Publicidad</li>
-                    <li>Proveedores</li>
-                    <li>Inversionistas</li>
-                </ul>
-            </div>
-            <div class="espacio letra redes text-center float-end">
-                <h6>Siguenos en:</h6>
-                <img class="logoredes imagen" src="/css/facebook.png" alt="">
-                <img class="logoredes imagen" src="/css/twitter.png" alt="">
-                <img class="logoredes imagen" src="/css/youtube.png" alt="">
-                <img class="logoredes imagen" src="/css/discord.png" alt="">
-                <h6>CONTACTANOS</h6>
-                <h6>Beatify@gmail.com</h6>
-            </div>
-            <div class="text-center espacio letra">
-                <p>Chile 2021 Beatify</p>
-                <p>Legal / Centro de Privacidad / Politica de privacidad / Cookies</p>
-            </div>
+
+			<div class="row">
+				<div id="small" class="col-md-3 col-lg-2">
+					<img id="logofooter" class="espacio" src="/css/logoblancoynegro.png" alt="logoFooter">
+				</div>
+				<div class="espacio letra col-md-4 col-lg-3">
+					<h6>SERVICIO AL CLIENTE</h6>
+					<ul class="lista">
+						<li>Acerca de</li>
+						<li>Términos y Condiciones</li>
+						<li>Privacidad y Seguridad</li>
+						<li>Representante Legal</li>
+						<li>Orden de Servicio</li>
+						<li>Bases y Promociones</li>
+					</ul>
+				</div>
+				<div class="espacio letra col-md-4 col-lg-3">
+					<h6>COMUNIDAD</h6>
+					<ul class="lista">
+						<li>Servicio para Artistas</li>
+						<li>Publicidad</li>
+						<li>Proveedores</li>
+						<li>Inversionistas</li>
+					</ul>
+				</div>
+				<div class="espacio letra redes text-center col-lg-4">
+					<h6>Síguenos en:</h6>
+					<img class="logoredes imagen" src="/css/facebook.png" alt="logoFacebook">
+					<img class="logoredes imagen" src="/css/twitter.png" alt="logoTwitter">
+					<img class="logoredes imagen" src="/css/youtube.png" alt="logoYoutube">
+					<img class="logoredes imagen" src="/css/discord.png" alt="logoDiscord">
+					<h6>CONTÁCTANOS</h6>
+					<h6>Beatify@gmail.com</h6>
+				</div>
+				<div class="text-center espacio letra">
+					<p>© Chile 2021 Beatify</p>
+					<p>Legal / Centro de Privacidad / Política de privacidad / Cookies</p>
+				</div>
+
+			</div>
+           
         </main>
     </footer>
 </body>
