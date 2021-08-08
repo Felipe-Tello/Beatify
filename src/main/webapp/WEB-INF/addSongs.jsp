@@ -53,10 +53,12 @@
                     <div class="form-group">
                         <form:label path="categories">Añadir Categorías</form:label>
                         <!-- agregar css para que el display de las categorías sea más ordenado -->
-                        <c:forEach items="${listaCategories}" var="lc">
+                        <p id="letrasGenero">
+                            <c:forEach items="${listaCategories}" var="lc">
                             <form:checkbox path="categories" value="${lc.id}"/>
                                 <c:out value="${lc.genero}"/>
-                        </c:forEach>
+                            </c:forEach>
+                        </p>
                     <div class="form-group">
                     <!-- Arreglar el boton q está un poco desviado xd -->
                     <input type="submit"  class="btn btn-outline-light subir" value="Subir"/>

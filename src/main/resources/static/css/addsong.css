@@ -29,6 +29,7 @@ h1{
     border-radius: 5px;
     width: 400px;
     padding: 35px;
+    box-shadow: #120033 -8px 8px 20px;
     /* margin: 45px; */
 }
 /*
@@ -73,4 +74,6 @@ label{
     background: url() no-repeat center center fixed;
     background-size:100% 100% ;
 } */
-
+#letrasGenero{
+    color: white;
+}

@@ -18,22 +18,30 @@
     <title>Administrador</title>
 </head>
 <body>
-    <div class="container-fluid">
-        <img id="icono" src="/css/5 sin título_20210721162542.png" alt="">
-        <div class="row">
-            <a class="col-6 text-end" href="/dashboard">volver al menu principal</a>
-            <form class="col-6 text-end" method="POST" action="/logout">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input type="submit" value="Cerrar sesión" />
-            </form>
-        </div>
-        <form:form method="POST" action="" modelAttribute="categoryModel">
-            <div>
-                <form:label path="genero">Agregar genero musical</form:label>
-                <form:input class="form-control" placeholder="Genero Musical" path="genero"/>
+        <nav class="navbar navbar-expand-md fixed-top barra bg-dark">
+            <a href="/dashboard"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
+            <div class="container-fluid">
+                <ul class="nav-menu">
+                    <li class="alinear">
+                        <a id="botonbarra" class="btn btn-outline-light" href="/profile/${userId}">Volver atrás</a>
+                    </li>
+                    <li class="alinear">
+                        <form method="POST" action="/logout">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="submit" value="Cerrar sesión" class=" btn btn-outline-light" />
+                        </form>
+                    </li>
+                </ul>
             </div>
-            <input class="btn btn-light" type="submit" value="Añadir genero"/>
-        </form:form>
-    </div>  
+        </nav>
+        <div id="moverabajo">
+            <form:form method="POST" action="" modelAttribute="categoryModel">
+                <div>
+                    <form:label path="genero">Agregar genero musical</form:label>
+                    <form:input class="form-control" placeholder="Genero Musical" path="genero"/>
+                </div>
+                <input id="botonenviar" class="btn btn-light" type="submit" value="Añadir genero"/>
+            </form:form>
+        </div>
 </body>
 </html>

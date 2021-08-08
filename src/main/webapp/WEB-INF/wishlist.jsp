@@ -30,7 +30,7 @@
                         <a href="/dashboard" class="btn btn-outline-light">volver al menu principal</a>
                     </li>
                     <li class="alinear sombra">
-                        <form>
+                        <form  method="POST" action="/logout">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <input type="submit" value="Cerrar sesión" class="btn btn-outline-light"/>
                         </form>
