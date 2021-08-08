@@ -16,78 +16,79 @@
     <link rel="stylesheet" type="text/css" href="/css/scrollbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <title>Document</title>
+	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Añadir Beat</title>
 </head>
-<body>
-    <div id="contenedor">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container-fluid">
-                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
-    
-                <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
-    
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-    
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <c:if test="${permiso == true}">
-                                    <a href="/admin" class="nav-link">Página de administrador</a>
-                                </c:if>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Categorías
-                                </a>
-                                <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
-                                    <!-- ver esta wa -->
-                                    <c:forEach items="${listaCategories}" var="lc">
-                                        <li class="nav-item">
-                                            <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
-                            </li>
-                            <li class="nav-item">
-                                <form  method="POST" action="/logout">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
-                                </form>
-                            </li>
-                            <li class="nav-item">
-                        </ul>
-                        
-                        <form action="/search" class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
-                            <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
-                        </form>
-                    </div>
+
+<body id="contenedor" class="monitos">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <c:if test="${permiso == true}">
+                                <a href="/admin" class="nav-link">Página de administrador</a>
+                            </c:if>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
+                                <c:forEach items="${listaCategories}" var="lc">
+                                    <li class="nav-item">
+                                        <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+                        </li>
+                        <li class="nav-item">
+                            <form  method="POST" action="/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                    </ul>
+                    
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
+                    </form>
                 </div>
             </div>
-        </nav>
-        <p class="text-end">
-            <a href="/profile/${usuario.id}"  class="btn btn-outline-light volver">Volver al perfil</a>
-            <a href="/dashboard"  class="btn btn-outline-light volver">Menú</a>
-        </p>
+        </div>
+    </nav>
 
-        <img class="rounded float-end imagenn" src="/css/images/16 sin título_20210723201644.png">
-        <div id="agregar">
-            <h1>Añadir Beat</h1>
+
+
+    <div class="container-fluid">
+        <div class="contenedorMonitos end-0">
+            <img src="/css/images/16 sin título_20210723201644.png" id="imgMonitos" alt="monitosFondo">
+        </div>
+        <div id="agregar" class="tamañoXSSM col-md-7 col-lg-5 col-xl-4 sombra">
+            <h2 class="text-center text-white mb-3">Añadir Beat</h2>
 
             <c:if test="${error != null}">
                 <small class="d-block text-danger"><c:out value = "${error}"/></small>
@@ -96,35 +97,96 @@
             <form action="" enctype="multipart/form-data" method="POST">
                 <input  class="form-control" type="file" name="file" accept=".AAC, .WMA, .WAV, .MP4, .MP3, .FLAC, .M4A">
                 <input  class="form-control" type="file" name="fileImage" accept=".jpg, .jpeg, .png">
+
                 <form:form method="POST" action="" modelAttribute="modelBeat">
                     <div class="form-group">
                         <form:label path="title">Título</form:label>
                         <form:input class="form-control" path="title" placeholder="Título del beat"/>
                         <small class="text-danger"><form:errors path="title"/></small>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <form:label path="cost">Precio (CLP) </form:label>
-                        <div class="form-group input-group mb-3">
+                        <div class="input-group">
                             <span class="input-group-text">$</span>
                             <form:input type="number" class="form-control" path="cost" step="100" min="0"/>
-                            <!-- Arreglar el display de esto -->
-                            <small class="text-danger d-block"><form:errors path="cost"/></small>
                         </div>
+                        <small class="text-danger d-block"><form:errors path="cost"/></small>
                     </div>
                     <div class="form-group">
-                        <form:label path="categories">Añadir Categorías</form:label>
-                        <!-- agregar css para que el display de las categorías sea más ordenado -->
-                        <c:forEach items="${listaCategories}" var="lc">
-                            <form:checkbox path="categories" value="${lc.id}"/>
-                                <c:out value="${lc.genero}"/>
-                        </c:forEach>
-                    <div class="form-group">
-                    <!-- Arreglar el boton q está un poco desviado xd -->
-                    <input type="submit"  class="btn btn-outline-light subir" value="Subir"/>
+                        <form:label path="categories" class="d-block">Añadir Categorías</form:label>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Selecciona categorías
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="dropdownMenuButton1">
+
+                                <c:forEach items="${listaCategories}" var="lc">
+                                    <li class="dropdown-item">
+                                        <form:checkbox path="categories" value="${lc.id}"/>
+                                        <c:out value="${lc.genero}"/>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="botonesNav mt-3">
+                        <a href="/profile/${usuario.id}" class="btn btn-outline-info opacity-75 boton">Volver atrás</a>
+                        <input type="submit" class="btn btn-outline-light w-50" value="Subir"/>
+                    </div>
+                    
                 </form:form>
+
             </form>
-            <a href="/profile/${usuario.id}">Volver atrás</a>
         </div>
+
     </div>
+
+    <footer>
+        <main role="main" class="container">
+
+			<div class="row">
+				<div id="small" class="col-md-3 col-lg-2">
+					<img id="logofooter" class="espacio" src="/css/logoblancoynegro.png" alt="logoFooter">
+				</div>
+				<div class="espacio letra col-md-4 col-lg-3">
+					<h6>SERVICIO AL CLIENTE</h6>
+					<ul class="lista">
+						<li>Acerca de</li>
+						<li>Términos y Condiciones</li>
+						<li>Privacidad y Seguridad</li>
+						<li>Representante Legal</li>
+						<li>Orden de Servicio</li>
+						<li>Bases y Promociones</li>
+					</ul>
+				</div>
+				<div class="espacio letra col-md-4 col-lg-3">
+					<h6>COMUNIDAD</h6>
+					<ul class="lista">
+						<li>Servicio para Artistas</li>
+						<li>Publicidad</li>
+						<li>Proveedores</li>
+						<li>Inversionistas</li>
+					</ul>
+				</div>
+				<div class="espacio letra redes text-center col-lg-4">
+					<h6>Síguenos en:</h6>
+					<img class="logoredes imagen" src="/css/facebook.png" alt="logoFacebook">
+					<img class="logoredes imagen" src="/css/twitter.png" alt="logoTwitter">
+					<img class="logoredes imagen" src="/css/youtube.png" alt="logoYoutube">
+					<img class="logoredes imagen" src="/css/discord.png" alt="logoDiscord">
+					<h6>CONTÁCTANOS</h6>
+					<h6>Beatify@gmail.com</h6>
+				</div>
+				<div class="text-center espacio letra">
+					<p>© Chile 2021 Beatify</p>
+					<p>Legal / Centro de Privacidad / Política de privacidad / Cookies</p>
+				</div>
+
+			</div>
+           
+        </main>
+    </footer>
 </body>
 </html>

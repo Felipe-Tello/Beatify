@@ -27,7 +27,7 @@ public class Beat extends BaseModel{
     private String title;
 
     @NotNull(message = "El campo no puede ser nulo")
-    @Min(5000)
+    @Min(value = 5000, message = "El precio mínimo es $5000")
     private int cost;
 
     //es un campo que se asigna desde el usuario? o en el servidor por interno? 
