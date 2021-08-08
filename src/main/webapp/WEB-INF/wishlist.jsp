@@ -90,7 +90,6 @@
         </div>
         <div class="row tabla">
             <div class="col-12 col-sm-12">
-                
                 <table class="table table-dark table-sm volver" >
                     <thead>
                         <tr>
@@ -115,6 +114,18 @@
                             <td>$ <c:out value="${lb.cost}"/></td>
                         </tr>
                         </c:forEach>
+                    </tbody>
+                </table>
+                <table class="table table-dark table-sm volver" >
+                    <thead>
+                        <tr>
+                            <th>Lista de compras</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No tienes Beats en el carro de compras</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -91,6 +91,7 @@
                     </li>
                 </ul>
                 <a href="/dashboard" class="btn btn-outline-light alinear float-end">Volver atrás</a>
+                <img src="${beat.imageUrl}" alt="" width="300" height="200">
                 <div class="alinear titulo">
                     <h1>Titulo: <c:out value="${beat.title}"></c:out></h1>
                     <h1>Author: <c:out value="${beat.uCreador.firstName}"></c:out></h1>
@@ -115,7 +116,7 @@
                             <input type="submit" value="Submit" class="btn btn-outline-light"/>
                         </form:form>
                     </div>
-                    <div class="float-center text-center">
+                    <div class="float-center text-center alinear">
                         <h1>Message Wall</h1>
                         <p>
                             <textarea readonly rows="8" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>

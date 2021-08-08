@@ -78,10 +78,10 @@ public class HomeController {
         return "dashboard.jsp";
     }
 
-    @GetMapping("/categories/{id}")
-    public String showCategory(@PathVariable("id")Long id, Principal principal, Model model){
+    @GetMapping("/categories/{idq}")
+    public String showCategory(@PathVariable("idq")Long idq, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
-        Category category = categoryService.findThingById(id);
+        Category category = categoryService.findThingById(idq);
         List<Category> listaCategories = categoryService.allThings();
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("userActual", userActual);
@@ -123,6 +123,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.setWishlistuser(userActual);
         beatService.createOrUpdateThing(beat);
+        // return "Remover del carro";
 
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";
@@ -141,6 +142,7 @@ public class HomeController {
         Beat beat = beatService.findThingById(id);
         beat.getWishlistuser().remove(userActual);
         beatService.createOrUpdateThing(beat);
+        // return "Añadir al carro";
 
         if (ruta.equals("dashboard")) {
             return "redirect:/dashboard";

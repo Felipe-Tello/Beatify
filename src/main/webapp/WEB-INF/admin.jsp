@@ -29,13 +29,16 @@
                 <input type="submit" value="Cerrar sesión" />
             </form>
         </div>
-        <form:form method="POST" action="" modelAttribute="categoryModel">
-            <div>
-                <form:label path="genero">Agregar genero musical</form:label>
-                <form:input class="form-control" placeholder="Genero Musical" path="genero"/>
-            </div>
-            <input class="btn btn-light" type="submit" value="Añadir genero"/>
-        </form:form>
+		<form action="" enctype="multipart/form-data" method="POST">
+			<input  class="form-control" type="file" name="file" accept=".jpg, .jpeg, .png">
+			<form:form method="POST" action="" modelAttribute="categoryModel">
+				<div>
+					<form:label path="genero">Agregar genero musical</form:label>
+					<form:input class="form-control" placeholder="Genero Musical" path="genero"/>
+				</div>
+				<input class="btn btn-light" type="submit" value="Añadir genero"/>
+			</form:form>
+		</form>
     </div>  
 
     <footer>
