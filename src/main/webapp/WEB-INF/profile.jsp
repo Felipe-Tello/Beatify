@@ -17,7 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- esta libreria está desactualizada -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/comentarios.js"></script>
     <title><c:out value="${user.firstName} ${user.lastName}"/></title>
@@ -225,10 +226,12 @@
 				</div>
 				<div class="espacio letra redes text-center col-lg-4">
 					<h6>Síguenos en:</h6>
-					<img class="logoredes imagen" src="/css/images/facebook.png" alt="">
-					<img class="logoredes imagen" src="/css/images/twitter.png" alt="">
-					<img class="logoredes imagen" src="/css/images/youtube.png" alt="">
-					<img class="logoredes imagen" src="/css/images/discord.png" alt="">
+
+					<img class="logoredes imagen" src="/css/images/facebook.png" alt="logoFacebook">
+					<img class="logoredes imagen" src="/css/images/twitter.png" alt="logoTwitter">
+					<img class="logoredes imagen" src="/css/images/youtube.png" alt="logoYoutube">
+					<img class="logoredes imagen" src="/css/images/discord.png" alt="logoDiscord">
+
 					<h6>CONTÁCTANOS</h6>
 					<h6>Beatify@gmail.com</h6>
 				</div>
