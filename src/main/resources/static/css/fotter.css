@@ -9,8 +9,8 @@ footer{
     background-color: rgb(52, 42, 65);
 }
 
-.logofooter{
-    width: 200px;
+#logofooter{
+    width: 100%;
 }
 
 .alinear{
@@ -24,18 +24,34 @@ footer{
 
 .espacio{
     padding: 5px;
-    margin-top: 25px;
-    margin-left: 40px;
 }
 
 .imagen{
     width:25px;
 }
 
-.redes{
-    padding-top: 30px;
-}
-
 .logoredes{
     margin: 20px;
+}
+
+
+@media (max-width: 768px) {
+    
+    #small {
+        display: flex;
+        width: 100%;
+    }
+
+    #logofooter {
+        width: 50%;
+        margin: 0px auto;
+    }
+
+    h6 {
+        text-align: center;
+    }
+
+    .lista {
+        margin-left: 15px;
+    }
 }

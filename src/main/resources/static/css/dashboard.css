@@ -13,22 +13,6 @@
     background-attachment: fixed;
 }
 
-#icono{
-    width: 260px;
-}
-
-h1{
-    color: white;
-    text-align: center;
-    padding: 50px;
-}
-
-h3{
-    color: white;
-    padding: 20px;
-    margin-left: 150px;
-}
-
 .alinear{
     display: inline-block;
     vertical-align: top;
@@ -42,13 +26,22 @@ h3{
     box-shadow: #120033 -8px 8px 20px;
 }
 
-.abajo{
-    padding-top: 50px;
-}
-
 #tabla{
-    margin-right: 150px;
-    margin-left: 150px;
+    /* margin-right: 150px;
+    margin-left: 150px; */
     box-shadow: -8px 8px 20px #000000;
     background-color: rgb(34, 34, 34);
+}
+
+.tamañoTabla {
+    width: 85%;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+    
+    .tamañoTabla {
+        width: 90%;
+    }
 }

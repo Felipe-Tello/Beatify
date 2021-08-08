@@ -1,12 +1,5 @@
 package com.team.beatify.controllers;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 
@@ -54,28 +47,28 @@ public class SongController {
 
     @GetMapping("/song/{id}")
     public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal, RedirectAttributes flash){
-        User user = userService.findByEmail(principal.getName());
+        User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
-
+        List<Category> listaCategories = categoryService.allThings();
         if(beat == null) {
             flash.addFlashAttribute("errorSong", "Beat no encontrado");
             return "redirect:/dashboard";
         }
-
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
         for (Message message2 : listaMessages) {
             dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
         }
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("data", dataString);
-        model.addAttribute("usuario", user);
+        model.addAttribute("userActual", userActual);
         model.addAttribute("beat", beat);
         return "showSong.jsp";
     }
-    @PostMapping("/song/{idMessage}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idMessage") Long idmessage, Principal principal){
+    @PostMapping("/song/{id}")
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("id") Long id, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(idmessage);
+        Beat beat = beatService.findThingById(id);
         message.setBeat(beat);
         message.setUser(userActual);
         messageService.createOrUpdateThing(message);
@@ -92,7 +85,7 @@ public class SongController {
         if(beat == null || beat.getuCreador().getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
-
+        model.addAttribute("userActual", usuarioLogeado);
         model.addAttribute("beat", beat);
         model.addAttribute("idBeat", beat.getId());
         setUserYCategorias(model, usuarioLogeado);
@@ -125,9 +118,13 @@ public class SongController {
     @GetMapping("/song/new")
     public String upload(@ModelAttribute("modelBeat")Beat beat, Model model, Principal principal){
         User usuario = encontrarUsuario(principal);
+        User userActual = userService.findByEmail(principal.getName());
         setUserYCategorias(model, usuario);
+        model.addAttribute("userActual", userActual);
         return "addSongs.jsp";
     }
+
+    
     // @PostMapping("/song/new")
     // public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
     //     User user = userService.findByEmail(principal.getName());
@@ -164,25 +161,32 @@ public class SongController {
     //         }
     //     } 
     // }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-@PostMapping("/song/new")
-public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
-    User user = userService.findByEmail(principal.getName());
+    
+    @PostMapping("/song/new")
+    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("fileImage") MultipartFile fileImage, Principal principal, Model model){
+        User user = userService.findByEmail(principal.getName());
 
-    if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
-        model.addAttribute("error", "Por favor, verifique los campos");
-        setUserYCategorias(model, user);
-        return "addSongs.jsp";
+        if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
+            model.addAttribute("error", "Por favor, verifique los campos");
+            setUserYCategorias(model, user);
+            return "addSongs.jsp";
 
-    }
-
-    else {  
-            String url = "src/main/resources/static/users/"+user.getId()+"/";
-            System.out.println(url);
+        }
+      
+        else {
+            // subir cancion
+            String url = "beats/"+user.getId()+"/";
             beatService.uploadBeat(user, file, url);
             Beat beatNew = beatService.createOrUpdateThing(beat);
             beatNew.setuCreador(user); 
             beatNew.setUrl(url+file.getOriginalFilename());
+            // subir imagen
+            String urlImage = "beatsImage/"+user.getId()+"/";
+            beatService.uploadBeatImage(fileImage, urlImage);
+            beatNew.setImageUrl(urlImage+fileImage.getOriginalFilename());
+            // guardar beat
             beatService.createOrUpdateThing(beatNew);
             return "redirect:/profile/"+user.getId();
             // model.addAttribute("listaCategories", listaCategories);

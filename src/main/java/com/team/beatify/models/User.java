@@ -47,7 +47,7 @@ public class User extends BaseModel{
 	private String passwordConfirmation;
 
 	//opcional
-	//debería tener un tamaño máximo?
+	@Size(max = 255, message = "Debe tener máximo 255 caracteres")
 	private String descripcion;
 
 	private String url;
@@ -69,15 +69,7 @@ public class User extends BaseModel{
 
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
 	private List<Message> listaMessagesFromUsers;
-
-	// @ManyToMany(fetch = FetchType.LAZY)
-    // @JoinTable(
-    //     name = "messages", 
-    //     joinColumns = @JoinColumn(name = "user_id"), 
-    //     inverseJoinColumns = @JoinColumn(name = "beat_id")
-    // )
-    // private List<Beat> beatsMessages;
-
+	
 	//----------------------------------------------------------------------------------------//
 	//relacion 1:n beats//
 	@OneToMany(mappedBy="uCreador", fetch = FetchType.LAZY)
