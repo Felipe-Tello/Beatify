@@ -91,7 +91,7 @@
                     </li>
                 </ul>
                 <a href="/dashboard" class="btn btn-outline-light alinear float-end">Volver atrás</a>
-                <img src="${beat.imageUrl}" alt="" width="300" height="200">
+                <img src="/${beat.imageUrl}" alt="" width="300" height="200">
                 <div class="alinear titulo">
                     <h1>Titulo: <c:out value="${beat.title}"></c:out></h1>
                     <h1>Author: <c:out value="${beat.uCreador.firstName}"></c:out></h1>
