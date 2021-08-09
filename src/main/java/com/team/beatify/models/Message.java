@@ -16,7 +16,7 @@ public class Message extends BaseModel{
     //ver mensajes predeterminados
     @NotNull(message = "El campo no puede ser nulo")
     @NotBlank(message = "El campo no puede estar en blanco")
-    @Size(min = 1, max = 255, message = "Debe tener entre 1 y 255 caracteres")
+    @Size(min = 1, max = 255, message = "Debe tener 255 caracteres máximo")
     private String comment;
 
     //----------------------------------------------------------------------------------------//
