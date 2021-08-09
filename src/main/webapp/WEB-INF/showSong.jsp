@@ -20,112 +20,115 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title><c:out value="${beat.title}"></c:out></title>
 </head>
-<body>
-    <div id="contenedor">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container-fluid">
-                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
-    
-                <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <c:if test="${permiso == true}">
-                                    <a href="/admin" class="nav-link">Página de administrador</a>
-                                </c:if>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Categorías
-                                </a>
-                                <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
-                                    <!-- ver esta wa -->
-                                    <c:forEach items="${listaCategories}" var="lc">
-                                        <li class="nav-item">
-                                            <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
-                            </li>
-                            <li class="nav-item">
-                                <form  method="POST" action="/logout">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
-                                </form>
-                            </li>
-                            <li class="nav-item">
-                        </ul>
-                        <form action="/search" class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
-                            <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
-                        </form>
-                    </div>
+<body id="contenedor">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <c:if test="${permiso == true}">
+                                <a href="/admin" class="nav-link">Página de administrador</a>
+                            </c:if>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
+                                <!-- ver esta wa -->
+                                <c:forEach items="${listaCategories}" var="lc">
+                                    <li class="nav-item">
+                                        <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+                        </li>
+                        <li class="nav-item">
+                            <form  method="POST" action="/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                    </ul>
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
+                    </form>
                 </div>
             </div>
-        </nav>
-        <main role="main" class="container contenedordos">
-            <div  class="abajo">
-                <ul class="float-start uldos alinear lista">
-                    <li>
-                        <p class="text-right">
-                            <a href="/dashboard" class="btn btn-outline-light sombra">Menú</a>
-                        </p>
-                    </li>
-                    <li>
-                        <c:if test="${userActual.id == beat.uCreador.id}">
-                            <a href="/song/${beat.id}/edit" class="btn btn-outline-light sombra">Editar</a>
-                        </c:if>
-                    </li>
-                </ul>
-                <a href="/dashboard" class="btn btn-outline-light alinear float-end">Volver atrás</a>
-                <img src="${beat.imageUrl}" alt="" width="300" height="200">
-                <div class="alinear titulo">
-                    <h1>Titulo: <c:out value="${beat.title}"></c:out></h1>
-                    <h1>Author: <c:out value="${beat.uCreador.firstName}"></c:out></h1>
-                    <h1>cost: <c:out value="${beat.cost}"></c:out></h1>
-                </div>
-                <div class="audio sombra bg-dark float-center">
-                    <audio controls>
-                        <source src="${beat.url}" type="audio/ogg">
-                        <source src="${beat.url}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div>
-                    <div class="alinear addcomentario">
-                        <h4>Add comment:</h4>
-                        <form:form action="" method="post" modelAttribute="messageModel">
-                            <p>
-                                <form:label path="comment"></form:label>
-                                <form:errors path="comment"/>
-                                <form:textarea path="comment" name="content" cols="20" rows="1" class="bg-dark letra"></form:textarea>
-                            </p>
-                            <input type="submit" value="Submit" class="btn btn-outline-light"/>
-                        </form:form>
-                    </div>
-                    <div class="float-center text-center alinear">
-                        <h1>Message Wall</h1>
-                        <p>
-                            <textarea readonly rows="8" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
-                        </p>
-                    </div>
-                </div>
+        </div>
+    </nav>
+
+
+    <main role="main" class="container contenedorMain">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <img src="/${beat.imageUrl}" id="imgSong" class="img-thumbnail" alt="imgBeat">
             </div>
-        </main>
-    </div>
+            <div class="col-md-7 text-center">
+                <h1 class="fst-italic"><c:out value="${beat.title}"></c:out></h1>
+                <h3>
+                    <a href="/profile/${beat.uCreador.id}" class="text-decoration-none linkUsuario"> <c:out value="${beat.uCreador.firstName}"></c:out> </a>
+                </h3>
+                <h4 class="text-white-50">$<c:out value="${beat.cost}"></c:out> CLP</h4>
+            </div>
+            <div class="col-md-2 text-center">
+                <c:if test="${userActual.id == beat.uCreador.id}">
+                    <a href="/song/${beat.id}/edit" class="btn btn-outline-light sombra w-75">Editar</a>
+                </c:if>
+
+                <c:if test="${userActual.id != beat.uCreador.id && !beat.wishlistuser.contains(userActual)}">
+                    <a href="/addwishlist/${beat.id}?ruta=song/${beat.id}" class="btn btn-outline-light sombra w-75">Añadir al carro</a>
+                </c:if>
+                <c:if test="${userActual.id != beat.uCreador.id && beat.wishlistuser.contains(userActual)}">
+                    <a href="/removewishlist/${beat.id}?ruta=song/${beat.id}" class="btn btn-outline-light sombra w-75">Remover del carro</a>
+                </c:if>
+            </div>
+        </div>
+
+        <div class="audio sombra bg-dark">
+            <audio controls class="w-100">
+                <source src="/${beat.url}" type="audio/ogg">
+                <source src="/${beat.url}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="w-100 mt-4">
+            <h2 class="text-center">Comentarios</h2>
+            <textarea readonly rows="8" class="bg-dark letra w-100 p-2"><c:out value="${data}"/></textarea>
+        </div>
+
+        <div class="row mt-3">
+            <h4>Agregar comentario:</h4>
+            <form:form action="" method="post" modelAttribute="messageModel" class="formulario">
+
+                <form:label path="comment"></form:label>
+                <form:errors path="comment"/>
+                <form:textarea path="comment" name="content" rows="2" class="bg-dark letra inputComentario"></form:textarea>
+
+                <input type="submit" value="Comentar" class="btn btn-outline-light botonComentar"/>
+            </form:form>
+        </div>
+        
+    </main>
 
 
     <footer>
@@ -137,7 +140,7 @@
 				</div>
 				<div class="espacio letra col-md-4 col-lg-3">
 					<h6>SERVICIO AL CLIENTE</h6>
-					<ul class="lista">
+					<ul>
 						<li>Acerca de</li>
 						<li>Términos y Condiciones</li>
 						<li>Privacidad y Seguridad</li>
@@ -148,7 +151,7 @@
 				</div>
 				<div class="espacio letra col-md-4 col-lg-3">
 					<h6>COMUNIDAD</h6>
-					<ul class="lista">
+					<ul>
 						<li>Servicio para Artistas</li>
 						<li>Publicidad</li>
 						<li>Proveedores</li>

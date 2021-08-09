@@ -81,36 +81,44 @@
                 </div>
             </div>
         </nav>
-        <main role="main" class="container contenedordos tabla">
-            <div class="abajo">
-                <table class="table table-dark table-sm table-responsive sombra" >
-                    <thead>
-                        <tr>
-                            <th>Autor</th>
-                            <th>Titulo</th>
-                            <th>Price</th>
-                            <th>Reproductor</th>
-                            <th>Wish List</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${searchword}" var="lb">
-                        <tr>
-                            <td><c:out value="${lb.uCreador.firstName}"/></td>
-                            <td><c:out value="${lb.title}"/></td>
-                            <td>$ <c:out value="${lb.cost}" /></td>
-                            <td>
-                                <audio controls src="${lb.url}"  class="btn btn-dark">
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </td>
-                            <td><a href="/removewishlist/${lb.id}?ruta=wishlist" class="btn btn-outline-light">Remove from wish list</a></td>
-                        </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+
+        <c:if test="${empty searchword}">
+            <h1 class="text-white text-center">Sin resultados</h1>
+        </c:if>
+
+        <c:if test="${not empty searchword}">
+            <main role="main" class="container contenedordos tabla">
+                <div class="abajo">
+                    <table class="table table-dark table-sm table-responsive sombra" >
+                        <thead>
+                            <tr>
+                                <th>Autor</th>
+                                <th>Titulo</th>
+                                <th>Price</th>
+                                <th>Reproductor</th>
+                                <th>Wish List</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${searchword}" var="lb">
+                            <tr>
+                                <td><c:out value="${lb.uCreador.firstName}"/></td>
+                                <td><c:out value="${lb.title}"/></td>
+                                <td>$ <c:out value="${lb.cost}" /></td>
+                                <td>
+                                    <audio controls src="${lb.url}"  class="btn btn-dark">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </td>
+                                <td><a href="/removewishlist/${lb.id}?ruta=wishlist" class="btn btn-outline-light">Remove from wish list</a></td>
+                            </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </c:if>
+        
     </div>
 
     <footer>
