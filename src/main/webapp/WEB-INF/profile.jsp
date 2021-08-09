@@ -160,7 +160,7 @@
                                 <a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
                             </td>
                             <td>
-                                <audio controls="" src="${lb.url}" class="btn btn-dark">
+                                <audio controls="" src="/${lb.url}" class="btn btn-dark">
                                     Your browser does not support the audio element.
                                 </audio>
                             </td>
