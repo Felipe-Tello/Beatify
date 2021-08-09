@@ -21,7 +21,7 @@
     <title>Añadir Beat</title>
 </head>
 
-<body id="contenedor" class="monitos">
+<body id="contenedor">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
@@ -95,17 +95,25 @@
             </c:if>
 
             <form action="" enctype="multipart/form-data" method="POST">
-                <input  class="form-control" type="file" name="file" accept=".AAC, .WMA, .WAV, .MP4, .MP3, .FLAC, .M4A">
-                <input  class="form-control" type="file" name="fileImage" accept=".jpg, .jpeg, .png">
+
+                <div class="form-group">
+                    <label for="pistaMusical">MP3/Audio <span class="text-danger">*</span> </label>
+                    <input id="pistaMusical"  class="form-control" type="file" name="file" accept=".AAC, .WMA, .WAV, .MP4, .MP3, .FLAC, .M4A">
+                </div>
+ 
+                <div class="form-group">
+                    <label for="imgDisco">Imagen de portada</label>
+                    <input id="imgDisco" class="form-control" type="file" name="fileImage" accept=".jpg, .jpeg, .png">
+                </div>
 
                 <form:form method="POST" action="" modelAttribute="modelBeat">
                     <div class="form-group">
-                        <form:label path="title">Título</form:label>
+                        <form:label path="title">Título <span class="text-danger">*</span></form:label>
                         <form:input class="form-control" path="title" placeholder="Título del beat"/>
                         <small class="text-danger"><form:errors path="title"/></small>
                     </div>
                     <div class="form-group">
-                        <form:label path="cost">Precio (CLP) </form:label>
+                        <form:label path="cost">Precio (CLP) <span class="text-danger">*</span></form:label>
                         <div class="input-group">
                             <span class="input-group-text">$</span>
                             <form:input type="number" class="form-control" path="cost" step="100" min="0"/>
@@ -113,7 +121,7 @@
                         <small class="text-danger d-block"><form:errors path="cost"/></small>
                     </div>
                     <div class="form-group">
-                        <form:label path="categories" class="d-block">Añadir Categorías</form:label>
+                        <form:label path="categories" class="d-block">Añadir Categorías <span class="text-danger">*</span></form:label>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               Selecciona categorías
@@ -142,7 +150,7 @@
 
 			<div class="row">
 				<div id="small" class="col-md-3 col-lg-2">
-					<img id="logofooter" class="espacio" src="/css/logoblancoynegro.png" alt="logoFooter">
+					<img id="logofooter" class="espacio" src="/css/images/logoblancoynegro.png" alt="logoFooter">
 				</div>
 				<div class="espacio letra col-md-4 col-lg-3">
 					<h6>SERVICIO AL CLIENTE</h6>
@@ -166,10 +174,10 @@
 				</div>
 				<div class="espacio letra redes text-center col-lg-4">
 					<h6>Síguenos en:</h6>
-					<img class="logoredes imagen" src="/css/facebook.png" alt="logoFacebook">
-					<img class="logoredes imagen" src="/css/twitter.png" alt="logoTwitter">
-					<img class="logoredes imagen" src="/css/youtube.png" alt="logoYoutube">
-					<img class="logoredes imagen" src="/css/discord.png" alt="logoDiscord">
+					<img class="logoredes imagen" src="/css/images/facebook.png" alt="logoFacebook">
+					<img class="logoredes imagen" src="/css/images/twitter.png" alt="logoTwitter">
+					<img class="logoredes imagen" src="/css/images/youtube.png" alt="logoYoutube">
+					<img class="logoredes imagen" src="/css/images/discord.png" alt="logoDiscord">
 					<h6>CONTÁCTANOS</h6>
 					<h6>Beatify@gmail.com</h6>
 				</div>
