@@ -21,7 +21,7 @@
 </head>
 <body id="imagenFondo">
     <div id="formulario" class="mt-5 mb-5">
-        <img class="iconoSup" src="/css/images/BTLogo.png" alt="">
+        <img class="iconoSup" src="/css/images/BTLogo.png" alt="BtLogo">
         <h1 class="text-center">Regístrate</h1>
         <form:form method="POST" action="" modelAttribute="user">
             <div class="form-group">
