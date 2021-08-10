@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import com.team.beatify.models.Beat;
 import com.team.beatify.models.Category;
@@ -46,8 +45,14 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Principal principal, Model model, HttpSession session) {
+    public String home(Principal principal, Model model) {
         model.addAttribute("usuarioLogeado", principal);
+
+        if(principal != null) {
+            User userActual = userService.findByEmail(principal.getName());
+            setUserActualYCategoriasYPermiso(userActual, model);
+        }
+
         return "inicio.jsp";
     }
 
@@ -63,20 +68,16 @@ public class HomeController {
         List<Beat> listaBeats = beatService.listaDeBeatsAsc();
         List<Beat> regionBeats = new ArrayList<>();
         Category category = categoryService.findThingById(2L); 
-        List<Category> listaCategories = categoryService.allThings();
         for (Beat beat : listaBeats) {
             if(beat.getuCreador().getRegion().equals(userActual.getRegion())){
                 regionBeats.add(beat);
             }
         }
         //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
-        if(userService.hasAdmin(userActual)) {
-            model.addAttribute("permiso", true);
-        }
-        model.addAttribute("listaCategories", listaCategories);
+
+        setUserActualYCategoriasYPermiso(userActual, model);
         model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
-        model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
         return "dashboard.jsp";
     }
@@ -85,9 +86,7 @@ public class HomeController {
     public String showCategory(@PathVariable("idq")Long idq, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         Category category = categoryService.findThingById(idq);
-        List<Category> listaCategories = categoryService.allThings();
-        model.addAttribute("listaCategories", listaCategories);
-        model.addAttribute("userActual", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
         model.addAttribute("category", category);
         return "categories.jsp";
     }
@@ -175,16 +174,11 @@ public class HomeController {
     public String showWishlist(@PathVariable("id")Long id, Model model, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
         List<Beat> listadeseados = userActual.getWishlistbeats();
-        List<Category> listaCategories = categoryService.allThings();
         int total = 0;
         for (Beat beat : listadeseados) {
             total += beat.getCost();
         }
-        if(userService.hasAdmin(userActual)) {
-            model.addAttribute("permiso", true);
-        }
-        model.addAttribute("listaCategories", listaCategories);
-        model.addAttribute("userActual", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
         model.addAttribute("wishlist", listadeseados);
         model.addAttribute("total", total);
         return "wishlist.jsp";
@@ -234,7 +228,7 @@ public class HomeController {
     public String showDetails(@PathVariable("idCompra") Long id, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         List<Compra> listaCompra = userActual.getListaDeCompras();
-        model.addAttribute("userActual", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
         model.addAttribute("listaCompra", listaCompra);
         return "details.jsp";
     }
@@ -244,12 +238,20 @@ public class HomeController {
 	public String search(@RequestParam("busqueda")String busqueda, Principal principal,Model model) {
         User userActual = userService.findByEmail(principal.getName());
 		List<Beat> searchword = beatService.busqueda(busqueda);
-        List<Category> listaCategories = categoryService.allThings();
-        model.addAttribute("listaCategories", listaCategories);
-        model.addAttribute("userActual", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
 		model.addAttribute("searchword", searchword);
 		model.addAttribute("artist", busqueda);
 		return "search.jsp";
 	}
+
+    public void setUserActualYCategoriasYPermiso(User usuario, Model model) {
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
+        model.addAttribute("userActual", usuario);
+
+        if(userService.hasAdmin(usuario)) {
+            model.addAttribute("permiso", true);
+        }
+    }
 }
 
