@@ -44,25 +44,20 @@ public class UserController {
     @GetMapping("/profile/{userid}")
     public String showProfile(@PathVariable("userid") Long userid, Principal principal, Model model, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
-        List<Category> listaCategories = categoryService.allThings();
         User user = userService.findThingById(userid);
         if(user == null) {
             flash.addFlashAttribute("errorUser", "Usuario no encontrado");
             return "redirect:/dashboard";
-        }
-        if(userService.hasAdmin(userActual)) {
-            model.addAttribute("permiso", true);
         }
         List<Beat> listaBeats = user.getBeatsDelCreador();
         int respectTotal = 0;
         for (Beat beat : listaBeats) {
             respectTotal += beat.getUsersLike().size();
         }
-        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("respectTotal", respectTotal);
         model.addAttribute("user", user);
-        model.addAttribute("userActual", userActual);
         model.addAttribute("listaBeats", listaBeats);
+        setUserActualYCategoriasYPermiso(userActual, model);
         // String url = "src/main/resources/static/users/"+user.getId()+"/";
         // File folder = new File(url);
         // System.out.println(url);
@@ -74,7 +69,6 @@ public class UserController {
     @PostMapping("/profile/{userid}")
     public String showProfile(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @RequestParam("beatId")Long id, Principal principal){
         User user = userService.findByEmail(principal.getName());
-        
         return "redirect:/profile/"+ user.getId();
     }
 
@@ -92,7 +86,7 @@ public class UserController {
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
         for (Message message2 : listaMessages) {
-            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
+            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n";
         }
         int respectTotal = 0;
         for (Beat beat2 : listaBeats) {
@@ -100,11 +94,11 @@ public class UserController {
         }
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("respectTotal", respectTotal);
-        model.addAttribute("userActual", userActual);
         model.addAttribute("user", user);
         model.addAttribute("listaBeats", listaBeats);
         model.addAttribute("data", dataString);
         model.addAttribute("beat", beat);
+        setUserActualYCategoriasYPermiso(userActual, model);
         return "profileComment.jsp";
     }
 
@@ -132,13 +126,12 @@ public class UserController {
         if(usuario == null || usuario.getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
-        model.addAttribute("userId", usuario.getId());
         model.addAttribute("user", usuario);
+        setUserActualYCategoriasYPermiso(usuario, model);
         return "editProfile.jsp";
     }
 
 
-    //ver lo de descripcion de usuario, falta agregarlo
     //nombre, apellido, región, descripcion.
     @PutMapping("/profile/{userid}/edit")
     public String editProfile(@Valid @ModelAttribute("user") User user, BindingResult result, @PathVariable("userid") Long userId, Model model) {
@@ -146,7 +139,7 @@ public class UserController {
         User usuario = userService.findThingById(userId);
 
         if(result.hasErrors()) {
-            model.addAttribute("userId", usuario.getId());
+            setUserActualYCategoriasYPermiso(usuario, model);
             return "editProfile.jsp";
         }
 
@@ -170,4 +163,13 @@ public class UserController {
         return user;
     }
 
+    public void setUserActualYCategoriasYPermiso(User usuario, Model model) {
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
+        model.addAttribute("userActual", usuario);
+
+        if(userService.hasAdmin(usuario)) {
+            model.addAttribute("permiso", true);
+        }
+    }
 }

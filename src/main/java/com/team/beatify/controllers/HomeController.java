@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.team.beatify.models.Beat;
 import com.team.beatify.models.Category;
 import com.team.beatify.models.Compra;
@@ -44,8 +46,9 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home() {
-        return "redirect:/dashboard";
+    public String home(Principal principal, Model model, HttpSession session) {
+        model.addAttribute("usuarioLogeado", principal);
+        return "inicio.jsp";
     }
 
     //si es q no hay nada en la wishlist, un id nulo, entonces redireccionar(modificar)
@@ -131,6 +134,9 @@ public class HomeController {
         else if (ruta.equals("profileComment")){
             return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
         }
+        else if (ruta.equals("song")) {
+            return "redirect:/song/" + beat.getId();
+        }
         else{
             return "redirect:/profile/"+ beat.getuCreador().getId();
         }
@@ -152,6 +158,9 @@ public class HomeController {
         }
         else if (ruta.equals("profileComment")){
             return "redirect:/profile/"+ beat.getuCreador().getId() +"/"+ beat.getId();
+        }
+        else if (ruta.equals("song")) {
+            return "redirect:/song/" + beat.getId();
         }
         else{
             return "redirect:/profile/"+ userActual.getId();
