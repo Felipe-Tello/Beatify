@@ -34,7 +34,12 @@
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <c:if test="${usuarioLogeado == null}">
+                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">¡Bienvenido/a!</h5>
+                    </c:if>
+                    <c:if test="${usuarioLogeado != null}">
+                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    </c:if>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
@@ -46,22 +51,51 @@
                             </c:if>
 
                         </li>
-                        <li class="nav-item">
-                            <form  method="POST" action="/logout">
-                                <c:if test="${usuarioLogeado != null}">
-                                    <form  method="POST" action="/logout">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
-                                    </form>
+
+                        <c:if test="${usuarioLogeado != null}">
+                            <li class="nav-item">
+                                <c:if test="${permiso == true}">
+                                    <a href="/admin" class="nav-link">Página de administrador</a>
                                 </c:if>
-                            </form>
-                        </li>
-                        <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
+                                <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Categorías
+                                </a>
+                                <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
+                                    <c:forEach items="${listaCategories}" var="lc">
+                                        <li class="nav-item">
+                                            <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+                            </li>
+                            <li class="nav-item">
+                                <form  method="POST" action="/logout">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
+                                </form>
+                            </li>
+
+                        </c:if>
                     </ul>
+                    <c:if test="${usuarioLogeado != null}">
+                        <form action="/search" class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                            <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
+                        </form>
+                    </c:if>
                 </div>
             </div>
         </div>
     </nav>
+    
     <main role="main" class="container abajo">
         <div class="text-center" style="color: rgb(255, 255, 255);">
             <h1 class="tipoletra">Escucha y Crea</h1>
