@@ -10,30 +10,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/editProfile.css">
     <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <title>Editar perfil</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-md fixed-top barra bg-dark">
-        <a href="/dashboard"><img id="icono" src="/css/5 sin título_20210721162541.png" alt="dashboard"></a>
+<body id="fondo">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <ul class="nav-menu">
-                <li class="alinear">
-                    <a id="botonbarra" class="btn btn-outline-light" href="/profile/${userId}">Volver atrás</a>
-                </li>
-                <li class="alinear">
-                    <a id="botonbarra" class="btn btn-outline-light" href="/dashboard">Menú</a>
-                </li>
-            </ul>
+            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <c:if test="${permiso == true}">
+								<a href="/admin" class="nav-link">Página de administrador</a>
+							</c:if>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Categorías
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
+								<!-- ver esta wa -->
+								<c:forEach items="${listaCategories}" var="lc">
+									<li class="nav-item">
+										<a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
+									</li>
+								</c:forEach>
+                            </ul>
+                        </li>
+						<li class="nav-item">
+							<a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+						</li>
+                        <li class="nav-item">
+                            <form  method="POST" action="/logout">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
+							</form>
+                        </li>
+                    </ul>
+                    
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+
+                </div>
+            </div>
         </div>
     </nav>
-    <div id="bajartabla">
+
+
+    <div id="bajartabla" class="container-fluid">
         <div id="tablaEdit">
             <h1>Editar perfil</h1>
 
@@ -42,25 +90,25 @@
                 <input type="hidden" name="_method" value="put">
         
                 <div class="form-group">
-                    <form:label path="firstName">Nombre:</form:label>
+                    <form:label path="firstName">Nombre</form:label>
                     <form:input class="form-control" placeholder="Nombre" path="firstName"/>
                     <small class="text-danger"><form:errors path="firstName"/></small>
                 </div>
                 <div class="form-group">
-                    <form:label path="lastName">Apellido:</form:label>
+                    <form:label path="lastName">Apellido</form:label>
                     <form:input class="form-control" placeholder="Apellido" path="lastName"/>
                     <small class="text-danger"><form:errors path="lastName"/></small>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="region">Ciudad/Comuna:</form:label>
+                    <form:label path="region">Ciudad</form:label>
                     <form:input class="form-control" placeholder="Ciudad/Comuna" path="location"/>
                     <small class="text-danger"><form:errors path="location"/></small>
                 </div>
 
                 <div class="form-group">
                     <!-- cambiar a una lista dsps -->
-                    <form:label for="exampleFormControlSelect1" path="region">Región</form:label>
+                    <form:label path="region">Región</form:label>
                     <form:select class="form-select" path="region"> 
                         <form:option value="Tarapacá">Tarapacá (I)</form:option>
                         <form:option value="Antofagasta">Antofagasta (II)</form:option>
@@ -82,21 +130,21 @@
                     <small class="text-danger"><form:errors path="region"/></small>
                 </div>
 
-                    <div class="form-group mb-2">
-                        <form:label for="staticEmail2" class="sr-only" path="descripcion">Descripción:</form:label>
-                        <form:textarea class="form-control" placeholder="Añadir descripción (opcional)" path="descripcion"/>
-                        <small class="text-danger"><form:errors path="descripcion"/></small>
-                    </div>
-                    <div class="form-group mb-2">
-                        <form:input class="form-control" type="hidden" path= "email" value = "${user.email}"/>
-                    </div>
-                    <div>
-                        <form:input type = "hidden" class="form-control" path="password" value = "${user.password}"/>
-                    </div>
-                    <div>
-                        <form:input type = "hidden" class="form-control" path="passwordConfirmation" value = "${user.passwordConfirmation}"/>
-                    </div>
-                <input id="botonRegis" class="btn btn-light w-100" type="submit" value="Confirmar edición"/>
+                <div class="form-group">
+                    <form:label path="descripcion">Descripción</form:label>
+                    <form:textarea class="form-control" placeholder="Añadir descripción (opcional)" path="descripcion"/>
+                    <small class="text-danger"><form:errors path="descripcion"/></small>
+                </div>
+                
+                <form:input class="form-control" type="hidden" path= "email" value = "${user.email}"/>
+                <form:input type = "hidden" class="form-control" path="password" value = "${user.password}"/>
+                <form:input type = "hidden" class="form-control" path="passwordConfirmation" value = "${user.passwordConfirmation}"/>
+
+                <div class="form-group botonesNav">
+                    <a href="/profile/${userActual.id}" class="btn btn-outline-info opacity-75 botonVolver" >Volver atrás</a>
+                    <input class="btn btn-outline-light w-50" type="submit" value="Confirmar"/>
+                </div>
+
             </form:form>
         </div>
     </div>

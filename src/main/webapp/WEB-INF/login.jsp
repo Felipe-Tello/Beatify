@@ -21,7 +21,9 @@
 </head>
 <body id="imagenFondo">
     <div class="login mt-5 mb-5">
-        <img class="iconoSup text-center" src="/css/images/BTLogo.png" alt="">
+        <a href="/">
+            <img class="iconoSup" src="/css/images/BTLogo.png" alt="logoBT">
+        </a>
         <h1 class="text-center mb-3">Ingresar</h1>
         <c:if test="${error != null}">
             <small class="error text-center">

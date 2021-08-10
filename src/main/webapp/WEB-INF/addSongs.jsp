@@ -69,7 +69,6 @@
                                 <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
                             </form>
                         </li>
-                        <li class="nav-item">
                     </ul>
                     
                     <form action="/search" class="d-flex">

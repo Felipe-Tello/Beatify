@@ -3,6 +3,7 @@ package com.team.beatify.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.team.beatify.models.Beat;
@@ -49,7 +50,6 @@ public class SongController {
     public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(id);
-        List<Category> listaCategories = categoryService.allThings();
         if(beat == null) {
             flash.addFlashAttribute("errorSong", "Beat no encontrado");
             return "redirect:/dashboard";
@@ -57,12 +57,11 @@ public class SongController {
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
         for (Message message2 : listaMessages) {
-            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n"+"-------------------------------"+"\n";
+            dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n";
         }
-        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("data", dataString);
-        model.addAttribute("userActual", userActual);
         model.addAttribute("beat", beat);
+        setUserActualYCategoriasYPermiso(userActual, model);
         return "showSong.jsp";
     }
     @PostMapping("/song/{id}")
@@ -77,7 +76,7 @@ public class SongController {
 
     //editar cancion
     @GetMapping("/song/{songid}/edit")
-    public String editSongPage(Principal principal, Model model, @PathVariable("songid") Long songId) {
+    public String editSongPage(Principal principal, Model model, @PathVariable("songid") Long songId, HttpSession session) {
 
         Beat beat = beatService.findThingById(songId);
         User usuarioLogeado = encontrarUsuario(principal);
@@ -85,22 +84,22 @@ public class SongController {
         if(beat == null || beat.getuCreador().getId() != usuarioLogeado.getId()) {
             return "redirect:/dashboard";
         }
-        model.addAttribute("userActual", usuarioLogeado);
+        session.setAttribute("beatCategories", beat.getCategories());
         model.addAttribute("beat", beat);
-        model.addAttribute("idBeat", beat.getId());
-        setUserYCategorias(model, usuarioLogeado);
+        model.addAttribute("idBeat", beat.getId()); //para el boton de volver atras
+        setUserActualYCategoriasYPermiso(usuarioLogeado, model);
         return "editSong.jsp";
     }
 
     //campos editables: titulo, costo, añadir categorias?
     @PutMapping("/song/{songid}/edit")
-    public String editSong(@Valid @ModelAttribute("beat") Beat beat, BindingResult result, @PathVariable("songid") Long songId, Model model, Principal principal) {
+    public String editSong(@Valid @ModelAttribute("beat") Beat beat, BindingResult result, @PathVariable("songid") Long songId, Model model, Principal principal, HttpSession session) {
 
         Beat beatUpdated = beatService.findThingById(songId);
         User usuarioLogeado = encontrarUsuario(principal);
 
         if(result.hasErrors() || beat.getCategories().size() <= 0) {
-            setUserYCategorias(model, usuarioLogeado);
+            setUserActualYCategoriasYPermiso(usuarioLogeado, model);
             model.addAttribute("error", "Por favor, verifique los campos");
             model.addAttribute("idBeat", beatUpdated.getId());
             return "editSong.jsp";
@@ -116,7 +115,7 @@ public class SongController {
     }
 
     @GetMapping("/song/new")
-    public String upload(@ModelAttribute("modelBeat")Beat beat, Model model, Principal principal){
+    public String upload(@ModelAttribute("modelBeat") Beat beat, Model model, Principal principal){
         User usuario = encontrarUsuario(principal);
         User userActual = userService.findByEmail(principal.getName());
         setUserYCategorias(model, usuario);
@@ -206,5 +205,15 @@ public class SongController {
         List<Category> listaCategories = categoryService.allThings();
         model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("usuario", user);
+    }
+
+    public void setUserActualYCategoriasYPermiso(User usuario, Model model) {
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
+        model.addAttribute("userActual", usuario);
+
+        if(userService.hasAdmin(usuario)) {
+            model.addAttribute("permiso", true);
+        }
     }
 }

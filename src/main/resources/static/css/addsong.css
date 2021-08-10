@@ -23,8 +23,8 @@
     border-radius: 5px;
     padding: 35px;
     box-shadow: #120033 -8px 8px 20px;
-    margin-top: 4%;
-    margin-bottom: 4%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     position: relative;
     z-index: 1;
 }
@@ -57,6 +57,12 @@ label{
     position: absolute;
 }
 
+.contenedorMonitosEditar {
+    margin-top: 1%;
+    margin-right: 4%;
+    position: absolute;
+}
+
 .boton {
     width: 48%;
 }
@@ -64,6 +70,10 @@ label{
 .botonesNav {
     display: flex;
     justify-content: space-between;
+}
+
+.letraGris {
+    color: #39a2d3;
 }
 
 @media (max-width: 576px) {
@@ -96,7 +106,7 @@ label{
 
 @media (max-width: 768px) {
     
-    .contenedorMonitos {
+    .contenedorMonitos, .contenedorMonitosEditar {
         display: none;
         margin: 0;
     }

@@ -95,10 +95,10 @@
                 </c:if>
 
                 <c:if test="${userActual.id != beat.uCreador.id && !beat.wishlistuser.contains(userActual)}">
-                    <a href="/addwishlist/${beat.id}?ruta=song/${beat.id}" class="btn btn-outline-light sombra w-75">Añadir al carro</a>
+                    <a href="/addwishlist/${beat.id}?ruta=song" class="btn btn-outline-light sombra w-75">Añadir al carro</a>
                 </c:if>
                 <c:if test="${userActual.id != beat.uCreador.id && beat.wishlistuser.contains(userActual)}">
-                    <a href="/removewishlist/${beat.id}?ruta=song/${beat.id}" class="btn btn-outline-light sombra w-75">Remover del carro</a>
+                    <a href="/removewishlist/${beat.id}?ruta=song" class="btn btn-outline-light sombra w-75">Remover del carro</a>
                 </c:if>
             </div>
         </div>
