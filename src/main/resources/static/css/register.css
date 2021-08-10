@@ -1,4 +1,7 @@
-
+*{
+    margin: 0px;
+    padding: 0px;
+}
 #formulario{
     background-color: #272727;
     margin: 0 auto;

@@ -87,6 +87,7 @@ public class UserController {
         User userActual = userService.findByEmail(principal.getName());
         User user = userService.findThingById(userid);
         Beat beat = beatService.findThingById(beatid);
+        List<Category> listaCategories = categoryService.allThings();
         List<Beat> listaBeats = user.getBeatsDelCreador();
         List<Message> listaMessages = beat.getListaMessagesFromBeat();
         String dataString = "";
@@ -97,6 +98,7 @@ public class UserController {
         for (Beat beat2 : listaBeats) {
             respectTotal += beat2.getUsersLike().size();
         }
+        model.addAttribute("listaCategories", listaCategories);
         model.addAttribute("respectTotal", respectTotal);
         model.addAttribute("userActual", userActual);
         model.addAttribute("user", user);

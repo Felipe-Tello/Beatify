@@ -90,6 +90,7 @@
         </div>
         <div class="row tabla">
             <div class="col-12 col-sm-12">
+                <c:if test="${wishlist.size() != 0}">
                 <table class="table table-dark table-sm volver" >
                     <thead>
                         <tr>
@@ -116,6 +117,8 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                </c:if>
+                <c:if test="${wishlist.size() == 0}">
                 <table class="table table-dark table-sm volver" >
                     <thead>
                         <tr>
@@ -128,6 +131,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </c:if>
             </div>
         </div>
         <h1>Total a pagar: <c:out value="${total}"/></h1>

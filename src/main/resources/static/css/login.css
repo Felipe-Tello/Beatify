@@ -1,4 +1,7 @@
-
+*{
+    margin: 0px;
+    padding: 0px;
+}
 .login{
     background-color: #272727;
     /* border: solid black; */
