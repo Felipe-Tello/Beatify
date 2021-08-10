@@ -221,6 +221,7 @@ public class HomeController {
         // }
         // compra.setTotal(total);
         userActual.setWishlistbeats(new ArrayList<Beat>());
+        userService.createOrUpdateThing(userActual);
         return "redirect:/details/"+compra.getId();
     }
 

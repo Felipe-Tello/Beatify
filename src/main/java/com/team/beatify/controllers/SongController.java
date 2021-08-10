@@ -46,10 +46,11 @@ public class SongController {
     // VER CANCION//
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @GetMapping("/song/{id}")
-    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("id") Long id, Model model, Principal principal, RedirectAttributes flash){
+    @GetMapping("/song/{idSong}")
+    public String showBeat(@ModelAttribute("messageModel") Message message, @PathVariable("idSong") Long idSong, Model model, Principal principal, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(id);
+        Beat beat = beatService.findThingById(idSong);
+        List<Category> listaCategories = categoryService.allThings();
         if(beat == null) {
             flash.addFlashAttribute("errorSong", "Beat no encontrado");
             return "redirect:/dashboard";
@@ -64,10 +65,10 @@ public class SongController {
         setUserActualYCategoriasYPermiso(userActual, model);
         return "showSong.jsp";
     }
-    @PostMapping("/song/{id}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("id") Long id, Principal principal){
+    @PostMapping("/song/{idSong}")
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idSong") Long idSong, Principal principal){
         User userActual = userService.findByEmail(principal.getName());
-        Beat beat = beatService.findThingById(id);
+        Beat beat = beatService.findThingById(idSong);
         message.setBeat(beat);
         message.setUser(userActual);
         messageService.createOrUpdateThing(message);

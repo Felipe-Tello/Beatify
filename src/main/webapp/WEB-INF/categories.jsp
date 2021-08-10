@@ -78,6 +78,7 @@
         <main role="main" class="container">
             <div class="abajo">
                 <h1><c:out value="${category.genero}"/></h1>
+                <c:if test="${category.beats.size() != 0}">
                 <table class="table table-striped table-hover table-dark table-responsive sombra">
                     <thead>
                         <tr>
@@ -96,7 +97,7 @@
                                 <td><c:out value="${g.title}"/></td>
                                 <td><c:out value="${g.cost}"/></td>
                                 <td>
-                                    <audio controls src="${g.url}" class="btn btn-dark">
+                                    <audio controls src="/${g.url}" class="btn btn-dark">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </td>
@@ -113,50 +114,65 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                </c:if>
+                <c:if test="${category.beats.size() == 0}">
+                <table class="table table-dark table-sm volver" >
+                    <thead>
+                        <tr>
+                            <th>Lista de compras</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No tienes Beats en el carro de compras</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </c:if>
             </div>
         </main>
-        <footer>
-            <main role="main" class="container">
-                <div class="row">
-                    <div id="small" class="col-md-3 col-lg-2">
-                        <img id="logofooter" class="espacio" src="/css/images/logoblancoynegro.png" alt="logoFooter">
-                    </div>
-                    <div class="espacio letra col-md-4 col-lg-3">
-                        <h6>SERVICIO AL CLIENTE</h6>
-                        <ul class="lista">
-                            <li>Acerca de</li>
-                            <li>Términos y Condiciones</li>
-                            <li>Privacidad y Seguridad</li>
-                            <li>Representante Legal</li>
-                            <li>Orden de Servicio</li>
-                            <li>Bases y Promociones</li>
-                        </ul>
-                    </div>
-                    <div class="espacio letra col-md-4 col-lg-3">
-                        <h6>COMUNIDAD</h6>
-                        <ul class="lista">
-                            <li>Servicio para Artistas</li>
-                            <li>Publicidad</li>
-                            <li>Proveedores</li>
-                            <li>Inversionistas</li>
-                        </ul>
-                    </div>
-                    <div class="espacio letra redes text-center col-lg-4">
-                        <h6>Síguenos en:</h6>
-                        <img class="logoredes imagen" src="/css/images/facebook.png" alt="">
-                        <img class="logoredes imagen" src="/css/images/twitter.png" alt="">
-                        <img class="logoredes imagen" src="/css/images/youtube.png" alt="">
-                        <img class="logoredes imagen" src="/css/images/discord.png" alt="">
-                        <h6>CONTÁCTANOS</h6>
-                        <h6>Beatify@gmail.com</h6>
-                    </div>
-                    <div class="text-center espacio letra">
-                        <p>© Chile 2021 Beatify</p>
-                        <p>Legal / Centro de Privacidad / Política de privacidad / Cookies</p>
-                    </div>
-                </div>
-            </main>
-        </footer>
     </div>
+    <footer>
+        <main role="main" class="container">
+            <div class="row">
+                <div id="small" class="col-md-3 col-lg-2">
+                    <img id="logofooter" class="espacio" src="/css/images/logoblancoynegro.png" alt="logoFooter">
+                </div>
+                <div class="espacio letra col-md-4 col-lg-3">
+                    <h6>SERVICIO AL CLIENTE</h6>
+                    <ul class="lista">
+                        <li>Acerca de</li>
+                        <li>Términos y Condiciones</li>
+                        <li>Privacidad y Seguridad</li>
+                        <li>Representante Legal</li>
+                        <li>Orden de Servicio</li>
+                        <li>Bases y Promociones</li>
+                    </ul>
+                </div>
+                <div class="espacio letra col-md-4 col-lg-3">
+                    <h6>COMUNIDAD</h6>
+                    <ul class="lista">
+                        <li>Servicio para Artistas</li>
+                        <li>Publicidad</li>
+                        <li>Proveedores</li>
+                        <li>Inversionistas</li>
+                    </ul>
+                </div>
+                <div class="espacio letra redes text-center col-lg-4">
+                    <h6>Síguenos en:</h6>
+                    <img class="logoredes imagen" src="/css/images/facebook.png" alt="">
+                    <img class="logoredes imagen" src="/css/images/twitter.png" alt="">
+                    <img class="logoredes imagen" src="/css/images/youtube.png" alt="">
+                    <img class="logoredes imagen" src="/css/images/discord.png" alt="">
+                    <h6>CONTÁCTANOS</h6>
+                    <h6>Beatify@gmail.com</h6>
+                </div>
+                <div class="text-center espacio letra">
+                    <p>© Chile 2021 Beatify</p>
+                    <p>Legal / Centro de Privacidad / Política de privacidad / Cookies</p>
+                </div>
+            </div>
+        </main>
+    </footer>
 </body>
 </html>

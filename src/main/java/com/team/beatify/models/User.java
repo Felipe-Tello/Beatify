@@ -52,6 +52,8 @@ public class User extends BaseModel{
 
 	private String url;
 
+	private Boolean valid;
+
 	///ROLES USUARIO--------------------------------------------------------------------------------//
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -100,7 +102,7 @@ public class User extends BaseModel{
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String location, String region, String email, String password, String passwordConfirmation, String url, List<Compra> listaDeCompras, List<Message> listaMessagesFromUsers, List<Beat> beatsDelCreador, List<Beat> beatsLike, List<Beat> wishlistbeats) {
+	public User(String firstName, String lastName, String location, String region, String email, Boolean valid, String password, String passwordConfirmation, String url, List<Compra> listaDeCompras, List<Message> listaMessagesFromUsers, List<Beat> beatsDelCreador, List<Beat> beatsLike, List<Beat> wishlistbeats) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.location = location;
@@ -114,6 +116,7 @@ public class User extends BaseModel{
 		this.beatsLike = beatsLike;
 		this.wishlistbeats = wishlistbeats;
 		this.url = url;
+		this.valid =valid;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -244,6 +247,14 @@ public class User extends BaseModel{
 
 	public void setListaMessagesFromUsers(List<Message> listaMessagesFromUsers) {
 		this.listaMessagesFromUsers = listaMessagesFromUsers;
+	}
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
 	}	
 	
 }
