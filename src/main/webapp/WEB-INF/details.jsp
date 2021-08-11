@@ -74,6 +74,37 @@
 			</div>
 		</nav>
 		<div>
+			<c:forEach items="${listaCompra}" var="lc">
+				<h3>Fecha de compra: <c:out value="${lc.fecha}"/></h3>
+				<h3>Monto Total: <c:out value="${lc.total}"/></h3>
+				<h3>Cantidad de Beats comprados: <c:out value="${lc.beats.size()}"/></h3>
+				<table class="table table-dark table-hover volver">
+					<thead>
+						<tr>
+							<th scope="col">Título</th>
+							<th scope="col">Reproductor</th>
+							<th scope="col">Autor</th>
+							<th scope="col">Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${lc.beats}" var="bc">
+						<tr>
+							<td><c:out value="${bc.title}"/></td>
+							<td>
+								<audio controls="" src="/${bc.url}" class="btn btn-dark">
+									Your browser does not support the audio element.
+								</audio>
+							</td>
+							<td><c:out value="${bc.uCreador.firstName}"/></td>
+							<td><c:out value="${bc.cost}"/></td>
+						</c:forEach>
+						</tr>
+					</tbody>
+				</table>
+			</c:forEach>
+
+
 			<h3><c:out value="${userActual.firstName}"/> <c:out value="${userActual.lastName}"/></h3>
 			<ul>
 				<c:forEach items="${listaCompra}" var="lc">
@@ -86,9 +117,11 @@
 							</c:forEach>
 						</ul>
 						<ul>
+							<c:forEach items="${lc.beats}" var="bc">
 							<audio controls="" src="/${lb.url}" class="btn btn-dark">
 								Your browser does not support the audio element.
-							</audio>		
+							</audio>
+							</c:forEach>		
 						</ul>
 					</li>
 				</c:forEach>
