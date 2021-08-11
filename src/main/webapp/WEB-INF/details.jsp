@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/fotter.css">
 	<link rel="stylesheet" type="text/css" href="/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="/css/wishlist.css">
+	<link rel="stylesheet" type="text/css" href="/css/details.css">
     <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -103,29 +104,6 @@
 					</tbody>
 				</table>
 			</c:forEach>
-
-
-			<h3><c:out value="${userActual.firstName}"/> <c:out value="${userActual.lastName}"/></h3>
-			<ul>
-				<c:forEach items="${listaCompra}" var="lc">
-					<li>
-						<td><c:out value="${lc.total}"/></td>
-						<td><c:out value="${lc.fecha}"/></td>
-						<ul>
-							<c:forEach items="${lc.beats}" var="bc">
-								<li><c:out value="${bc.cost}"/> <c:out value="${bc.title}"/></li>
-							</c:forEach>
-						</ul>
-						<ul>
-							<c:forEach items="${lc.beats}" var="bc">
-							<audio controls="" src="/${lb.url}" class="btn btn-dark">
-								Your browser does not support the audio element.
-							</audio>
-							</c:forEach>		
-						</ul>
-					</li>
-				</c:forEach>
-			</ul>
 		</div>
 
 
