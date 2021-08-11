@@ -20,10 +20,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>Beatify</title>
 </head>
-<body>
-    <body class="fondo" background="/css/images/instruments_microphones_studio_room_record-788410.jpg!d.jpg">
+<body id="fondo">
         
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
 
@@ -96,14 +95,14 @@
         </div>
     </nav>
     
-    <main role="main" class="container abajo">
-        <div class="text-center" style="color: rgb(255, 255, 255);">
+    <div class="main">
+        <div class="text-center container-fluid" style="color: rgb(255, 255, 255);">
             <h1 class="tipoletra">Escucha y Crea</h1>
             <h2 class="tipoletrados">Pon a prueba tu lado artístico con Beatify</h2>
             <br>
             <a href="/register" class="btn btn-outline-light sombra">¡Regístrate!</a>
         </div>
-    </main>
+    </div>
     
     <footer>
         <main role="main" class="container">

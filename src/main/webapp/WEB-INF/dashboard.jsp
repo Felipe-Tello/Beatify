@@ -82,134 +82,137 @@
     </nav>
 
 	<!-- CAROUSEL 2DA VERSION -->
-	<c:if test="${not empty listaCategories}">
-		<div class="contenedorCarousel">
-			<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-				<ol class="carousel-indicators">
-					<c:forEach items="${listaCategories}" var="lc">
-						<c:if test="${lc.id == 1}">
-							<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}" class="active"></li>
-						</c:if>
-		
-						<c:if test="${lc.id != 1}">
-							<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}"></li>
-						</c:if>
-					</c:forEach>
-				</ol>
-				<div class="carousel-inner">
-					<c:forEach items="${listaCategories}" var="lc">
-						<c:if test="${lc.id == 1}">
-							<div class="carousel-item active" data-bs-interval="5000">
-								<div class="overlay-image">
-									<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
+	<div class="contenedorMain">
+		<c:if test="${not empty listaCategories}">
+			<div class="contenedorCarousel">
+				<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<ol class="carousel-indicators">
+						<c:forEach items="${listaCategories}" var="lc">
+							<c:if test="${lc.id == 1}">
+								<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}" class="active"></li>
+							</c:if>
+			
+							<c:if test="${lc.id != 1}">
+								<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}"></li>
+							</c:if>
+						</c:forEach>
+					</ol>
+					<div class="carousel-inner">
+						<c:forEach items="${listaCategories}" var="lc">
+							<c:if test="${lc.id == 1}">
+								<div class="carousel-item active" data-bs-interval="5000">
+									<div class="overlay-image">
+										<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
+									</div>
+									<div class="carousel-caption">
+										<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
+									</div>
 								</div>
-								<div class="carousel-caption">
-									<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
+							</c:if>
+			
+							<c:if test="${lc.id != 1}">
+								<div class="carousel-item" data-bs-interval="4000">
+									<div class="overlay-image">
+										<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
+									</div>
+									<div class="carousel-caption">
+										<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
+									</div>
 								</div>
-							</div>
-						</c:if>
+							</c:if>
+						</c:forEach>
+					</div>
+			
+					<button data-bs-target="#myCarousel" class="carousel-control-prev" type="button" data-bs-slide="prev">
+						<span class="visually-hidden">prev</span>
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					</button>
+			
+					<button data-bs-target="#myCarousel"  class="carousel-control-next" type="button" data-bs-slide="next">
+						<span class="visually-hidden">next</span>
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					</button>
+			
+				</div>	
+			</div>
+
+		</c:if>
 		
-						<c:if test="${lc.id != 1}">
-							<div class="carousel-item" data-bs-interval="4000">
-								<div class="overlay-image">
-									<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
-								</div>
-								<div class="carousel-caption">
-									<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
-				</div>
 		
-				<button data-bs-target="#myCarousel" class="carousel-control-prev" type="button" data-bs-slide="prev">
-					<span class="visually-hidden">prev</span>
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				</button>
 		
-				<button data-bs-target="#myCarousel"  class="carousel-control-next" type="button" data-bs-slide="next">
-					<span class="visually-hidden">next</span>
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				</button>
-		
-			</div>	
+		<!-- <img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block"> -->
+
+		<div class="abajo">
+
+			<c:if test="${errorSong != null}">
+				<p class="text-danger text-center"><c:out value = "${errorSong}"/></p>
+			</c:if>
+
+			<c:if test="${errorUser != null}">
+				<p class="text-danger text-center"><c:out value = "${errorUser}"/></p>
+			</c:if>
+
+			<h1 class="text-center text-white mt-5 mb-5">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h1>
+
+			<div class="table-responsive-lg mb-5 tamañoTabla">
+
+				<h3 class="text-white">Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
+
+				<table id="tabla" class="table table-dark table-hover">
+
+					<thead>
+						<tr>
+							<th scope="col">Título</th>
+							<th scope="col">Reproductor</th>
+							<th scope="col">Respects</th>
+							<th scope="col">Autor</th>
+							<th scope="col">Precio</th>
+							<th scope="col">Carrito</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${listaBeats}" var="lb">
+						<tr id="#row">
+							<td>
+								<a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
+							</td>
+							<td>
+								<audio controls="" src="${lb.url}" class="btn btn-dark">
+									Your browser does not support the audio element.
+								</audio>
+							</td>
+							<td id="${lb.id}">
+								<span><c:out value = "${lb.usersLike.size()}"/></span>
+								<c:if test="${!lb.usersLike.contains(userActual)}">
+									<a href="#row" onclick="like(${lb.id}, 'like')" class="btn btn-outline-info">Like</a>
+								</c:if>
+								<c:if test="${lb.usersLike.contains(userActual)}">
+									<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
+								</c:if>
+							</td>
+							<td>
+								<a href="/profile/${lb.uCreador.id}" class="link-info text-decoration-none"><c:out value="${lb.uCreador.firstName}"/></a>
+							</td>
+							<td>
+								<c:out value="${lb.cost}"/>
+							</td>
+							
+							<td id="${lb.id}">
+								<c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
+									<a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Añadir al carro</a>
+								</c:if>
+								<c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
+									<a href="/removewishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Remover del carro</a>
+								</c:if>
+							</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
-	</c:if>
-	
-	
-	
-	<!-- <img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
-		<div class="carousel-caption d-none d-md-block"> -->
-
-	<div class="abajo">
-
-		<c:if test="${errorSong != null}">
-			<p class="text-danger text-center"><c:out value = "${errorSong}"/></p>
-		</c:if>
-
-		<c:if test="${errorUser != null}">
-			<p class="text-danger text-center"><c:out value = "${errorUser}"/></p>
-		</c:if>
-
-		<h1 class="text-center text-white mt-5 mb-5">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h1>
-
-		<div class="table-responsive-lg mb-5 tamañoTabla">
-
-			<h3 class="text-white">Canciones de artistas cercanos a <c:out value="${userActual.region}"></c:out></h3>
-
-			<table id="tabla" class="table table-dark table-hover">
-
-				<thead>
-					<tr>
-						<th scope="col">Título</th>
-						<th scope="col">Reproductor</th>
-						<th scope="col">Respects</th>
-						<th scope="col">Autor</th>
-						<th scope="col">Precio</th>
-						<th scope="col">Carrito</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${listaBeats}" var="lb">
-					<tr id="#row">
-						<td>
-							<a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
-						</td>
-						<td>
-							<audio controls="" src="${lb.url}" class="btn btn-dark">
-								Your browser does not support the audio element.
-							</audio>
-						</td>
-						<td id="${lb.id}">
-							<span><c:out value = "${lb.usersLike.size()}"/></span>
-							<c:if test="${!lb.usersLike.contains(userActual)}">
-								<a href="#row" onclick="like(${lb.id}, 'like')" class="btn btn-outline-info">Like</a>
-							</c:if>
-							<c:if test="${lb.usersLike.contains(userActual)}">
-								<a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
-							</c:if>
-						</td>
-						<td>
-							<a href="/profile/${lb.uCreador.id}" class="link-info text-decoration-none"><c:out value="${lb.uCreador.firstName}"/></a>
-						</td>
-						<td>
-							<c:out value="${lb.cost}"/>
-						</td>
-						
-						<td id="${lb.id}">
-							<c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
-								<a href="/addwishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Añadir al carro</a>
-							</c:if>
-							<c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
-								<a href="/removewishlist/${lb.id}?ruta=dashboard" class="btn btn-outline-light">Remover del carro</a>
-							</c:if>
-						</td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
 	</div>
 
 	<!-- footer -->
