@@ -4,8 +4,11 @@
     /* border: 1px solid rgb(21, 6, 226); */
 }
 
-.abajo{
-    padding: 25%;
+.main {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5%;
 }
 
 .sombra{
@@ -14,14 +17,47 @@
 
 .tipoletra{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 70px;
 }
 
-.fondo{
-    background-size: contain;
+#fondo{
+    background-image: url("/css/images/instruments_microphones_studio_room_record-788410.jpg!d.jpg");
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .tipoletrados{
     font-family:sans-serif;
+}
+
+@media (max-width: 575px) {
+    .tipoletra {
+        font-size: 42px;
+    }
+
+    .tipoletrados {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 576px) { 
+    .tipoletra {
+        font-size: 60px;
+    }
+
+    .tipoletrados {
+        font-size: 23px;
+    }
+}
+
+/* tablets */
+@media (min-width: 768px) {
+    .tipoletra {
+        font-size: 78px;
+    }
+
+    .tipoletrados {
+        font-size: 26px;
+    }
 }

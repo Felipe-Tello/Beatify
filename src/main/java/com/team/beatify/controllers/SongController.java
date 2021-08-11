@@ -120,7 +120,7 @@ public class SongController {
         User userActual = userService.findByEmail(principal.getName());
         setUserActualYCategoriasYPermiso(userActual, model);
         setUserYCategorias(model, usuario);
-        model.addAttribute("userActual", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
         return "addSongs.jsp";
     }
 
@@ -133,6 +133,7 @@ public class SongController {
         if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
             model.addAttribute("error", "Por favor, verifique los campos");
             setUserYCategorias(model, user);
+            setUserActualYCategoriasYPermiso(user, model);
             return "addSongs.jsp";
 
         }

@@ -32,6 +32,7 @@ h1{
 
 #tamañoContenedor {
     width: 85%;
+    min-height: 50vh;
     margin: 0 auto;
     margin-top: 6%;
     margin-bottom: 6%;

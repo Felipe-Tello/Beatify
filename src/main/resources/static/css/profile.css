@@ -46,7 +46,10 @@ h1, h2, h4{
 
 .tamañoContenedor {
     width: 85%;
+    min-height: 50vh;
     margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 

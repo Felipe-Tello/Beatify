@@ -79,7 +79,7 @@
         </div>
     </nav>
 
-    <main role="main" class="tamañoContenedor mt-4 mb-5">
+    <main role="main" class="tamañoContenedor">
         
         <div class="row mb-4">
             <div id="datosxS" class="col col-sm-7 col-md-7">

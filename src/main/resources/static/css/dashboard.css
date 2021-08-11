@@ -18,6 +18,10 @@
     vertical-align: top;
 }
 
+.contenedorMain {
+    min-height: 50vh;
+}
+
 .padd{
     margin: 20px;
 }
@@ -76,7 +80,7 @@
 @media (min-width: 768px) {
     .slide img {
         /* border: 1px dotted white; */
-        border: 3px solid white;
+        border: 2px solid white;
         height: 90vh;
     }
 
