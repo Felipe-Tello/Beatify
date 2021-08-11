@@ -73,7 +73,7 @@
                     </ul>
                     
                     <form action="/search" class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <input class="form-control me-2" type="search" placeholder="Beats, artista, región" aria-label="Search" name="busqueda">
                         <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
                     </form>
                 </div>
@@ -195,7 +195,7 @@
 								<a href="/profile/${lb.uCreador.id}" class="link-info text-decoration-none"><c:out value="${lb.uCreador.firstName}"/></a>
 							</td>
 							<td>
-								<c:out value="${lb.cost}"/>
+								$<c:out value="${lb.cost}"/>
 							</td>
 							
 							<td id="${lb.id}">
