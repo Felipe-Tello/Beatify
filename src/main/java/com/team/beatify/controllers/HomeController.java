@@ -74,8 +74,17 @@ public class HomeController {
             }
         }
         //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
+        List<Beat> listaBeatsSinComprar = new ArrayList<>();
+        listaBeatsSinComprar = beatService.allThings();
 
+        List<Compra> listaCompra = userActual.getListaDeCompras();
+        for (Compra compra : listaCompra) {
+            for (Beat beats : compra.getBeats()) {
+                listaBeatsSinComprar.remove(beats);
+            }
+        }
         setUserActualYCategoriasYPermiso(userActual, model);
+        model.addAttribute("listaBeatsSinComprar", listaBeatsSinComprar);
         model.addAttribute("category", category);
         model.addAttribute("regionBeats", regionBeats);
         model.addAttribute("listaBeats", listaBeats);

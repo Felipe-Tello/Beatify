@@ -119,11 +119,9 @@
         <div class="row mt-3">
             <h4>Agregar comentario:</h4>
             <form:form action="" method="post" modelAttribute="messageModel" class="formulario">
-
                 <form:label path="comment"></form:label>
-                <form:errors path="comment"/>
                 <form:textarea path="comment" name="content" rows="2" class="bg-dark letra inputComentario"></form:textarea>
-
+                <form:errors path="comment"/>
                 <input type="submit" value="Comentar" class="btn btn-outline-light botonComentar"/>
             </form:form>
         </div>
