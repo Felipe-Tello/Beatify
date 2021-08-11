@@ -27,8 +27,6 @@
 }
 
 #tabla{
-    /* margin-right: 150px;
-    margin-left: 150px; */
     box-shadow: -8px 8px 20px #000000;
     background-color: rgb(34, 34, 34);
 }
@@ -38,10 +36,55 @@
     margin: 0 auto;
 }
 
+.carousel-item {
+    background-color: #000000;
+    /* position: relative; */
+}
+
+.overlay-image {
+    opacity: 0.7;
+}
+
+.contenedorCarousel {
+    box-shadow: -8px 8px 20px #000000;
+}
+
 
 @media (max-width: 768px) {
-    
     .tamañoTabla {
         width: 90%;
     }
+}
+
+/* para el carousel */
+@media (max-width: 576px) { 
+    .slide img {
+        height: 75vh;
+    }
+
+}
+
+@media (min-width: 576px) { 
+    .slide img {
+        height: 80vh;
+    }
+
+}
+
+
+/* tablets */
+@media (min-width: 768px) {
+    .slide img {
+        /* border: 1px dotted white; */
+        border: 3px solid white;
+        height: 90vh;
+    }
+
+    .contenedorCarousel {
+        border: 25px solid rgb(12, 11, 11);
+        /* intentar con diferentes px de border */
+        /* border-right: none;
+        border-left: none; */
+    }
+    
 }

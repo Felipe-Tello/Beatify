@@ -83,52 +83,61 @@
 
 	<!-- CAROUSEL 2DA VERSION -->
 	<c:if test="${not empty listaCategories}">
-		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-			<ol class="carousel-indicators">
-				<c:forEach items="${listaCategories}" var="lc">
-					<c:if test="${lc.id == 1}">
-						<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}" class="active"></li>
-					</c:if>
-	
-					<c:if test="${lc.id != 1}">
-						<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}"></li>
-					</c:if>
-				</c:forEach>
-			</ol>
-			<div class="carousel-inner">
-				<c:forEach items="${listaCategories}" var="lc">
-					<c:if test="${lc.id == 1}">
-						<div class="carousel-item active" data-bs-interval="5000">
-							<div class="container">
-								<img src="${lc.url}" alt="">
-								<h1 class="text-center p-5"><c:out value = "${lc.genero}"/></h1>
+		<div class="contenedorCarousel">
+			<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+				<ol class="carousel-indicators">
+					<c:forEach items="${listaCategories}" var="lc">
+						<c:if test="${lc.id == 1}">
+							<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}" class="active"></li>
+						</c:if>
+		
+						<c:if test="${lc.id != 1}">
+							<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}"></li>
+						</c:if>
+					</c:forEach>
+				</ol>
+				<div class="carousel-inner">
+					<c:forEach items="${listaCategories}" var="lc">
+						<c:if test="${lc.id == 1}">
+							<div class="carousel-item active" data-bs-interval="5000">
+								<div class="overlay-image">
+									<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
+								</div>
+								<div class="carousel-caption">
+									<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
+								</div>
 							</div>
-						</div>
-					</c:if>
-	
-					<c:if test="${lc.id != 1}">
-						<div class="carousel-item" data-bs-interval="4000">
-							<div class="container">
-								<img src="${lc.url}" alt="" width="1300" height="400">
-								<h1 class="text-center p-5"><c:out value = "${lc.genero}"/></h1>
+						</c:if>
+		
+						<c:if test="${lc.id != 1}">
+							<div class="carousel-item" data-bs-interval="4000">
+								<div class="overlay-image">
+									<img src="${lc.url}" alt="imgCategory" class="d-block w-100">
+								</div>
+								<div class="carousel-caption">
+									<a href="/categories/${lc.id}" class="btn btn-outline-light w-50 pt-md-2 pb-md-2">Ir a <c:out value = "${lc.genero}"/></a>
+								</div>
 							</div>
-						</div>
-					</c:if>
-				</c:forEach>
-			</div>
-	
-			<button data-bs-target="#myCarousel" class="carousel-control-prev" type="button" data-bs-slide="prev">
-				<span class="visually-hidden">prev</span>
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			</button>
-	
-			<button data-bs-target="#myCarousel"  class="carousel-control-next" type="button" data-bs-slide="next">
-				<span class="visually-hidden">next</span>
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			</button>
-	
-		</div>	
+						</c:if>
+					</c:forEach>
+				</div>
+		
+				<button data-bs-target="#myCarousel" class="carousel-control-prev" type="button" data-bs-slide="prev">
+					<span class="visually-hidden">prev</span>
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				</button>
+		
+				<button data-bs-target="#myCarousel"  class="carousel-control-next" type="button" data-bs-slide="next">
+					<span class="visually-hidden">next</span>
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				</button>
+		
+			</div>	
+		</div>
+
 	</c:if>
+	
+	
 	
 	<!-- <img src="/css/5 sin título_20210721162541.png" class="d-block w-100" alt="...">
 		<div class="carousel-caption d-none d-md-block"> -->
@@ -143,7 +152,7 @@
 			<p class="text-danger text-center"><c:out value = "${errorUser}"/></p>
 		</c:if>
 
-		<h1 class="text-center text-white mt-4 mb-4">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h1>
+		<h1 class="text-center text-white mt-5 mb-5">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h1>
 
 		<div class="table-responsive-lg mb-5 tamañoTabla">
 
