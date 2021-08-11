@@ -21,117 +21,125 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/comentarios.js"></script>
 </head>
-<body>
-    <div id="contenedor">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container-fluid">
-                <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <c:if test="${permiso == true}">
-                                    <a href="/admin" class="nav-link">Página de administrador</a>
-                                </c:if>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Categorías
-                                </a>
-                                <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
-                                    <!-- ver esta wa -->
-                                    <c:forEach items="${listaCategories}" var="lc">
-                                        <li class="nav-item">
-                                            <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
-                            </li>
-                            <li class="nav-item">
-                                <form  method="POST" action="/logout">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
-                                </form>
-                            </li>
-                        </ul>
-                        <form action="/search" class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
-                            <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
-                        </form>
-                    </div>
+<body id="contenedor">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <c:if test="${permiso == true}">
+                                <a href="/admin" class="nav-link">Página de administrador</a>
+                            </c:if>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/profile/${userActual.id}" class="nav-link">Ir al perfil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="categorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="categorias">
+                                <!-- ver esta wa -->
+                                <c:forEach items="${listaCategories}" var="lc">
+                                    <li class="nav-item">
+                                        <a href="/categories/${lc.id}" class="nav-link"><c:out value="${lc.genero}"/></a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/wishlist/${userActual.id}" class="nav-link">Carrito</a>
+                        </li>
+                        <li class="nav-item">
+                            <form  method="POST" action="/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="submit" value="Cerrar Sesión" class="btn nav-link"/>
+                            </form>
+                        </li>
+                    </ul>
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
+                    </form>
                 </div>
             </div>
-        </nav>
-        <main role="main" class="container">
-            <div class="abajo">
-                <h1><c:out value="${category.genero}"/></h1>
-                <c:if test="${category.beats.size() != 0}">
-                <table class="table table-striped table-hover table-dark table-responsive sombra">
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center text-white fst-italic"><c:out value = "${category.genero}"/></h1>
+
+        <c:if test="${category.beats.size() == 0}">
+            <h3 class="text-white text-opacity-75 text-center fw-light">Sin resultados</h3>
+        </c:if>
+
+        <c:if test="${category.beats.size() != 0}">
+            <main role="main" class="table-responsive-lg mt-4">
+                <h3 class="text-white fw-light">Resultados</h3>
+                <table class="table table-dark table-hover sombra">
                     <thead>
                         <tr>
-                            <th>Author</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Reproductor</th>
-                            <th>Respect</th>
-                            <th>Wish List</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Reproductor</th>
+                            <th scope="col">Respects</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Carrito</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${category.beats}" var="g">
-                            <tr>
-                                <td><a href="/profile/${g.uCreador.id}"><c:out value="${g.uCreador.firstName}"/></a></td>
-                                <td><c:out value="${g.title}"/></td>
-                                <td><c:out value="${g.cost}"/></td>
+                        <c:forEach items="${category.beats}" var="lb">
+                            <tr id="#row">
                                 <td>
-                                    <audio controls src="/${g.url}" class="btn btn-dark">
+                                    <a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
+                                </td>
+                                <td>
+                                    <audio controls="" src="/${lb.url}" class="btn btn-dark">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </td>
-                                <td>
-                                    <c:out value="${g.usersLike.size()}"/>
-                                    <c:if test="${!g.usersLike.contains(userActual)}"><a href="/like/${g.id}?ruta=category" class="btn btn-outline-info">Like</a></c:if>
-                                    <c:if test="${g.usersLike.contains(userActual)}"><a href="/dislike/${g.id}?ruta=category" class="btn btn-outline-danger">Dislike</a></c:if>
+                                <td id="${lb.id}">
+                                    <span><c:out value = "${lb.usersLike.size()}"/></span>
+                                    <c:if test="${!lb.usersLike.contains(userActual)}">
+                                        <a href="#row" onclick="like(${lb.id}, 'like')" class="btn btn-outline-info">Like</a>
+                                    </c:if>
+                                    <c:if test="${lb.usersLike.contains(userActual)}">
+                                        <a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
+                                    </c:if>
                                 </td>
                                 <td>
-                                    <c:if test="${userActual.id != g.uCreador.id && !g.wishlistuser.contains(userActual)}"><a href="/addwishlist/${g.id}?ruta=category" class="btn btn-outline-light">Add lo wish list</a></c:if>
-                                    <c:if test="${userActual.id != g.uCreador.id && g.wishlistuser.contains(userActual)}"><a href="/removewishlist/${g.id}?ruta=category" class="btn btn-outline-light">Remove from wish list</a></c:if>
+                                    <a href="/profile/${lb.uCreador.id}" class="link-info text-decoration-none"><c:out value="${lb.uCreador.firstName}"/></a>
+                                </td>
+                                <td>
+                                    <p>$<c:out value="${lb.cost}"/></p>
+                                </td>
+                                
+                                <td id="${lb.id}">
+                                    <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
+                                        <a href="/addwishlist/${lb.id}?ruta=categories/${category.id}" class="btn btn-outline-light">Añadir al carro</a>
+                                    </c:if>
+                                    <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
+                                        <a href="/removewishlist/${lb.id}?ruta=categories/${category.id}" class="btn btn-outline-light">Remover del carro</a>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                </c:if>
-                <c:if test="${category.beats.size() == 0}">
-                <table class="table table-dark table-sm volver" >
-                    <thead>
-                        <tr>
-                            <th>Lista de compras</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>No tienes Beats en el carro de compras</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </c:if>
-            </div>
-        </main>
+            </main>
+        </c:if>
     </div>
+
+
     <footer>
         <main role="main" class="container">
             <div class="row">

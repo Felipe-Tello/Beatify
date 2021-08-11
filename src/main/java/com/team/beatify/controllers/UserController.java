@@ -127,7 +127,7 @@ public class UserController {
             return "redirect:/dashboard";
         }
         model.addAttribute("user", usuario);
-        setUserActualYCategoriasYPermiso(usuario, model);
+        setUserActualYCategoriasYPermiso(usuarioLogeado, model);
         return "editProfile.jsp";
     }
 

@@ -136,6 +136,12 @@ public class HomeController {
         else if (ruta.equals("song")) {
             return "redirect:/song/" + beat.getId();
         }
+        else if (ruta.contains("search")) {
+            return "redirect:/" + ruta;
+        }
+        else if (ruta.contains("categories")) {
+            return "redirect:/" + ruta;
+        }
         else{
             return "redirect:/profile/"+ beat.getuCreador().getId();
         }
@@ -160,6 +166,12 @@ public class HomeController {
         }
         else if (ruta.equals("song")) {
             return "redirect:/song/" + beat.getId();
+        }
+        else if (ruta.contains("search")) {
+            return "redirect:/" + ruta;
+        }
+        else if (ruta.contains("categories")) {
+            return "redirect:/" + ruta;
         }
         else{
             return "redirect:/profile/"+ userActual.getId();
