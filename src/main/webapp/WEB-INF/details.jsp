@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/css/scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="/css/fotter.css">
 	<link rel="stylesheet" type="text/css" href="/css/navbar.css">
+	<link rel="stylesheet" type="text/css" href="/css/wishlist.css">
 	<link rel="stylesheet" type="text/css" href="/css/details.css">
     <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -20,7 +21,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div>
+	<div id="contenedor">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 			<div class="container-fluid">
 				<a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
@@ -73,21 +74,37 @@
 				</div>
 			</div>
 		</nav>
-	
-		<h3><c:out value="${userActual.firstName}"/> <c:out value="${userActual.lastName}"/></h3>
-		<ul>
+		<div>
 			<c:forEach items="${listaCompra}" var="lc">
-				<li>
-					<td><c:out value="${lc.total}"/></td>
-					<td><c:out value="${lc.fecha}"/></td>
-					<ul>
+				<h3>Fecha de compra: <c:out value="${lc.fecha}"/></h3>
+				<h3>Monto Total: <c:out value="${lc.total}"/></h3>
+				<h3>Cantidad de Beats comprados: <c:out value="${lc.beats.size()}"/></h3>
+				<table class="table table-dark table-hover volver">
+					<thead>
+						<tr>
+							<th scope="col">Título</th>
+							<th scope="col">Reproductor</th>
+							<th scope="col">Autor</th>
+							<th scope="col">Precio</th>
+						</tr>
+					</thead>
+					<tbody>
 						<c:forEach items="${lc.beats}" var="bc">
-							<li><c:out value="${bc.cost}"/> <c:out value="${bc.title}"/></li>
+						<tr>
+							<td><c:out value="${bc.title}"/></td>
+							<td>
+								<audio controls="" src="/${bc.url}" class="btn btn-dark">
+									Your browser does not support the audio element.
+								</audio>
+							</td>
+							<td><c:out value="${bc.uCreador.firstName}"/></td>
+							<td><c:out value="${bc.cost}"/></td>
 						</c:forEach>
-					</ul>
-				</li>
+						</tr>
+					</tbody>
+				</table>
 			</c:forEach>
-		</ul>
+		</div>
 
 
 		<footer>

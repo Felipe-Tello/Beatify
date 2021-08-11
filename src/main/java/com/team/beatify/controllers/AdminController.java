@@ -1,6 +1,7 @@
 package com.team.beatify.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -32,7 +33,8 @@ public class AdminController {
     @GetMapping("/admin")
     public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
-        model.addAttribute("admin", userActual);
+        setUserActualYCategoriasYPermiso(userActual, model);
+        model.addAttribute("userActual", userActual);
         return "admin.jsp";
     }
 
@@ -45,5 +47,14 @@ public class AdminController {
         newCategory.setUrl(url+file.getOriginalFilename());
         categoryService.createOrUpdateThing(newCategory);
         return "redirect:/admin";
+    }
+    public void setUserActualYCategoriasYPermiso(User usuario, Model model) {
+        List<Category> listaCategories = categoryService.allThings();
+        model.addAttribute("listaCategories", listaCategories);
+        model.addAttribute("userActual", usuario);
+
+        if(userService.hasAdmin(usuario)) {
+            model.addAttribute("permiso", true);
+        }
     }
 }

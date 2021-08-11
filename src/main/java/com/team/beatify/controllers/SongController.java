@@ -118,48 +118,11 @@ public class SongController {
     public String upload(@ModelAttribute("modelBeat") Beat beat, Model model, Principal principal){
         User usuario = encontrarUsuario(principal);
         User userActual = userService.findByEmail(principal.getName());
+        setUserActualYCategoriasYPermiso(userActual, model);
         setUserYCategorias(model, usuario);
         setUserActualYCategoriasYPermiso(userActual, model);
         return "addSongs.jsp";
     }
-
-    
-    // @PostMapping("/song/new")
-    // public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
-    //     User user = userService.findByEmail(principal.getName());
-
-    //     if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
-    //         model.addAttribute("error", "Por favor, verifique los campos");
-    //         setUserYCategorias(model, user);
-    //         return "addSongs.jsp";
-    //     }
-
-    //     else {
-    //         String name = file.getOriginalFilename();
-    //         Path directorioImg = Paths.get("src/main/resources/static/users/user");
-    //         String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();
-    //         File directorio = new File(ruta);
-    //         if(directorio.exists() == false){ 
-    //             directorio.mkdirs(); 
-    //         }
-    //         try {
-    //             byte[] bytes = file.getBytes();
-    //             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(directorio.getAbsolutePath() +"/"+ name)));
-    //             stream.write(bytes);
-    //             stream.close();
-    //             Beat beatNew = beatService.createOrUpdateThing(beat);
-    //             beatNew.setuCreador(user); 
-    //             beatNew.setUrl("/users/user"+user.getId()+"/"+ name);
-    //             beatService.createOrUpdateThing(beatNew);
-    //             return "redirect:/profile/"+user.getId();
-    //         } catch (Exception e) {
-    //             return "You failed to upload  => " + e.getMessage();
-    //             // model.addAttribute("listaCategories", listaCategories);
-    //             // model.addAttribute("error", e.getMessage());
-    //             // return "addSongs.jsp";
-    //         }
-    //     } 
-    // }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -218,3 +181,42 @@ public class SongController {
         }
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // @PostMapping("/song/new")
+    // public String handleFileUpload(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, Model model){
+    //     User user = userService.findByEmail(principal.getName());
+
+    //     if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
+    //         model.addAttribute("error", "Por favor, verifique los campos");
+    //         setUserYCategorias(model, user);
+    //         return "addSongs.jsp";
+    //     }
+
+    //     else {
+    //         String name = file.getOriginalFilename();
+    //         Path directorioImg = Paths.get("src/main/resources/static/users/user");
+    //         String ruta = directorioImg.toFile().getAbsolutePath() +user.getId();
+    //         File directorio = new File(ruta);
+    //         if(directorio.exists() == false){ 
+    //             directorio.mkdirs(); 
+    //         }
+    //         try {
+    //             byte[] bytes = file.getBytes();
+    //             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(directorio.getAbsolutePath() +"/"+ name)));
+    //             stream.write(bytes);
+    //             stream.close();
+    //             Beat beatNew = beatService.createOrUpdateThing(beat);
+    //             beatNew.setuCreador(user); 
+    //             beatNew.setUrl("/users/user"+user.getId()+"/"+ name);
+    //             beatService.createOrUpdateThing(beatNew);
+    //             return "redirect:/profile/"+user.getId();
+    //         } catch (Exception e) {
+    //             return "You failed to upload  => " + e.getMessage();
+    //             // model.addAttribute("listaCategories", listaCategories);
+    //             // model.addAttribute("error", e.getMessage());
+    //             // return "addSongs.jsp";
+    //         }
+    //     } 
+    // }
