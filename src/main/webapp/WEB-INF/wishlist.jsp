@@ -173,9 +173,7 @@
 					<p>© Chile 2021 Beatify</p>
 					<p>Legal / Centro de Privacidad / Política de privacidad / Cookies</p>
 				</div>
-
 			</div>
-           
         </main>
     </footer>
 </body>
