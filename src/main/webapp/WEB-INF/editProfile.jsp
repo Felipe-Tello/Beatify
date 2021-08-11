@@ -24,18 +24,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
-
             <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
-
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-
                 <div class="offcanvas-body">
                     <ul class="navbar-nav flex-grow-1 pe-3">
                         <li class="nav-item">
@@ -69,12 +65,10 @@
 							</form>
                         </li>
                     </ul>
-                    
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    <form action="/search" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Canción/Artista" aria-label="Search" name="busqueda">
+                        <button class="btn btn-outline-success" type="submit" value="Search">Buscar</button>
                     </form>
-
                 </div>
             </div>
         </div>

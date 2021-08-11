@@ -86,7 +86,7 @@
 		<div class="contenedorCarousel">
 			<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
 				<ol class="carousel-indicators">
-					<c:forEach items="${listaCategories}" var="lc">
+					<c:forEach items="${listaBeatsSinComprar}" var="lc">
 						<c:if test="${lc.id == 1}">
 							<li data-bs-target="#myCarousel" data-bs-slide-to="${lc.id - 1}" class="active"></li>
 						</c:if>
