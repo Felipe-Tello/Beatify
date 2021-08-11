@@ -16,6 +16,7 @@
 .container {
     margin-top: 6%;
     margin-bottom: 6%;
+    min-height: 299px;
 }
 
 footer .container {
