@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminController {
@@ -34,20 +35,30 @@ public class AdminController {
     public String addCategory(@ModelAttribute("categoryModel")Category category, Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         setUserActualYCategoriasYPermiso(userActual, model);
-        model.addAttribute("userActual", userActual);
         return "admin.jsp";
     }
 
     @PostMapping("/admin")
-    public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal){
+    public String addCategory(@Valid @ModelAttribute("categoryModel") Category category, BindingResult result, @RequestParam("file") MultipartFile file, Principal principal, RedirectAttributes flash, Model model){
+
+        if(result.hasErrors() || file.isEmpty()) {
+            User userActual = userService.findByEmail(principal.getName());
+            setUserActualYCategoriasYPermiso(userActual, model);
+            model.addAttribute("error", "Por favor, verifique los campos");
+            return "admin.jsp";
+        }
+
         Category newCategory = categoryService.createOrUpdateThing(category);
         String url = "categoryImage/";
         categoryService.createOrUpdateThing(newCategory);
         categoryService.uploadCategoryImage(file, url);
         newCategory.setUrl(url+file.getOriginalFilename());
         categoryService.createOrUpdateThing(newCategory);
+        flash.addFlashAttribute("subido", "¡Añadido exitosamente!");
         return "redirect:/admin";
     }
+
+
     public void setUserActualYCategoriasYPermiso(User usuario, Model model) {
         List<Category> listaCategories = categoryService.allThings();
         model.addAttribute("listaCategories", listaCategories);

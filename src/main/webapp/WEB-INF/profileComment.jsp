@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/css/profile.css">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/fotter.css">
+    <link rel="stylesheet" type="text/css" href="/css/showSong.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
     <link rel="shortcut icon" href="/css/images/BTLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -33,7 +34,7 @@
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
@@ -146,9 +147,6 @@
 						<th scope="col">Respects</th>
 						<th scope="col">Precio</th>
 						<th scope="col">Comentarios</th>
-                        <c:if test="${userActual.id != user.id}">
-                            <th scope="col">Carrito</th>
-                        </c:if>
 					</tr>
 				</thead>
                 <tbody>
@@ -159,8 +157,8 @@
                             </td>
                             <td>
                                 <audio controls>
-                                    <source src="${lb.url}" type="audio/ogg">
-                                    <source src="${lb.url}" type="audio/mpeg">
+                                    <source src="$/{lb.url}" type="audio/ogg">
+                                    <source src="/${lb.url}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                 </audio>
                             </td>
@@ -173,45 +171,37 @@
                                     <a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
                                 </c:if>
                             </td>
-                            <td><c:out value="${lb.cost}"/></td>
+                            <td>$<c:out value="${lb.cost}"/></td>
                             <td>
                                 <a href="/profile/${user.id}/${lb.id}" class="btn btn-outline-light" >Comentarios</a>
                             </td>
-                            <c:if test="${userActual.id != user.id}">
-                                <td>
-                                    <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
-                                        <a href="/addwishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Añadir al carro</a>
-                                    </c:if>
-                                    <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
-                                        <a href="/removewishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Remover del carro</a>
-                                    </c:if>
-                                </td>
-                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
-        <div class="tabla">
-            <div class="alinear float-end text-center">
-                <h1>Message Wall</h1>
-                <p>
-                    <textarea readonly rows="4" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
-                </p>
-            </div>
-            <div class="alinear addcomentario">
-                <h4>Add comment:</h4>
-                <form:form action="" method="post" modelAttribute="messageModel">
-                    <p>
-                        <form:label path="comment"></form:label>
-                        <form:textarea path="comment" name="content" cols="30" rows="1" class="bg-dark letra"></form:textarea>
-                    </p>
-                    <input type="submit" value="Submit" class="btn btn-outline-light sombra"/>
-                    <br>
-                    <form:errors path="comment"/>
-                </form:form>
-            </div>
+
+
+        <div class="w-100 mt-4">
+            <h2 class="text-center">Comentarios</h2>
+            <textarea readonly rows="8" class="bg-dark letraInput w-100 p-2"><c:out value="${data}"/></textarea>
         </div>
+
+        <div class="row mt-3">
+            <h4>Agregar comentario:</h4>
+            <form:form action="" method="post" modelAttribute="messageModel" class="formulario">
+                <form:label path="comment"></form:label>
+                <form:textarea path="comment" name="content" rows="2" class="bg-dark letraInput inputComentario p-2"></form:textarea>
+                <input type="submit" value="Comentar" class="btn btn-outline-light botonComentar"/>
+            </form:form>
+        </div>
+
+        <c:if test="${errorMensaje != null}">
+            <p class="text-white-50 fw-bolder">
+                <c:out value = "${errorMensaje}"/>
+            </p>
+        </c:if>
+
     </main>
 
 

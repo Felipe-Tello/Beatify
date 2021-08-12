@@ -30,7 +30,7 @@
             </button>
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -80,7 +80,13 @@
     <main role="main" class="container contenedorMain">
         <div class="row mb-4">
             <div class="col-md-3">
-                <img src="/${beat.imageUrl}" id="imgSong" class="img-thumbnail" alt="imgBeat">
+                <c:if test="${beat.imageUrl == null}">
+                    <img src="/css/images/music.png" id="imgSong" class="img-thumbnail" alt="imgBeat">
+                </c:if>
+                <c:if test="${beat.imageUrl != null}">
+                    <img src="/${beat.imageUrl}" class="img-thumbnail w-100" alt="imgBeat">
+                </c:if>
+            
             </div>
             <div class="col-md-7 text-center">
                 <h1 class="fst-italic"><c:out value="${beat.title}"></c:out></h1>
@@ -113,18 +119,23 @@
 
         <div class="w-100 mt-4">
             <h2 class="text-center">Comentarios</h2>
-            <textarea readonly rows="8" class="bg-dark letra w-100 p-2"><c:out value="${data}"/></textarea>
+            <textarea readonly rows="8" class="bg-dark letraInput w-100 p-2"><c:out value="${data}"/></textarea>
         </div>
 
         <div class="row mt-3">
             <h4>Agregar comentario:</h4>
             <form:form action="" method="post" modelAttribute="messageModel" class="formulario">
                 <form:label path="comment"></form:label>
-                <form:textarea path="comment" name="content" rows="2" class="bg-dark letra inputComentario"></form:textarea>
-                <form:errors path="comment"/>
+                <form:textarea path="comment" name="content" rows="2" class="bg-dark letraInput inputComentario p-2"></form:textarea>
                 <input type="submit" value="Comentar" class="btn btn-outline-light botonComentar"/>
             </form:form>
         </div>
+
+        <c:if test="${errorMensaje != null}">
+            <p class="text-white-50 fw-bolder">
+                <c:out value = "${errorMensaje}"/>
+            </p>
+        </c:if>
         
     </main>
 

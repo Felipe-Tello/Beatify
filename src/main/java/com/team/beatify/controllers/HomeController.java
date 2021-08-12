@@ -47,12 +47,10 @@ public class HomeController {
     @GetMapping("/")
     public String home(Principal principal, Model model) {
         model.addAttribute("usuarioLogeado", principal);
-
         if(principal != null) {
             User userActual = userService.findByEmail(principal.getName());
             setUserActualYCategoriasYPermiso(userActual, model);
         }
-
         return "inicio.jsp";
     }
 
@@ -73,7 +71,6 @@ public class HomeController {
                 regionBeats.add(beat);
             }
         }
-        //esto es para ver si tiene permisos de admin (y mostrar en el jsp un link a la pag de admin)
         List<Beat> listaBeatsSinComprar = new ArrayList<>();
         listaBeatsSinComprar = beatService.allThings();
 

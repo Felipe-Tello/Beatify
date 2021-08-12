@@ -19,28 +19,28 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseModel{
-	@NotBlank(message = "El nombre no puede estar en blanco")
-	@Size(min = 2,max = 200,message = "El nombre debe tener entre 2 y 200 caracteres")
+	@NotBlank(message = "Este campo es obligatorio")
+	@Size(max = 200, message = "El nombre debe tener máximo 200 caracteres")
 	private String firstName;
 
-    @NotBlank(message = "El apellido no puede estar en blanco")
-    @Size(min = 2,max = 200,message = "El apellido debe tener entre 2 y 200 caracteres")
+    @NotBlank(message = "Este campo es obligatorio")
+    @Size(max = 200,message = "El apellido debe tener máximo 200 caracteres")
     private String lastName;
 
 	//?
-	@NotBlank(message = "La ciudad no puede estar en blanco")
-	@Size(min = 3,max = 200,message = "La cuidad debe tener entre 3 y 200 caracteres")
+	@NotBlank(message = "Este campo es obligatorio")
+	@Size(max = 200,message = "Debe tener máximo 200 caracteres")
 	private String location;
 
     @NotNull(message = "Debe seleccionar una región")
     private String region;
 
-	@NotBlank(message = "El email no puede estar en blanco")
-	@Email(message = "Debe ingresar un Email valido")
+	@NotBlank(message = "Este campo es obligatorio")
+	@Email(message = "Debe ingresar un email vélido")
 	private String email;
 
-	@NotBlank(message = "El campo contraseña no puede estar en blanco")
-	@Size( min = 8, max = 200, message = "La contraseña debe tener entre 8 y 200 caracteres")
+	@NotBlank(message = "Este campo es obligatorio")
+	@Size( min = 8, max = 200, message = "La contraseña debe tener mínimo 8 caracteres")
 	private String password;
 
 	@Transient

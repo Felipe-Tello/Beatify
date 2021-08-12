@@ -22,13 +22,17 @@
     margin-top: 5%;
     margin-bottom: 5%;
 }
-
+/* 
 .lista{
     list-style: none;
+} */
+
+h1, h2, h4{
+    color: white;
 }
 
-h1, h2, h4, .letra{
-    color: white;
+.letraInput {
+    color: silver;
 }
 
 .sombra{
@@ -72,6 +76,8 @@ h1, h2, h4, .letra{
 }
 
 #imgSong {
+    background-color: #252555;
+    padding: 20px;
     width: 100%;
 }
 
