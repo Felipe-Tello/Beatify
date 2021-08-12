@@ -159,8 +159,8 @@
                             </td>
                             <td>
                                 <audio controls>
-                                    <source src="${lb.url}" type="audio/ogg">
-                                    <source src="${lb.url}" type="audio/mpeg">
+                                    <source src="/${lb.url}" type="audio/ogg">
+                                    <source src="/${lb.url}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                 </audio>
                             </td>
