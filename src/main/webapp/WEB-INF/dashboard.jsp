@@ -172,7 +172,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${listaBeats}" var="lb">
+						<c:forEach items="${listaBeatsSinComprar}" var="lb">
 							<tr id="#row">
 								<td>
 									<a href="/song/${lb.id}" class="link-info text-decoration-none"><c:out value="${lb.title}"/></a>
