@@ -5,3 +5,18 @@
 h3{
     color: white;
 }
+
+.contenedorCompras {
+    width: 90%;
+    margin: 0 auto;
+    min-height: 50vh;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.contenedorDetalles {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #272727;
+}

@@ -103,30 +103,12 @@ public class UserController {
     }
 
     @PostMapping("/profile/{userid}/{beatid}")
-    public String showMessage(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, Principal principal, Model model){
+    public String showMessage(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("userid") Long userid, @PathVariable("beatid") Long beatid, Principal principal, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(beatid);
         if (result.hasErrors()) {
-            User user = userService.findThingById(userid);
-            List<Category> listaCategories = categoryService.allThings();
-            List<Beat> listaBeats = user.getBeatsDelCreador();
-            List<Message> listaMessages = beat.getListaMessagesFromBeat();
-            String dataString = "";
-            for (Message message2 : listaMessages) {
-                dataString += message2.getUser().getFirstName()+": "+message2.getComment()+ "\n";
-            }
-            int respectTotal = 0;
-            for (Beat beat2 : listaBeats) {
-                respectTotal += beat2.getUsersLike().size();
-            }
-            model.addAttribute("listaCategories", listaCategories);
-            model.addAttribute("respectTotal", respectTotal);
-            model.addAttribute("user", user);
-            model.addAttribute("listaBeats", listaBeats);
-            model.addAttribute("data", dataString);
-            model.addAttribute("beat", beat);
-            setUserActualYCategoriasYPermiso(userActual, model);
-            return "profileComment.jsp";
+            flash.addFlashAttribute("errorMensaje", "Error al enviar el mensaje");
+            return "redirect:/profile/"+userid+"/"+beatid;
         }
         message.setBeat(beat);
         message.setUser(userActual);

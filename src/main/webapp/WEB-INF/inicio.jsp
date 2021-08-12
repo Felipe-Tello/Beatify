@@ -37,7 +37,7 @@
                         <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">¡Bienvenido/a!</h5>
                     </c:if>
                     <c:if test="${usuarioLogeado != null}">
-                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h5>
                     </c:if>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>

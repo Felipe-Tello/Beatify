@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>Administrador</title>
 </head>
-<body>
+<body id="contenedor">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="/dashboard" class="navbar-brand"><img id="icono" src="/css/images/5 sin título_20210721162541.png" alt="dashboard"></a>
@@ -32,7 +32,7 @@
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
@@ -78,17 +78,34 @@
             </div>
         </div>
     </nav>    
-    <div class="container-fluid">
+    <div class="container">
         <div id="moverabajo">
-		<form action="" enctype="multipart/form-data" method="POST">
-            <label for="">Agregar portada al genero</label>
-			<input  class="form-control" type="file" name="file" accept=".jpg, .jpeg, .png">
-			<form:form method="POST" action="" modelAttribute="categoryModel">
-                <form:label path="genero">Agregar genero musical</form:label>
-                <form:input class="form-control" placeholder="Genero Musical" path="genero"/>
-				<input id="botonenviar" class="btn btn-light" type="submit" value="Añadir genero"/>
-			</form:form>
-        </form>
+
+            <c:if test="${subido != null}">
+                <h5 class="text-center fw-normal text-info">
+                    <c:out value = "${subido}"/>
+                </h5>
+            </c:if>
+
+            <c:if test="${error != null}">
+                <h5 class="text-center fw-normal text-danger">
+                    <c:out value = "${error}"/>
+                </h5>
+            </c:if>
+
+            <form action="" enctype="multipart/form-data" method="POST">
+                <label for="portada">Agregar portada al género</label>
+                <input id="portada" class="form-control" type="file" name="file" accept=".jpg, .jpeg, .png">
+                <form:form method="POST" action="" modelAttribute="categoryModel">
+                    <form:label path="genero">Agregar género musical</form:label>
+                    <form:input class="form-control" placeholder="Nombre del género" path="genero"/>
+                    <form:errors  path="genero" class="text-danger"/>
+
+                    <div class="d-flex justify-content-end">
+                        <input id="botonenviar" class="btn btn-outline-light mt-4" type="submit" value="Añadir categoría"/>
+                    </div>
+                </form:form>
+            </form>
         </div>
     </div>  
 

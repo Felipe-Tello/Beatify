@@ -11,9 +11,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -23,11 +25,13 @@ public class Beat extends BaseModel{
     //ver qué tipo de mensajes predeterminados tendremos
     
     @NotNull(message = "El campo no puede ser nulo")
-    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotBlank(message = "Este campo es obligatorio")
+	@Size(max = 200,message = "Debe tener máximo 200 caracteres")
     private String title;
 
     @NotNull(message = "El campo no puede ser nulo")
-    @Min(value = 5000, message = "El precio mínimo es $5000")
+    @Min(value = 5000, message = "El precio mínimo es $5000 CLP")
+    @Max(value = 1000000, message = "El precio máximo es $1000000 CLP")
     private int cost;
 
     //es un campo que se asigna desde el usuario? o en el servidor por interno? 

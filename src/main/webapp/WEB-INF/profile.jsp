@@ -33,7 +33,7 @@
             <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="menu" aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido, <c:out value="${userActual.firstName}"></c:out></h5>
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Bienvenido/a, <c:out value="${userActual.firstName}"></c:out></h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
@@ -81,6 +81,12 @@
     </nav>
 
     <main role="main" class="tamañoContenedor">
+
+        <c:if test="${subido != null}">
+            <h5 class="text-center fw-light text-info mb-4">
+                <c:out value = "${subido}"/>
+            </h5>
+        </c:if>
         
         <div class="row mb-4">
             <div id="datosxS" class="col col-sm-7 col-md-7">

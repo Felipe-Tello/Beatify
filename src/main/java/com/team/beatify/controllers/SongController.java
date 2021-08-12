@@ -65,9 +65,14 @@ public class SongController {
         return "showSong.jsp";
     }
     @PostMapping("/song/{idSong}")
-    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idSong") Long idSong, Principal principal){
+    public String showBeat(@Valid @ModelAttribute("messageModel") Message message, BindingResult result, @PathVariable("idSong") Long idSong, Principal principal, RedirectAttributes flash){
         User userActual = userService.findByEmail(principal.getName());
         Beat beat = beatService.findThingById(idSong);
+
+            if(result.hasErrors()) {
+                flash.addFlashAttribute("errorMensaje", "Error al enviar el mensaje");
+                return "redirect:/song/"+beat.getId();
+            }
         message.setBeat(beat);
         message.setUser(userActual);
         messageService.createOrUpdateThing(message);
@@ -127,7 +132,7 @@ public class SongController {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     @PostMapping("/song/new")
-    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("fileImage") MultipartFile fileImage, Principal principal, Model model){
+    public String uploadBeat(@Valid @ModelAttribute("modelBeat")Beat beat, BindingResult result, @RequestParam("file") MultipartFile file, @RequestParam("fileImage") MultipartFile fileImage, Principal principal, Model model, RedirectAttributes flash){
         User user = userService.findByEmail(principal.getName());
 
         if(result.hasErrors() || file.isEmpty() || beat.getCategories().size() <= 0) {
@@ -146,17 +151,18 @@ public class SongController {
             beatNew.setuCreador(user); 
             beatNew.setUrl(url+file.getOriginalFilename());
             // subir imagen
-            String urlImage = "beatsImage/"+user.getId()+"/";
-            beatService.uploadBeatImage(fileImage, urlImage);
-            beatNew.setImageUrl(urlImage+fileImage.getOriginalFilename());
+
+            if(fileImage.isEmpty() == false) {
+                String urlImage = "beatsImage/"+user.getId()+"/";
+                beatService.uploadBeatImage(fileImage, urlImage);
+                beatNew.setImageUrl(urlImage+fileImage.getOriginalFilename());
+            }
             // guardar beat
             beatService.createOrUpdateThing(beatNew);
+            flash.addFlashAttribute("subido", "¡Beat subido exitosamente!");
             return "redirect:/profile/"+user.getId();
-            // model.addAttribute("listaCategories", listaCategories);
-            // model.addAttribute("error", e.getMessage());
-            // return "addSongs.jsp";
-    } 
-}
+        } 
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public User encontrarUsuario(Principal principal) {
