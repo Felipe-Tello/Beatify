@@ -133,7 +133,12 @@
                     </li>
                     <li>
                         <c:if test="${userActual.id == user.id}">
-                            <a href="/song/new" class="btn btn-outline-light sombraclara">Añadir beat</a>
+                            <a href="/song/new" class="btn btn-outline-light sombraclara sombraclara mb-3">Añadir beat</a>
+                        </c:if>
+                    </li>
+                    <li>
+                        <c:if test="${userActual.id == user.id}">
+                            <a href="/details" class="btn btn-outline-light sombraclara">Mi historial de compra</a>
                         </c:if>
                     </li>
                 </ul>

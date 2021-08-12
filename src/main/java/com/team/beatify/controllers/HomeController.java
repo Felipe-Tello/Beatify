@@ -242,8 +242,8 @@ public class HomeController {
     // VER HISTORIAL DE COMPRA //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @GetMapping("/details/{idCompra}")
-    public String showDetails(@PathVariable("idCompra") Long id, Principal principal, Model model){
+    @GetMapping("/details")
+    public String showDetails( Principal principal, Model model){
         User userActual = userService.findByEmail(principal.getName());
         List<Compra> listaCompra = userActual.getListaDeCompras();
         setUserActualYCategoriasYPermiso(userActual, model);
