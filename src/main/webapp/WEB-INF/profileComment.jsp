@@ -167,10 +167,10 @@
                             <td id="${lb.id}">
                                 <span><c:out value = "${lb.usersLike.size()}"/></span>
                                 <c:if test="${!lb.usersLike.contains(userActual)}">
-                                    <a href="#row"class="btn btn-outline-info" onclick="like(${lb.id}, 'like')">Like</a>
+                                    <a href="#row" onclick="like(${lb.id}, 'like')" class="btn btn-outline-info">Like</a>
                                 </c:if>
                                 <c:if test="${lb.usersLike.contains(userActual)}">
-                                    <a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger" >Dislike</a>
+                                    <a href="#row" onclick="like(${lb.id}, 'dislike')" class="btn btn-outline-danger">Dislike</a>
                                 </c:if>
                             </td>
                             <td><c:out value="${lb.cost}"/></td>
@@ -180,7 +180,7 @@
                             <c:if test="${userActual.id != user.id}">
                                 <td>
                                     <c:if test="${userActual.id != lb.uCreador.id && !lb.wishlistuser.contains(userActual)}">
-                                        <a href="/addwishlist/${lb.id}?ruta=profile" class="btn btn-outline-light" >Añadir al carro</a>
+                                        <a href="/addwishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Añadir al carro</a>
                                     </c:if>
                                     <c:if test="${userActual.id != lb.uCreador.id && lb.wishlistuser.contains(userActual)}">
                                         <a href="/removewishlist/${lb.id}?ruta=profile" class="btn btn-outline-light">Remover del carro</a>
@@ -196,7 +196,7 @@
             <div class="alinear float-end text-center">
                 <h1>Message Wall</h1>
                 <p>
-                    <textarea readonly rows="6" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
+                    <textarea readonly rows="4" cols="70" class="bg-dark letra"><c:out value="${data}"/></textarea>
                 </p>
             </div>
             <div class="alinear addcomentario">
@@ -204,10 +204,11 @@
                 <form:form action="" method="post" modelAttribute="messageModel">
                     <p>
                         <form:label path="comment"></form:label>
-                        <form:errors path="comment"/>
                         <form:textarea path="comment" name="content" cols="30" rows="1" class="bg-dark letra"></form:textarea>
                     </p>
                     <input type="submit" value="Submit" class="btn btn-outline-light sombra"/>
+                    <br>
+                    <form:errors path="comment"/>
                 </form:form>
             </div>
         </div>
