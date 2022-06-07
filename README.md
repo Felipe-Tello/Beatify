@@ -5,7 +5,7 @@ Proyecto Musical de Bases y Beats.
 # Integrantes
 - [github](https://github.com/Felipe-Tello) // [Linkedin](https://www.linkedin.com/in/felipe-tello-astudillo/) // Instagram // FELIPE TELLO (BACKEND)                
 - [github](https://github.com/amonlop) // Linkedin // Instagram // ANTONIA MONTERO (FRONTEND Y BACKEND)  
-- [github](https://github.com/katsAle) // Linkedin // Instagram // KATHERINE SUAZO (FRONTEND)            
+- [github](https://github.com/katsAle) // Linkedin // [Instagram](https://www.instagram.com/yepyeu/) // KATHERINE SUAZO (FRONTEND)            
 - [github](https://github.com/ValentinaYanezAguayo) // Linkedin // Instagram // VALENTINA YAÑEZ (FRONTEND)            
 
 # Desarrollado con:
@@ -51,7 +51,7 @@ Pagina principal de la aplicación:
 
 ![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/main.jpg "MySql squema")
 
-Pagina de Registro:
+Pagina de registro:
 
 ![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/registro.jpg "MySql squema")
 
@@ -67,7 +67,7 @@ Pagina del dashboard parte 2:
 
 ![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Dashboard2.jpg "MySql squema")
 
-Pagina del Administrador:
+Pagina del administrador:
 
 ![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Admin.jpg "MySql squema")
 
