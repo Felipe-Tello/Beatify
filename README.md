@@ -43,6 +43,54 @@ Proyecto Musical de Bases y Beats.
 - La aplicación cuenta con contenido estático responsiva (CSS, imágenes, JS).
 
 # Diseños y vistas
-[ver todas las paginas y vistas](https://imgur.com/a/KOfDQYk)
+Esquema diseñado en MySql Workbench:
 
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Captura%20de%20pantalla%202022-06-06%20181041.jpg "MySql squema")
 
+Pagina principal de la aplicación:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/main.jpg "MySql squema")
+
+Pagina de Registro:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/registro.jpg "MySql squema")
+
+Pagina de inicio de sesion:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/sesion.jpg "MySql squema")
+
+Pagina del dashboard parte 1:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Dashboard.jpg "MySql squema")
+
+Pagina del dashboard parte 2:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Dashboard2.jpg "MySql squema")
+
+Pagina del Administrador:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Admin.jpg "MySql squema")
+
+Pagina de perfil:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/profile.jpg "MySql squema")
+
+Pagina de creacion de cancion:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/crear.jpg "MySql squema")
+
+Pagina detalle de la cancion:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/details.jpg "MySql squema")
+
+Pagina de busqueda por parametros:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/busqueda.jpg "MySql squema")
+
+Pagina del carro de compra:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/Carro.jpg "MySql squema")
+
+Pagina detalles de compras:
+
+![alt text](https://github.com/Felipe-Tello/Beatify/blob/main/assets/detailsCarro.jpg "MySql squema")
