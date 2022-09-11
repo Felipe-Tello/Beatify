@@ -3,7 +3,7 @@
 Proyecto Musical de Bases y Beats.
 
 # Integrantes
-- [github](https://github.com/Felipe-Tello) // [Linkedin](https://www.linkedin.com/in/felipe-tello-astudillo/) // Instagram // FELIPE TELLO (BACKEND Y FRONTEND)                
+- [github](https://github.com/Felipe-Tello) // [Linkedin](https://www.linkedin.com/in/felipe-tello-astudillo/) // Instagram // FELIPE TELLO (FRONTEND Y BACKEND)                
 - [github](https://github.com/amonlop) // Linkedin // Instagram // ANTONIA MONTERO (FRONTEND Y BACKEND)  
 - [github](https://github.com/katsAle) // Linkedin // [Instagram](https://www.instagram.com/yepyeu/) // KATHERINE SUAZO (FRONTEND)            
 - [github](https://github.com/ValentinaYanezAguayo) // Linkedin // Instagram // VALENTINA YAÑEZ (FRONTEND)            
